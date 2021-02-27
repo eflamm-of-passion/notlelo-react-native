@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import Svg, { Circle, Path } from 'react-native-svg';
+import { requestPermissionsAsync, createAssetAsync, createAlbumAsync, getAlbumAsync, addAssetsToAlbumAsync, saveToLibraryAsync } from 'expo-media-library';
 import { Camera } from 'expo-camera';
+
+const ALBUM_NAME = "Batch Number";
 
 export default function CameraScreen({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -10,28 +13,41 @@ export default function CameraScreen({navigation}) {
 
   useEffect(() => {
     (async () => {
-      const {status} = await Camera.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
+      const cameraAccess = await Camera.requestPermissionsAsync();
+      const mediaLibraryAccess = await requestPermissionsAsync();
+      setHasPermission(cameraAccess.status === 'granted' && mediaLibraryAccess.status === 'granted');
     })();
-  }, [photoList]);
+  }, []);
 
   if(hasPermission === null) {
-    <Text>No access to the camera</Text>;
+    return <Text>No access to the camera </Text>;
   }
   if(hasPermission === false) {
-    return <Text>No access to the camera</Text>;
+    return <Text>No access to the camera </Text>;
   }
 
-  const takePicture = async () => {
+  const takePicture = () => {
     if(camera) {
-      const photo = await camera.takePictureAsync();
-      photo.id = Math.random();
-      setPhotoList([photo].concat(photoList));
+      camera.takePictureAsync().then(photo => {
+        photo.id = Math.random();
+        setPhotoList([photo].concat(photoList));
+        createAssetAsync(photo.uri).then((photoAsset) => setPhotoList([photoAsset].concat(photoList)));
+      });
     }
   }
 
   const savePictures = () => {
-    // TODO 
+    if (photoList.length) {
+      getAlbumAsync(ALBUM_NAME).then( (album) => {
+        if(album) {
+          addAssetsToAlbumAsync(photoList, album, false);
+        } else {
+          createAlbumAsync(ALBUM_NAME, photoList[0], false)
+          .then(album => addAssetsToAlbumAsync(photoList.slice(1), album, false));
+        }
+        setPhotoList([]);
+      });
+    }
   }
 
   const cancelTakingPictures = () => {
@@ -46,7 +62,7 @@ export default function CameraScreen({navigation}) {
   const displayPreviewPhotos = () => {
     return photoList.map(photo => {
       return <TouchableOpacity onPress={() => removePhoto(photo.id)} key={photo.id}>
-              <Image style={styles.photoPreview} source={{uri: photo && photo.uri}}/>
+              <Image style={styles.photoPreview} source={{uri: photo.uri}}/>
             </TouchableOpacity>
     })
   }
@@ -60,7 +76,7 @@ export default function CameraScreen({navigation}) {
     <View style={styles.container}>
       <Camera style={styles.camera} type={Camera.Constants.Type.back} ref={(r) => {setCamera(r)}}>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.cancelButton} onPress={() => savePictures()} >
+          <TouchableOpacity style={styles.cancelButton} onPress={() => cancelTakingPictures()} >
             <Svg width="50" height="50" viewBox="0 0 20 20" fill="lightgray">
                 <Path fill="none" stroke="lightgray" stroke-width="1.06" d="M16,16 L4,4"></Path>
                 <Path fill="none" stroke="lightgray" stroke-width="1.06" d="M16,4 L4,16"></Path>
@@ -71,7 +87,7 @@ export default function CameraScreen({navigation}) {
               <Circle cx="50" cy="50" r="45" stroke="darkgrey" strokeWidth="5" fill="lightgray" />
             </Svg>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.validateButton} onPress={() => cancelTakingPictures()}>
+          <TouchableOpacity style={styles.validateButton} onPress={() => savePictures()}>
             <Svg viewBox="0 0 512 512" width="40" height="40" fill="lightgray">
               <Path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" />
             </Svg>
