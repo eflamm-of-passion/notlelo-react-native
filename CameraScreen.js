@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Modal, TextInput } from 'react-native';
 import Svg, { Circle, Path } from 'react-native-svg';
 import { requestPermissionsAsync, createAssetAsync, createAlbumAsync, getAlbumAsync, addAssetsToAlbumAsync, getAssetsAsync } from 'expo-media-library';
 import { Camera } from 'expo-camera';
@@ -12,6 +12,8 @@ export default function CameraScreen({navigation}) {
   const [camera, setCamera] = useState(null);
   const [photoList, setPhotoList] = useState([]);
   const [creationDate, setCreationDate] = useState(new Date());
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [productName, setProductName] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -19,7 +21,7 @@ export default function CameraScreen({navigation}) {
       const mediaLibraryAccess = await requestPermissionsAsync();
       setHasPermission(cameraAccess.status === 'granted' && mediaLibraryAccess.status === 'granted');
     })();
-  }, []);
+  }, [isModalVisible, photoList]);
 
   if(hasPermission === null) {
     return <Text>No access to the camera </Text>;
@@ -80,6 +82,18 @@ export default function CameraScreen({navigation}) {
     console.log("products");
     console.log(JSON.stringify(products));
     EventService.setProducts([]);
+    setModalVisible(true);
+  }
+
+  const openModal = () => {
+    setProductName("");
+    setModalVisible(true);
+    // TODO open the keyboard
+  }
+
+  const cancelSavingProduct = () => {
+    setProductName("");
+    setModalVisible(false);
   }
 
   const flushPictures = () => {
@@ -115,7 +129,7 @@ export default function CameraScreen({navigation}) {
               <Circle cx="50" cy="50" r="45" stroke="darkgrey" strokeWidth="5" fill="lightgray" />
             </Svg>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.validateButton} onPress={() => savePictures()}>
+          <TouchableOpacity style={styles.validateButton} onPress={() => openModal()}>
             <Svg viewBox="0 0 512 512" width="40" height="40" fill="white">
               <Path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" />
             </Svg>
@@ -134,6 +148,37 @@ export default function CameraScreen({navigation}) {
           : null
         }
       </View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isModalVisible}
+        onRequestClose={() => setModalVisible(!isModalVisible)}
+      >
+        <View style={styles.modalView}>
+          <Text style={styles.modalTitle}>Name of the product</Text>
+          <TextInput
+            style={styles.modalTextInput}
+            autoFocus={true}
+            placeholder={'Can of Montblanc'}
+            onChangeText={text => setProductName(text)}
+            value={productName}
+          />
+          <View style={styles.modalButtonContainer}>
+            <TouchableOpacity
+              style={[styles.modalButton, styles.modalCancelButton]}
+              onPress={() => setModalVisible(!isModalVisible)}
+            >
+              <Text style={styles.modalButtonText}>Cancel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.modalButton, styles.modalValidateButton]}
+              onPress={() => setModalVisible(!isModalVisible)}
+            >
+              <Text style={styles.modalButtonText}>Validate</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   ) 
 }
@@ -183,5 +228,56 @@ const styles = StyleSheet.create({
   },
   flushPicturesButton: {
     justifyContent: 'center'
-  }
+  },
+  modalView: {
+    margin: 20,
+    marginTop: 200,
+    backgroundColor: "white",
+    borderRadius: 5,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 30
+  },
+  modalTitle: {
+    width: '90%',
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#3b3b3b',
+    textAlign: 'left'
+  },
+  modalTextInput: {
+    marginTop: 10,
+    marginBottom: 10,
+    height: 40,
+    width: '90%',
+    borderBottomWidth: 1,
+    borderBottomColor: 'grey'
+  },
+  modalButtonContainer: {
+    flexDirection: 'row',
+    width: '50%',
+    justifyContent: 'center'
+  },
+  modalButton: {
+    marginRight: 10,
+    padding: 10,
+    borderRadius: 5
+  },
+  modalButtonText: {
+    color: 'white',
+    textTransform: 'uppercase'
+  },
+  modalCancelButton: {
+    backgroundColor: 'red'
+  },
+  modalValidateButton: {
+    backgroundColor: 'green'
+  },
 });
