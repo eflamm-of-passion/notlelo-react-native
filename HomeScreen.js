@@ -1,17 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 export default function HomeScreen({navigation}) {
    return (
        <View style={styles.container}>
-            <View style={styles.title}>
+           <ImageBackground source={require('./assets/ripped-paper.png')} style={styles.title}> 
                 <Text style={styles.titleText}>Batch Number</Text>
-            </View>
+            </ImageBackground>
             <View style={styles.buttons}>
-                <Button style={styles.button} title={'Start'}
-                    onPress={() => navigation.navigate('Camera')}
-                />
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Camera')}>
+                    <Text style={styles.buttonText}>Start</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Browser')}>
+                    <Text style={styles.buttonText}>Browse</Text>
+                </TouchableOpacity>
             </View>
            <StatusBar style="auto" />
        </View>
@@ -21,27 +24,46 @@ export default function HomeScreen({navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'darkslategrey',
+        width: '100%',
+        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
       },
     title: {
-        flex: 2,
+        flex: 1,
+        width: '100%',
+        marginTop: -30,
         alignItems: 'center',
         justifyContent: 'center',
     },
     titleText: {
-        fontSize: 40,
-        color: '#a1f5ff',
-        letterSpacing: 2,
-        textTransform: 'capitalize'
+        width: '80%',
+        textAlign: 'center',
+        fontSize: 50,
+        lineHeight: 80,
+        color: 'white',
+        letterSpacing: 8,
+        textTransform: 'uppercase'
     },
     buttons: {
         flex: 1,
+        paddingBottom: 80,
+        width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
     },
     button: {
-        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '60%',
+        height: 60,
+        color: 'darkgray',
+        marginTop: 20
+    },
+    buttonText: {
+        fontSize: 18,
+        letterSpacing: 5,
+        textTransform: 'uppercase',
+        color: '#404040',
     }
 });

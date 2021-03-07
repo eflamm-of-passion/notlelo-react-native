@@ -59,17 +59,18 @@ export default function CameraScreen({navigation}) {
       } else {
         await addAssetsToAlbumAsync(photoAssetList, album, false);
       }
-      setPhotoList([]);
-
       // save the product to the database
+      const productPhotoList = photoAssetList.map(photo => photo.uri);
       const product = {event: "someEvent", meal: "breakfast", name: productName};
       EventService.addProduct(product, creationDate);
-
+      
+      setPhotoList([]);
     }
   }
 
   const cancelTakingPictures = async () => {
     // TODO
+    // FIXME
     const album = await getAlbumAsync(ALBUM_NAME);
     const options = {album: album};
     const assets = await getAssetsAsync(options);
@@ -81,7 +82,6 @@ export default function CameraScreen({navigation}) {
     console.log("products");
     console.log(JSON.stringify(products));
     EventService.setProducts([]);
-    setModalVisible(true);
   }
 
   const openModal = () => {
@@ -101,6 +101,7 @@ export default function CameraScreen({navigation}) {
   }
   
   const displayPreviewPhotos = () => {
+    // TODO filler
     return photoList.map(photo => {
       return <TouchableOpacity onPress={() => onClickPhotoBubble(photo.id)} key={photo.id}>
               <Image style={styles.photoPreview} source={{uri: photo.uri}}/>
@@ -156,7 +157,6 @@ export default function CameraScreen({navigation}) {
         animationType="slide"
         transparent={true}
         visible={isModalVisible}
-        onRequestClose={() => setModalVisible(!isModalVisible)}
       >
         <View style={styles.modalView}>
           <Text style={styles.modalTitle}>Name of the product</Text>

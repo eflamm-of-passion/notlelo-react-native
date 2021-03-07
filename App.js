@@ -7,6 +7,7 @@ import CameraScreen from './CameraScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import EventService from './EventService';
+import BrowserScreen from './BrowserScreen';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,7 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen name="Home" component={HomeScreen} options={{headerShown: false}} />
           <Stack.Screen name="Camera" component={CameraScreen} options={{headerShown: false}}/>
+          <Stack.Screen name="Browser" component={BrowserScreen} options={{headerShown: false}}/>
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
