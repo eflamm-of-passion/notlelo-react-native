@@ -35,7 +35,10 @@ export default function CameraScreen({navigation}) {
       if(!photoList.length) {
         setCreationDate(new Date());
       }
+      const photoFiller = {id: 0, filler: true}
+      setPhotoList([photoFiller].concat(photoList));
       const photo = await camera.takePictureAsync();
+      setPhotoList(photoList.filter(photo => photo.id !== photoFiller.id));
       photo.id = Math.random();
       setPhotoList([photo].concat(photoList));
     }
@@ -104,7 +107,11 @@ export default function CameraScreen({navigation}) {
     // TODO filler
     return photoList.map(photo => {
       return <TouchableOpacity onPress={() => onClickPhotoBubble(photo.id)} key={photo.id}>
-              <Image style={styles.photoPreview} source={{uri: photo.uri}}/>
+              {
+                photo.filler
+                ? <View style={styles.photoPreviewFiller}></View>
+                : <Image style={styles.photoPreview} source={{uri: photo.uri}}/>
+              }
             </TouchableOpacity>
     })
   }
@@ -116,7 +123,6 @@ export default function CameraScreen({navigation}) {
 
   const onClickPhotoBubble = (id) => {
     setPhotoList(photoList.filter(photo => photo.id !== id));
-    displayPreviewPhotos();
   }
 
   return (
@@ -200,6 +206,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column-reverse'
   },
   photoPreview: {
+    width: 80,
+    height: 80,
+    borderRadius: 50,
+    marginTop: 10
+  },
+  photoPreviewFiller: {
+    backgroundColor: 'black',
     width: 80,
     height: 80,
     borderRadius: 50,

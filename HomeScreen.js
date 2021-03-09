@@ -12,8 +12,8 @@ export default function HomeScreen({navigation}) {
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Camera')}>
                     <Text style={styles.buttonText}>Start</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Browser')}>
-                    <Text style={styles.buttonText}>Browse</Text>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Library')}>
+                    <Text style={styles.buttonText}>Library</Text>
                 </TouchableOpacity>
             </View>
            <StatusBar style="auto" />
@@ -43,7 +43,9 @@ const styles = StyleSheet.create({
         lineHeight: 80,
         color: 'white',
         letterSpacing: 8,
-        textTransform: 'uppercase'
+        textTransform: 'uppercase',
+        textShadowColor: 'white',
+        textShadowRadius: 4
     },
     buttons: {
         flex: 1,
