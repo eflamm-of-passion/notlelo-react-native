@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, Modal, SafeAreaView, ScrollView } from 'react-native';
 import EventService from './EventService';
+import i18n from './i18n';
 
 
 export default function LibraryScreen() {
@@ -110,14 +111,14 @@ export default function LibraryScreen() {
             <TouchableOpacity
               style={[styles.modalButton, styles.modalCloseButton]}
               onPress={() => setSelectedPhoto(null)}
-            ><Text style={styles.modalButtonText}>Close</Text></TouchableOpacity>
+            ><Text style={styles.modalButtonText}>{i18n.t('library.close')}</Text></TouchableOpacity>
           </View>
         </Modal>
   }
 
   return (
       <SafeAreaView style={styles.container}>
-          <Text style={styles.title}>Library</Text>
+          <Text style={styles.title}>{i18n.t('library.library')}</Text>
           <ScrollView style={styles.productList}>
               {productList.size ? displayEvents(productList) : null}
           </ScrollView>

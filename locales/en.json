@@ -1,0 +1,17 @@
+{
+    "home": {
+        "title": "Batch Number",
+        "camera": "Start",
+        "library": "Library"
+    },
+    "camera": {
+        "validate": "Validate",
+        "cancel": "Cancel",
+        "nameOfProduct": "Name of the product",
+        "productNamePlaceHolder": "can of Montblanc"
+    },
+    "library": {
+        "library": "Library",
+        "close": "Close"
+    }
+}

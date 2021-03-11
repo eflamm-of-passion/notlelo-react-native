@@ -1,0 +1,17 @@
+{
+    "home": {
+        "title": "Batch Number",
+        "camera": "Photo",
+        "library": "Bibliothèque"
+    },
+    "camera": {
+        "validate": "Valider",
+        "cancel": "Annuler",
+        "nameOfProduct": "Nom du produit",
+        "productNamePlaceHolder": "Boîte de Montblanc"
+    },
+    "library": {
+        "library": "Bibliothèque",
+        "close": "Fermer"
+    }
+}

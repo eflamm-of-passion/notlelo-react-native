@@ -4,6 +4,7 @@ import Svg, { Circle, Path } from 'react-native-svg';
 import { requestPermissionsAsync, createAssetAsync, createAlbumAsync, getAlbumAsync, addAssetsToAlbumAsync, getAssetsAsync } from 'expo-media-library';
 import { Camera } from 'expo-camera';
 import EventService from './EventService';
+import i18n from './i18n';
 
 const ALBUM_NAME = "Batch Number";
 
@@ -165,11 +166,11 @@ export default function CameraScreen({navigation}) {
         visible={isModalVisible}
       >
         <View style={styles.modalView}>
-          <Text style={styles.modalTitle}>Name of the product</Text>
+          <Text style={styles.modalTitle}>{i18n.t('camera.nameOfProduct')}</Text>
           <TextInput
             style={styles.modalTextInput}
             autoFocus={true}
-            placeholder={'Can of Montblanc'}
+            placeholder={i18n.t('camera.productNamePlaceHolder')}
             onChangeText={text => setProductName(text)}
             value={productName}
           />
@@ -178,13 +179,13 @@ export default function CameraScreen({navigation}) {
               style={[styles.modalButton, styles.modalCancelButton]}
               onPress={() => setModalVisible(!isModalVisible)}
             >
-              <Text style={styles.modalButtonText}>Cancel</Text>
+              <Text style={styles.modalButtonText}>{i18n.t('camera.cancel')}</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.modalButton, styles.modalValidateButton]}
               onPress={() => onClickValidate()}
             >
-              <Text style={styles.modalButtonText}>Validate</Text>
+              <Text style={styles.modalButtonText}>{i18n.t('camera.validate')}</Text>
             </TouchableOpacity>
           </View>
         </View>

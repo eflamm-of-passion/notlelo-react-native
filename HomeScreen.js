@@ -1,19 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import i18n from './i18n';
 
 export default function HomeScreen({navigation}) {
    return (
        <View style={styles.container}>
            <ImageBackground source={require('./assets/ripped-paper.png')} style={styles.title}> 
-                <Text style={styles.titleText}>Batch Number</Text>
+                <Text style={styles.titleText}>{i18n.t('home.title')}</Text>
             </ImageBackground>
             <View style={styles.buttons}>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Camera')}>
-                    <Text style={styles.buttonText}>Start</Text>
+                    <Text style={styles.buttonText}>{i18n.t('home.camera')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Library')}>
-                    <Text style={styles.buttonText}>Library</Text>
+                    <Text style={styles.buttonText}>{i18n.t('home.library')}</Text>
                 </TouchableOpacity>
             </View>
            <StatusBar style="auto" />
