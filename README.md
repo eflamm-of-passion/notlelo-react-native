@@ -1,6 +1,7 @@
 **TODO**  
 until the next release
-- [ ] input the event and meal
+- [x] input the event and meal
 - [ ] export all photos in a zipfile
 - [ ] delete button in library
 - [ ] choose a better name for the app
+- [ ] cancel taking picture

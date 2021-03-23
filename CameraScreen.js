@@ -15,6 +15,8 @@ export default function CameraScreen({navigation}) {
   const [creationDate, setCreationDate] = useState(new Date());
   const [isModalVisible, setModalVisible] = useState(false);
   const [productName, setProductName] = useState("");
+  const [mealName, setMealName] = useState("");
+  const [eventName, setEventName] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -65,7 +67,7 @@ export default function CameraScreen({navigation}) {
       }
       // save the product to the database
       const productPhotoList = photoAssetList.map(photo => photo.uri);
-      const product = {event: "someEvent", meal: "breakfast", name: productName};
+      const product = {event: eventName, meal: mealName, name: productName};
       EventService.addProduct(product, creationDate);
       
       setPhotoList([]);
@@ -166,13 +168,29 @@ export default function CameraScreen({navigation}) {
         visible={isModalVisible}
       >
         <View style={styles.modalView}>
-          <Text style={styles.modalTitle}>{i18n.t('camera.nameOfProduct')}</Text>
+          <Text style={styles.modalTitle}>{i18n.t('camera.productInputLabel')}</Text>
           <TextInput
             style={styles.modalTextInput}
             autoFocus={true}
             placeholder={i18n.t('camera.productNamePlaceHolder')}
             onChangeText={text => setProductName(text)}
             value={productName}
+          />
+          <Text style={styles.modalTitle}>{i18n.t('camera.mealInputLabel')}</Text>
+          <TextInput
+            style={styles.modalTextInput}
+            autoFocus={true}
+            placeholder={i18n.t('camera.mealNamePlaceHolder')}
+            onChangeText={text => setMealName(text)}
+            value={mealName}
+          />
+          <Text style={styles.modalTitle}>{i18n.t('camera.eventInputLabel')}</Text>
+          <TextInput
+            style={styles.modalTextInput}
+            autoFocus={true}
+            placeholder={i18n.t('camera.eventNamePlaceHolder')}
+            onChangeText={text => setEventName(text)}
+            value={eventName}
           />
           <View style={styles.modalButtonContainer}>
             <TouchableOpacity
@@ -249,7 +267,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    marginTop: 200,
+    marginTop: 100,
     backgroundColor: "white",
     borderRadius: 5,
     padding: 35,

@@ -7,8 +7,12 @@
     "camera": {
         "validate": "Validate",
         "cancel": "Cancel",
-        "nameOfProduct": "Name of the product",
-        "productNamePlaceHolder": "can of Montblanc"
+        "productInputLabel": "Name of the product",
+        "mealInputLabel": "Name of the meal",
+        "eventInputLabel": "Name of the event",
+        "productNamePlaceHolder": "can of Montblanc",
+        "mealNamePlaceHolder": "breakfast",
+        "eventNamePlaceHolder": "summer camp 2020"
     },
     "library": {
         "library": "Library",
