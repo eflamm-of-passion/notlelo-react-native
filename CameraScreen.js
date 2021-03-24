@@ -77,17 +77,18 @@ export default function CameraScreen({navigation}) {
   const cancelTakingPictures = async () => {
     // TODO
     // FIXME
-    const album = await getAlbumAsync(ALBUM_NAME);
-    const options = {album: album};
-    const assets = await getAssetsAsync(options);
-    const products = await EventService.getProducts();
-    console.log("assets");
-    console.log(JSON.stringify(assets));
-    console.log("photo");
-    console.log(JSON.stringify(photoList));
-    console.log("products");
-    console.log(JSON.stringify(products));
-    EventService.setProducts([]);
+    // const album = await getAlbumAsync(ALBUM_NAME);
+    // const options = {album: album};
+    // const assets = await getAssetsAsync(options);
+    // const products = await EventService.getProducts();
+    // console.log("assets");
+    // console.log(JSON.stringify(assets));
+    // console.log("photo");
+    // console.log(JSON.stringify(photoList));
+    // console.log("products");
+    // console.log(JSON.stringify(products));
+    // EventService.setProducts([]);
+    // EventService.getProductPhotos()
   }
 
   const openModal = () => {

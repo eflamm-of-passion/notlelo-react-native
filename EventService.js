@@ -21,6 +21,22 @@ export default class EventService {
             // error reading value
           }
     }
+
+    static async getProductPhotos(product) {
+        const dates = product.photos.map(photo => photo.creationDate);
+        const firstDate = Math.min(dates);
+        const lastDate = Math.max(dates);
+        // TODO return photos as assets with medialibrary
+        // prepare option
+
+        const getOption = {
+            createdBefore: lastDate,
+            createdAfter: firstDate
+        };
+        // FIXME 
+        const assets = await getAssetsAsync(getOption);
+        console.log(JSON.stringify(assets));
+    }
     
     static setProducts(products) {
         try {
@@ -34,7 +50,7 @@ export default class EventService {
         const now = new Date();
         const today = `${now.getDate()}-${now.getMonth() > 8 ? now.getMonth()+1 : "0"+now.getMonth()+1 }-${now.getFullYear()}`;
         const assets = await getAssetsAsync({createdAfter: creationDate});
-        const photos = assets.assets.map(a => a.uri);
+        const photos = assets.assets.map(a => ({uri: a.uri, creationDate: a.creationTime}));
         const productToCreate = {
             uuid: UUID(),
             event: product.event ? product.event : "none",
@@ -49,6 +65,9 @@ export default class EventService {
     }
 
     static async removeProduct(product) {
+
+        // FIXME expo-filesystem.deleteAsync does not seem to be able to operate on this scope
+        // TODO try to remove with medialibrary
         try {
             for(let photo of product.photos) {
                 console.log(JSON.stringify(photo));

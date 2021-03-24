@@ -54,7 +54,8 @@ export default function LibraryScreen() {
   }
 
   const deleteProduct = (product) => {
-    EventService.removeProduct(product);
+    // EventService.removeProduct(product);
+    EventService.getProductPhotos(product);
   }
   
   const displayEvents = (eventMap) => {
@@ -99,9 +100,9 @@ export default function LibraryScreen() {
 
   const displayPhotos = (photoList) => {
     
-    return photoList ? photoList.map(photoUri => 
-      <TouchableOpacity key={Math.random()} style={styles.takePictureButton} onPress={() => setSelectedPhoto(photoUri)}>
-        <Image style={styles.photo} source={{uri: photoUri}}/> 
+    return photoList ? photoList.map(photo => 
+      <TouchableOpacity key={Math.random()} style={styles.takePictureButton} onPress={() => setSelectedPhoto(photo)}>
+        <Image style={styles.photo} source={{uri: photo.uri}}/> 
         {displayModal()}
       </TouchableOpacity>
       ) : null
