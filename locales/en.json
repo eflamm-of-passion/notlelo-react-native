@@ -16,6 +16,7 @@
     },
     "library": {
         "library": "Library",
-        "close": "Close"
+        "close": "Close",
+        "delete": "Delete"
     }
 }

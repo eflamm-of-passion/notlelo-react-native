@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getAssetsAsync } from 'expo-media-library';
+import { deleteAsync } from 'expo-file-system';
 
 const ALBUM_NAME = "Batch Number";
 
@@ -45,6 +46,20 @@ export default class EventService {
         const products = await this.getProducts();
         products.push(productToCreate);
         this.setProducts(products);
+    }
+
+    static async removeProduct(product) {
+        try {
+            for(let photo of product.photos) {
+                console.log(JSON.stringify(photo));
+                await deleteAsync(photo);
+            }
+        } catch (error) {
+        console.log(error);
+        }
+        let products = await this.getProducts();
+        products = products.filter(p => p.uuid ==! product.uuid);
+        // this.setProducts(products);
     }
 
 }

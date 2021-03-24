@@ -10,7 +10,7 @@ export default function LibraryScreen() {
 
   useEffect(() => {
     fetchProducts();
-}, [fetchProducts]);
+}, [fetchProducts, deleteProduct]);
 
   const fetchProducts = useCallback(async () => {
     const flatProductList = await EventService.getProducts();
@@ -52,6 +52,10 @@ export default function LibraryScreen() {
       date: flatProduct.date
     }
   }
+
+  const deleteProduct = (product) => {
+    EventService.removeProduct(product);
+  }
   
   const displayEvents = (eventMap) => {
     const eventList = [];
@@ -86,6 +90,9 @@ export default function LibraryScreen() {
         <View style={styles.photoList}>
           {displayPhotos(product.photos)}
         </View>
+        <TouchableOpacity key={Math.random()} style={styles.deleteProductButton} onPress={() => deleteProduct(product)}>
+          <Text style={styles.deleteProductButtonLabel}>{i18n.t('library.delete')}</Text>
+        </TouchableOpacity>
       </View>
     ));
   }
@@ -203,4 +210,20 @@ const styles = StyleSheet.create({
       color: 'white',
       textTransform: 'uppercase'
     },
+    deleteProductButton: {
+      flex: 1,
+      width: '98%',
+      height: 60,
+      marginTop: 10,
+      backgroundColor: 'red',
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
+      borderRadius: 5
+    },
+    deleteProductButtonLabel: {
+      color: 'white',
+      fontSize: 20,
+      letterSpacing: 2
+    }
 });
