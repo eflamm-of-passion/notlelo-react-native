@@ -66,7 +66,6 @@ export default function CameraScreen({navigation}) {
         await addAssetsToAlbumAsync(photoAssetList, album, false);
       }
       // save the product to the database
-      const productPhotoList = photoAssetList.map(photo => photo.uri);
       const product = {event: eventName, meal: mealName, name: productName};
       EventService.addProduct(product, creationDate);
       
@@ -87,7 +86,7 @@ export default function CameraScreen({navigation}) {
     // console.log(JSON.stringify(photoList));
     // console.log("products");
     // console.log(JSON.stringify(products));
-    // EventService.setProducts([]);
+    EventService.setProducts([]);
     // EventService.getProductPhotos()
   }
 

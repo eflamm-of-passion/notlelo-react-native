@@ -10,7 +10,7 @@ export default function LibraryScreen() {
 
   useEffect(() => {
     fetchProducts();
-}, [fetchProducts, deleteProduct]);
+  }, []);
 
   const fetchProducts = useCallback(async () => {
     const flatProductList = await EventService.getProducts();
@@ -53,9 +53,9 @@ export default function LibraryScreen() {
     }
   }
 
-  const deleteProduct = (product) => {
-    // EventService.removeProduct(product);
-    EventService.getProductPhotos(product);
+  const deleteProduct = async (product) => {
+    await EventService.removeProduct(product);
+    fetchProducts();
   }
   
   const displayEvents = (eventMap) => {
