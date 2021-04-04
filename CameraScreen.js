@@ -79,15 +79,15 @@ export default function CameraScreen({navigation}) {
     // const album = await getAlbumAsync(ALBUM_NAME);
     // const options = {album: album};
     // const assets = await getAssetsAsync(options);
-    // const products = await EventService.getProducts();
+    const products = await EventService.getProducts();
+    // EventService.getProductPhotos()
+    // EventService.setProducts([]);
     // console.log("assets");
     // console.log(JSON.stringify(assets));
     // console.log("photo");
     // console.log(JSON.stringify(photoList));
-    // console.log("products");
-    // console.log(JSON.stringify(products));
-    EventService.setProducts([]);
-    // EventService.getProductPhotos()
+    console.log("products");
+    console.log(JSON.stringify(products));
   }
 
   const openModal = () => {

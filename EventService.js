@@ -1,5 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getAssetsAsync, getAlbumAsync, removeAssetsFromAlbumAsync, deleteAssetsAsync } from 'expo-media-library';
+import { getAssetsAsync, getAlbumAsync, removeAssetsFromAlbumAsync } from 'expo-media-library';
+import * as FileSystem from "expo-file-system";
+import * as Sharing from 'expo-sharing';
+import JSZip from "jszip";
 
 const ALBUM_NAME = "Batch Number";
 
@@ -30,7 +33,7 @@ export default class EventService {
 
     /**
      * The the product array in the database
-     * @param {*} products 
+     * @param {array of objects} products 
      * @returns void
      */
     static setProducts(products) {
@@ -43,7 +46,7 @@ export default class EventService {
 
     /**
      * Returns the MediaLibrary assets, and the album id
-     * @param {*} product 
+     * @param {object} product 
      * @returns 
      */
     static async getProductPhotos(product) {
@@ -69,12 +72,12 @@ export default class EventService {
 
     /**
      * Adds a product and the reference to its photos in the database
-     * @param {*} product, the product to add
-     * @param {*} creationDate, the date of creation of the product, to fetch its the assets
+     * @param {object} product, the product to add
+     * @param {date} creationDate, the date of creation of the product, to fetch its the assets
      */
     static async addProduct(product, creationDate) {
         const now = new Date();
-        const today = `${now.getDate()}-${now.getMonth() > 8 ? now.getMonth()+1 : "0"+now.getMonth()+1 }-${now.getFullYear()}`;
+        const today = `${now.getDate() > 9 ? (now.getDate()) : "0"+(now.getDate())}-${now.getMonth() > 8 ? (now.getMonth()+1) : "0"+(now.getMonth()+1) }-${now.getFullYear()}`;
         const assets = await getAssetsAsync({createdAfter: creationDate});
         const photos = assets.assets.map(a => ({uri: a.uri, creationDate: a.creationTime}));
         const productToCreate = {
@@ -93,7 +96,7 @@ export default class EventService {
 
     /**
      * Removes a product from the database, and its photos in the album
-     * @param {*} product 
+     * @param {object} product 
      */
     static async removeProduct(product) {
         const assets = await this.getProductPhotos(product);
@@ -101,6 +104,39 @@ export default class EventService {
         let products = await this.getProducts();
         products = products.filter(p => p.uuid !== product.uuid);
         return await this.setProducts(products);
+    }
+
+    /**
+     * Creates a zip files with all the products and their photos, and share it through another app
+     * @param {string} eventName - the name of the event
+     */
+    static async shareEvent(eventName) {
+        // prepare the zip structure with all photos
+        const zip = new JSZip();
+        const products = await this.getProducts();
+        const photosToZip = [];
+        for(const p of products) {
+            if(p.event === eventName) {
+                for(photo of p.photos) {
+                    const photoName = photo.uri.split('/').pop();
+                    const photoBlob = await FileSystem.readAsStringAsync(photo.uri, {encoding: FileSystem.EncodingType.Base64});
+                    console.log(photoName);
+                    console.log(photoBlob);
+                    const photoToZip = zip.folder(p.event).folder(p.meal).folder(p.name).file(photoName, photoBlob, {binary: true, base64: true});
+                    photosToZip.push(photoToZip);
+                }
+            }
+        }
+        // generate the zip
+        const blob = await zip.generateAsync({type: "base64"});
+        // save the zip into the internal storage
+        const zipFilePath = FileSystem.documentDirectory + eventName + ".zip";
+        await FileSystem.writeAsStringAsync(zipFilePath, blob, {encoding: FileSystem.EncodingType.Base64});
+        // share the zip
+        const UTI = 'public.item';
+        await Sharing.shareAsync(zipFilePath, {UTI});   
+        // clear the zip from the internal storage
+        await FileSystem.deleteAsync(zipFilePath);
     }
 
 }

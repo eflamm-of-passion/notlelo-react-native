@@ -57,6 +57,10 @@ export default function LibraryScreen() {
     await EventService.removeProduct(product);
     fetchProducts();
   }
+
+  const shareEvent = async (event) => {
+    await EventService.shareEvent(event);
+  }
   
   const displayEvents = (eventMap) => {
     const eventList = [];
@@ -66,6 +70,9 @@ export default function LibraryScreen() {
     return eventList.map(event => (
       <View style={styles.eventContainer} key={Math.random()}>
         <Text style={styles.eventTitle}>{event.name}</Text>
+        <TouchableOpacity key={Math.random()} style={styles.compressEventButton} onPress={() => shareEvent(event.name)}>
+          <Text style={styles.compressEventButtonLabel}>{i18n.t('library.share')}</Text>
+        </TouchableOpacity>
         {displayMeals(event.mealMap)}
       </View>
     ));
@@ -223,6 +230,22 @@ const styles = StyleSheet.create({
       borderRadius: 5
     },
     deleteProductButtonLabel: {
+      color: 'white',
+      fontSize: 20,
+      letterSpacing: 2
+    },
+    compressEventButton: {
+      flex: 1,
+      width: '98%',
+      height: 60,
+      marginTop: 10,
+      backgroundColor: 'blue',
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
+      borderRadius: 5
+    },
+    compressEventButtonLabel: {
       color: 'white',
       fontSize: 20,
       letterSpacing: 2

@@ -17,6 +17,8 @@
     "library": {
         "library": "Bibliothèque",
         "close": "Fermer",
-        "delete": "Supprimer"
+        "delete": "Supprimer",
+        "compress": "Télécharger au format zip",
+        "share": "Partager"
     }
 }
