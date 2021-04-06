@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, Modal, TextInput } from 'react-native';
 import Svg, { Circle, Path } from 'react-native-svg';
-import { requestPermissionsAsync, createAssetAsync, createAlbumAsync, getAlbumAsync, addAssetsToAlbumAsync, getAssetsAsync } from 'expo-media-library';
+import { requestPermissionsAsync, createAssetAsync, createAlbumAsync, getAlbumAsync, addAssetsToAlbumAsync, deleteAssetsAsync, getAssetsAsync } from 'expo-media-library';
 import { Camera } from 'expo-camera';
 import EventService from './EventService';
 import i18n from './i18n';
@@ -12,12 +12,13 @@ export default function CameraScreen({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
   const [camera, setCamera] = useState(null);
   const [photoList, setPhotoList] = useState([]);
-  const [creationDate, setCreationDate] = useState(new Date());
-  const [isModalVisible, setModalVisible] = useState(false);
+  
   const [productName, setProductName] = useState("");
   const [mealName, setMealName] = useState("");
   const [eventName, setEventName] = useState("");
-
+  const [creationDate, setCreationDate] = useState(new Date());
+  const [isModalVisible, setModalVisible] = useState(false);
+  
   useEffect(() => {
     (async () => {
       const cameraAccess = await Camera.requestPermissionsAsync();
@@ -26,10 +27,7 @@ export default function CameraScreen({navigation}) {
     })();
   }, [isModalVisible, photoList]);
 
-  if(hasPermission === null) {
-    return <Text>No access to the camera </Text>;
-  }
-  if(hasPermission === false) {
+  if(hasPermission === null || hasPermission === false) {
     return <Text>No access to the camera </Text>;
   }
 
@@ -40,7 +38,7 @@ export default function CameraScreen({navigation}) {
       }
       const photoFiller = {id: 0, filler: true}
       setPhotoList([photoFiller].concat(photoList));
-      const photo = await camera.takePictureAsync();
+      const photo = await camera.takePictureAsync({quality: 0.5});
       setPhotoList(photoList.filter(photo => photo.id !== photoFiller.id));
       photo.id = Math.random();
       setPhotoList([photo].concat(photoList));
@@ -74,20 +72,8 @@ export default function CameraScreen({navigation}) {
   }
 
   const cancelTakingPictures = async () => {
-    // TODO
-    // FIXME
-    // const album = await getAlbumAsync(ALBUM_NAME);
-    // const options = {album: album};
-    // const assets = await getAssetsAsync(options);
-    const products = await EventService.getProducts();
-    // EventService.getProductPhotos()
-    // EventService.setProducts([]);
-    // console.log("assets");
-    // console.log(JSON.stringify(assets));
-    // console.log("photo");
-    // console.log(JSON.stringify(photoList));
-    console.log("products");
-    console.log(JSON.stringify(products));
+    // TODO delete all the assets
+    navigation.goBack()
   }
 
   const openModal = () => {
@@ -119,8 +105,7 @@ export default function CameraScreen({navigation}) {
     })
   }
   
-  const onClickFlushPictures = () => {
-    // TODO remove all pictures from cache
+  const onClickFlushPictures = async () => {
     setPhotoList([]);
   }
 
@@ -231,7 +216,7 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   photoPreviewFiller: {
-    backgroundColor: 'black',
+    backgroundColor: '#323633',
     width: 80,
     height: 80,
     borderRadius: 50,

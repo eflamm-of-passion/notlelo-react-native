@@ -17,7 +17,7 @@ export default function HomeScreen({navigation}) {
                     <Text style={styles.buttonText}>{i18n.t('home.library')}</Text>
                 </TouchableOpacity>
             </View>
-           <StatusBar style="auto" />
+           <StatusBar style="light" />
        </View>
    ) 
 }
@@ -40,13 +40,12 @@ const styles = StyleSheet.create({
     titleText: {
         width: '80%',
         textAlign: 'center',
-        fontSize: 50,
-        lineHeight: 80,
+        fontSize: 70,
+        lineHeight: 100,
         color: 'white',
-        letterSpacing: 8,
-        textTransform: 'uppercase',
+        letterSpacing: 7,
         textShadowColor: 'white',
-        textShadowRadius: 4
+        textShadowRadius: 12
     },
     buttons: {
         flex: 1,
@@ -58,14 +57,13 @@ const styles = StyleSheet.create({
     button: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: '60%',
         height: 60,
         color: 'darkgray',
-        marginTop: 20
+        marginTop: 25
     },
     buttonText: {
-        fontSize: 18,
-        letterSpacing: 5,
+        fontSize: 21,
+        letterSpacing: 6,
         textTransform: 'uppercase',
         color: '#404040',
     }

@@ -1,6 +1,6 @@
 {
     "home": {
-        "title": "Batch Number",
+        "title": "notlelo",
         "camera": "Photo",
         "library": "Bibliothèque"
     },
@@ -15,7 +15,6 @@
         "eventNamePlaceHolder": "camp 2020"
     },
     "library": {
-        "library": "Bibliothèque",
         "close": "Fermer",
         "delete": "Supprimer",
         "compress": "Télécharger au format zip",

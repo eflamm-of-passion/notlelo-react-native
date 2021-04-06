@@ -63,32 +63,21 @@ export default function LibraryScreen() {
   const shareEvent = async (event) => {
     await EventService.shareEvent(event);
   }
-  
-  const displayMeals = (mealMap) => {
-    const mealList = [];
-    for(const [mealName, products] of mealMap) {
-      mealList.push({name: mealName, products: products});
-    }
-    return mealList.map(meal => (
-      <View style={styles.mealContainer} key={Math.random()}>
-        <Text style={styles.mealTitle}>{meal.name}</Text>
-        {displayProducts(meal.products)}
-      </View>
-    ));
-  }
 
   const displayProducts = (products) => {
     return products.map(product => (
       <View style={styles.productContainer} key={Math.random()}>
-        <Text style={styles.productTitle}>{product.name}</Text>
+        <View style={styles.productTitle}>
+          <Text style={styles.productTitleText}>{product.name}</Text>
+          <TouchableOpacity style={styles.deleteProductButton} onPress={() => deleteProduct(product)}>
+            <Svg fill="none" stroke="red" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+              <Polyline points="3 6 5 6 21 6"/><Path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><Line x1="10" x2="10" y1="11" y2="17"/><Line x1="14" x2="14" y1="11" y2="17"/>
+            </Svg>
+          </TouchableOpacity>
+        </View>
         <View style={styles.photoList}>
           {displayPhotos(product.photos)}
         </View>
-        <TouchableOpacity key={Math.random()} style={styles.deleteProductButton} onPress={() => deleteProduct(product)}>
-          <Svg fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
-            <Polyline points="3 6 5 6 21 6"/><Path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><Line x1="10" x2="10" y1="11" y2="17"/><Line x1="14" x2="14" y1="11" y2="17"/>
-          </Svg>
-        </TouchableOpacity>
       </View>
     ));
   }
@@ -116,6 +105,19 @@ export default function LibraryScreen() {
             </Modal>
   }
 
+  const displayMeals = (mealMap) => {
+    const mealList = [];
+    for(const [mealName, products] of mealMap) {
+      mealList.push({name: mealName, products: products});
+    }
+    return mealList.map(meal => (
+      <View style={styles.mealContainer} key={Math.random()}>
+        <Text style={styles.mealTitle}>{meal.name}</Text>
+        {displayProducts(meal.products)}
+      </View>
+    ));
+  }
+
   const displayEvents = (eventMap) => {
     const eventList = [];
     for(const [eventName, mealMap] of eventMap) {
@@ -123,12 +125,15 @@ export default function LibraryScreen() {
     }
     return eventList.map(event => (
       <View style={styles.eventContainer} key={Math.random()}>
-        <Text style={styles.eventTitle}>{event.name}</Text>
-        <TouchableOpacity key={Math.random()} style={styles.compressEventButton} onPress={() => shareEvent(event.name)}>
-          <Svg viewBox="0 0 183 171" fill="white">
-            <Path fill-rule="evenodd" clip-rule="evenodd" d="M122.88,35.289L87.945,70.578v-17.58c-22.091-4.577-39.542,0.468-52.796,17.271 c2.301-34.558,25.907-51.235,52.795-52.339L87.945,0L122.88,35.289L122.88,35.289z"/><Path d="M6.908,23.746h35.626c-4.587,3.96-8.71,8.563-12.264,13.815H13.815v62.943h80.603V85.831l13.814-13.579v35.159 c0,3.814-3.093,6.907-6.907,6.907H6.908c-3.815,0-6.908-3.093-6.908-6.907V30.653C0,26.838,3.093,23.746,6.908,23.746L6.908,23.746 z"/>
-          </Svg>
-        </TouchableOpacity>
+        <View style={styles.eventTitle}>
+          <Text  style={styles.eventTitleText}>{event.name}</Text>
+          <TouchableOpacity style={styles.compressEventButton} onPress={() => shareEvent(event.name)}>
+            <Svg viewBox="0 0 384.973 384.973" style="enable-background:new 0 0 384.973 384.973;" fill="white">
+              <Path d="M103.751,256.682h24.241c16.866-95.677,100.2-168.424,200.714-168.424c4.211,0,8.217,0.036,12.259,0.072l-44.079,44.067 c-4.704,4.704-4.704,12.307,0,17.011c2.346,2.346,5.426,3.525,8.505,3.525s6.16-1.179,8.505-3.525l71.075-72.94l-71.063-72.94 c-4.704-4.704-12.307-4.704-17.011,0c-4.704,4.704-4.704,12.307,0,17.011l43.682,43.682c-3.826-0.012-7.459-0.036-11.369-0.036 C215.284,64.197,121.099,147.627,103.751,256.682z"/>
+              <Path d="M348.88,180.458c-6.641,0-12.03,5.39-12.03,12.03v168.424H24.062V120.306h108.273c6.641,0,12.03-5.39,12.03-12.03 c0-6.641-5.39-12.03-12.03-12.03h-0.361H24.062c-13.281,0-24.061,10.779-24.061,24.061v240.606 c0,13.281,10.779,24.061,24.061,24.061H336.85c13.281,0,24.061-10.779,24.061-24.061V192.488 C360.911,185.847,355.521,180.458,348.88,180.458z"/>
+            </Svg>
+          </TouchableOpacity>
+        </View>
         {displayMeals(event.mealMap)}
         {displayModal()}
       </View>
@@ -137,7 +142,6 @@ export default function LibraryScreen() {
 
   return (
       <SafeAreaView style={styles.container}>
-          <Text style={styles.title}>{i18n.t('library.library')}</Text>
           <ViewPager style={styles.viewPager} initialPage={0}>
               {productList.size ? displayEvents(productList) : null}
           </ViewPager>
@@ -149,14 +153,18 @@ const styles = StyleSheet.create({
     container: {
         flex: 1
     },
-    title: {
-      paddingTop: 10,
+    eventTitle: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      backgroundColor: '#003a5d'
+    },
+    eventTitleText: {
+      paddingTop: 20,
       paddingLeft: 10,
       color: 'white',
       textTransform: 'uppercase',
-      fontSize: 30,
+      fontSize: 40,
       letterSpacing: 8,
-      backgroundColor: '#003a5d'
     },
     viewPager: {
       flex: 1
@@ -164,18 +172,11 @@ const styles = StyleSheet.create({
     eventContainer: {
         
     },
-    eventTitle: {
-      fontSize: 20,
-      paddingLeft: 10,
-      letterSpacing: 4,
-      color: '#404040',
-      textTransform: 'uppercase'
-    },
     mealContainer: {
         
     },
     mealTitle: {
-      fontSize: 15,
+      fontSize: 25,
       paddingLeft: 40,
       letterSpacing: 3,
       color: '#404040',
@@ -185,7 +186,11 @@ const styles = StyleSheet.create({
         
     },
     productTitle: {
-      fontSize: 15,
+      flexDirection: 'row',
+      alignItems: 'center'
+    },
+    productTitleText: {
+      fontSize: 20,
       paddingLeft: 80,
       letterSpacing: 1,
       color: '#404040',
@@ -226,34 +231,20 @@ const styles = StyleSheet.create({
       textTransform: 'uppercase'
     },
     deleteProductButton: {
-      width: 60,
-      height: 60,
-      marginTop: 10,
-      backgroundColor: 'red',
+      width: 30,
+      height: 30,
+      marginLeft: 10,
       justifyContent: 'center',
       alignItems: 'center',
       alignSelf: 'center',
-      borderRadius: 5
-    },
-    deleteProductButtonLabel: {
-      color: 'white',
-      fontSize: 20,
-      letterSpacing: 2
     },
     compressEventButton: {
-      alignSelf : 'end',
-      width: 60,
-      height: 60,
+      alignSelf : 'center',
+      width: 35,
+      height: 35,
       marginTop: 10,
-      backgroundColor: 'blue',
+      marginRight: 20,
       justifyContent: 'center',
       alignItems: 'center',
-      alignSelf: 'center',
-      borderRadius: 5
-    },
-    compressEventButtonLabel: {
-      color: 'white',
-      fontSize: 20,
-      letterSpacing: 2
     }
 });
