@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         color: 'white',
         letterSpacing: 7,
         textShadowColor: 'white',
-        textShadowRadius: 12
+        textShadowRadius: 4
     },
     buttons: {
         flex: 1,

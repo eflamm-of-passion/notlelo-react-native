@@ -2,12 +2,13 @@ import 'react-native-gesture-handler';
 import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import HomeScreen from './HomeScreen';
-import CameraScreen from './CameraScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
+import HomeScreen from './HomeScreen';
+import CameraScreen from './camera/CameraScreen';
+import LibraryScreen from './library/LibraryScreen';
 import EventService from './EventService';
-import LibraryScreen from './LibraryScreen';
 
 const Stack = createStackNavigator();
 

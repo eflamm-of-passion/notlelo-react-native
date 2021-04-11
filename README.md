@@ -1,11 +1,7 @@
 **TODO**  
 until the next release
-- [x] input the event and meal
-- [x] export all photos in a zipfile
-- [x] delete button in library
-- [x] choose a better name for the app
-- [x] cancel taking picture
-- [x] event carousel
-- [x] redesign the library screen
+- [x] make sure the event title is not too big, and the share button is visible
 - [ ] display the date in the library
-- [x] white notification bar
+- [x] refactor the code in smaller components
+- [ ] delete meal if no product left, and delete event if no meal left
+- [ ] install EsLint and Prettier
