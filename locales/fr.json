@@ -1,23 +1,23 @@
 {
-    "home": {
-        "title": "notlelo",
-        "camera": "Photo",
-        "library": "Bibliothèque"
-    },
-    "camera": {
-        "validate": "Valider",
-        "cancel": "Annuler",
-        "productInputLabel": "Nom du produit",
-        "mealInputLabel": "Nom du repas",
-        "eventInputLabel": "Nom de l'évènement",
-        "productNamePlaceHolder": "boîte de Montblanc",
-        "mealNamePlaceHolder": "déjeuner",
-        "eventNamePlaceHolder": "camp 2020"
-    },
-    "library": {
-        "close": "Fermer",
-        "delete": "Supprimer",
-        "compress": "Télécharger au format zip",
-        "share": "Partager"
-    }
+  "home": {
+    "title": "notlelo",
+    "camera": "Photo",
+    "library": "Bibliothèque"
+  },
+  "camera": {
+    "validate": "Valider",
+    "cancel": "Annuler",
+    "productInputLabel": "Nom du produit",
+    "mealInputLabel": "Nom du repas",
+    "eventInputLabel": "Nom de l'évènement",
+    "productNamePlaceHolder": "boîte de Montblanc",
+    "mealNamePlaceHolder": "déjeuner",
+    "eventNamePlaceHolder": "camp 2020"
+  },
+  "library": {
+    "close": "Fermer",
+    "delete": "Supprimer",
+    "compress": "Télécharger au format zip",
+    "share": "Partager"
+  }
 }

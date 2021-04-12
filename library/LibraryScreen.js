@@ -1,9 +1,9 @@
-import React, {useState, useEffect, useCallback} from 'react';
-import { StyleSheet, View, SafeAreaView } from 'react-native';
-import ViewPager from '@react-native-community/viewpager';
+import React, { useState, useEffect, useCallback } from "react";
+import { StyleSheet, View, SafeAreaView } from "react-native";
+import ViewPager from "@react-native-community/viewpager";
 
-import EventService from '../EventService';
-import EventView from './EventView';
+import EventService from "../EventService";
+import EventView from "./EventView";
 
 export default function LibraryScreen() {
   const [productList, setProductList] = useState([]);
@@ -21,12 +21,12 @@ export default function LibraryScreen() {
 
   const deserializeFlatProductList = (flatProductList) => {
     const eventMap = new Map();
-    for(const flatProduct of flatProductList) {
+    for (const flatProduct of flatProductList) {
       const mealMap = eventMap.get(flatProduct.event);
-      if(mealMap) {
-        const product = deserializeProduct(flatProduct); 
+      if (mealMap) {
+        const product = deserializeProduct(flatProduct);
         const productList = mealMap.get(flatProduct.meal);
-        if(productList) {
+        if (productList) {
           productList.push(product);
           mealMap.set(flatProduct.meal, productList);
         } else {
@@ -43,50 +43,53 @@ export default function LibraryScreen() {
       }
     }
     return eventMap;
-  }
+  };
 
   const deserializeProduct = (flatProduct) => {
     return {
       uuid: flatProduct.uuid,
       name: flatProduct.name,
       photos: flatProduct.photos,
-      date: flatProduct.date
-    }
-  }
+      date: flatProduct.date,
+    };
+  };
 
   const deleteProduct = async (product) => {
     await EventService.removeProduct(product);
     fetchProducts();
-  }
+  };
 
   const displayEvents = (eventMap) => {
     const eventList = [];
-    
-    for(const [eventName, mealMap] of eventMap) {
-      eventList.push({name: eventName, mealMap: mealMap});
+
+    for (const [eventName, mealMap] of eventMap) {
+      eventList.push({ name: eventName, mealMap: mealMap });
     }
-    
-    return eventList.map(event => (
+
+    return eventList.map((event) => (
       <View key={Math.random()}>
-        <EventView event={event} deleteProduct={deleteProduct} setSelectedPhoto={setSelectedPhoto}></EventView>
+        <EventView
+          event={event}
+          deleteProduct={deleteProduct}
+          setSelectedPhoto={setSelectedPhoto}
+        ></EventView>
       </View>
     ));
-  }
+  };
 
   return (
-      <SafeAreaView style={styles.container}>
-          <ViewPager style={styles.viewPager} initialPage={0}>
-              {productList.size ? displayEvents(productList) : null}
-          </ViewPager>
-      </SafeAreaView>
+    <SafeAreaView style={styles.container}>
+      <ViewPager style={styles.viewPager} initialPage={0}>
+        {productList.size ? displayEvents(productList) : null}
+      </ViewPager>
+    </SafeAreaView>
   );
-
 }
 const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    },
-    viewPager: {
-      flex: 1
-    },
+  container: {
+    flex: 1,
+  },
+  viewPager: {
+    flex: 1,
+  },
 });
