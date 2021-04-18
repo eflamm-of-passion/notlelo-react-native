@@ -8,14 +8,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './HomeScreen';
 import CameraScreen from './camera/CameraScreen';
 import LibraryScreen from './library/LibraryScreen';
-import EventService from './EventService';
+import { init } from './EventService';
 
 const Stack = createStackNavigator();
 
 export default function App() {
 
   useEffect(() => {
-    EventService.init();
+    init();
   });
   
   return (

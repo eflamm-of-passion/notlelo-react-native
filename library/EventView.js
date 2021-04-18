@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
-import MealView from './MealView';
+import DateView from './DateView';
 import ShareEventButton from './ShareEventButton';
 import ExpandProductPhotoModal from './ExpandProductPhotoModal';
 
@@ -9,13 +9,13 @@ export default function EventView({event, deleteProduct, setSelectedPhoto}) {
 
     const displayMeals = () => {
         
-        const mealList = [];
-        for(const [mealName, products] of event.mealMap) {
-          mealList.push({name: mealName, products: products});
+        const dateList = [];
+        for(const [dateName, mealMap] of event.dateMap) {
+          dateList.push({name: dateName, mealMap: mealMap});
         }
 
-        return mealList.map(meal => (
-            <MealView key={Math.random()} meal={meal} deleteProduct={deleteProduct} setSelectedPhoto={setSelectedPhoto}></MealView>
+        return dateList.map(date => (
+            <DateView key={Math.random()} date={date} deleteProduct={deleteProduct} setSelectedPhoto={setSelectedPhoto}></DateView>
         ));
       }
 

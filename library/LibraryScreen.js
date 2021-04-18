@@ -2,7 +2,7 @@ import React, {useState, useEffect, useCallback} from 'react';
 import { StyleSheet, View, SafeAreaView } from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
 
-import EventService from '../EventService';
+import { getProducts } from '../EventService';
 import EventView from './EventView';
 
 export default function LibraryScreen() {
@@ -14,33 +14,46 @@ export default function LibraryScreen() {
   }, []);
 
   const fetchProducts = useCallback(async () => {
-    const flatProductList = await EventService.getProducts();
+    const flatProductList = await getProducts();
     const productList = deserializeFlatProductList(flatProductList);
     setProductList(productList);
   }, []);
 
   const deserializeFlatProductList = (flatProductList) => {
+    // yeah... I know
     const eventMap = new Map();
     for(const flatProduct of flatProductList) {
-      const mealMap = eventMap.get(flatProduct.event);
-      if(mealMap) {
-        const product = deserializeProduct(flatProduct); 
-        const productList = mealMap.get(flatProduct.meal);
-        if(productList) {
-          productList.push(product);
-          mealMap.set(flatProduct.meal, productList);
+      const dateMap = eventMap.get(flatProduct.event);
+      if(dateMap){
+        const mealMap = dateMap.get(flatProduct.date);
+        if(mealMap) {
+          const product = deserializeProduct(flatProduct); 
+          const productList = mealMap.get(flatProduct.meal);
+          if(productList) {
+            productList.push(product);
+            mealMap.set(flatProduct.meal, productList);
+          } else {
+            // the meal does not exist
+            mealMap.set(flatProduct.meal, [product]);
+          }
+          dateMap.set(flatProduct.date, mealMap);
         } else {
-          // the meal does not exist
-          mealMap.set(flatProduct.meal, [product]);
+          // the date does not exist
+          const product = deserializeProduct(flatProduct);
+          const newMealMap = new Map();
+          newMealMap.set(flatProduct.meal, [product]);
+          dateMap.set(flatProduct.date, newMealMap);
         }
-        eventMap.set(flatProduct.event, mealMap);
       } else {
         // the event does not exist
         const product = deserializeProduct(flatProduct);
+        const newDateMap = new Map();
         const newMealMap = new Map();
         newMealMap.set(flatProduct.meal, [product]);
-        eventMap.set(flatProduct.event, newMealMap);
+        newDateMap.set(flatProduct.date, newMealMap)
+        eventMap.set(flatProduct.event, newDateMap);
       }
+
     }
     return eventMap;
   }
@@ -62,8 +75,8 @@ export default function LibraryScreen() {
   const displayEvents = (eventMap) => {
     const eventList = [];
     
-    for(const [eventName, mealMap] of eventMap) {
-      eventList.push({name: eventName, mealMap: mealMap});
+    for(const [eventName, dateMap] of eventMap) {
+      eventList.push({name: eventName, dateMap: dateMap});
     }
     
     return eventList.map(event => (
