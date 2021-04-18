@@ -1,6 +1,6 @@
-import React, {useState, useEffect, useCallback} from 'react';
-import { StyleSheet, View, SafeAreaView } from 'react-native';
-import ViewPager from '@react-native-community/viewpager';
+import React, { useState, useEffect, useCallback } from "react";
+import { StyleSheet, View, SafeAreaView } from "react-native";
+import ViewPager from "@react-native-community/viewpager";
 
 import { getProducts } from '../EventService';
 import EventView from './EventView';
@@ -56,21 +56,21 @@ export default function LibraryScreen() {
 
     }
     return eventMap;
-  }
+  };
 
   const deserializeProduct = (flatProduct) => {
     return {
       uuid: flatProduct.uuid,
       name: flatProduct.name,
       photos: flatProduct.photos,
-      date: flatProduct.date
-    }
-  }
+      date: flatProduct.date,
+    };
+  };
 
   const deleteProduct = async (product) => {
     await EventService.removeProduct(product);
     fetchProducts();
-  }
+  };
 
   const displayEvents = (eventMap) => {
     const eventList = [];
@@ -78,28 +78,31 @@ export default function LibraryScreen() {
     for(const [eventName, dateMap] of eventMap) {
       eventList.push({name: eventName, dateMap: dateMap});
     }
-    
-    return eventList.map(event => (
+
+    return eventList.map((event) => (
       <View key={Math.random()}>
-        <EventView event={event} deleteProduct={deleteProduct} setSelectedPhoto={setSelectedPhoto}></EventView>
+        <EventView
+          event={event}
+          deleteProduct={deleteProduct}
+          setSelectedPhoto={setSelectedPhoto}
+        ></EventView>
       </View>
     ));
-  }
+  };
 
   return (
-      <SafeAreaView style={styles.container}>
-          <ViewPager style={styles.viewPager} initialPage={0}>
-              {productList.size ? displayEvents(productList) : null}
-          </ViewPager>
-      </SafeAreaView>
+    <SafeAreaView style={styles.container}>
+      <ViewPager style={styles.viewPager} initialPage={0}>
+        {productList.size ? displayEvents(productList) : null}
+      </ViewPager>
+    </SafeAreaView>
   );
-
 }
 const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    },
-    viewPager: {
-      flex: 1
-    },
+  container: {
+    flex: 1,
+  },
+  viewPager: {
+    flex: 1,
+  },
 });

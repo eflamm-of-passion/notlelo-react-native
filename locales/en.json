@@ -1,24 +1,24 @@
 {
-    "home": {
-        "title": "Batch Number",
-        "camera": "Start",
-        "library": "Library"
-    },
-    "camera": {
-        "validate": "Validate",
-        "cancel": "Cancel",
-        "productInputLabel": "Name of the product",
-        "mealInputLabel": "Name of the meal",
-        "eventInputLabel": "Name of the event",
-        "productNamePlaceHolder": "can of Montblanc",
-        "mealNamePlaceHolder": "breakfast",
-        "eventNamePlaceHolder": "summer camp 2020"
-    },
-    "library": {
-        "library": "Library",
-        "close": "Close",
-        "delete": "Delete",
-        "compress": "Compress as zip",
-        "share": "Share"
-    }
+  "home": {
+    "title": "Batch Number",
+    "camera": "Start",
+    "library": "Library"
+  },
+  "camera": {
+    "validate": "Validate",
+    "cancel": "Cancel",
+    "productInputLabel": "Name of the product",
+    "mealInputLabel": "Name of the meal",
+    "eventInputLabel": "Name of the event",
+    "productNamePlaceHolder": "can of Montblanc",
+    "mealNamePlaceHolder": "breakfast",
+    "eventNamePlaceHolder": "summer camp 2020"
+  },
+  "library": {
+    "library": "Library",
+    "close": "Close",
+    "delete": "Delete",
+    "compress": "Compress as zip",
+    "share": "Share"
+  }
 }

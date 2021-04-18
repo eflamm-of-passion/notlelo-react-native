@@ -1,5 +1,6 @@
 **TODO**  
 until the next release
+
 - [x] make sure the event title is not too big, and the share button is visible
 - [ ] view pager by dates
 - [x] refactor the code in smaller components
@@ -7,3 +8,4 @@ until the next release
 - [x] install EsLint and Prettier
 - [ ] suggest meal and event, as a <select>
 - [x] refactor the EventService to be React compliant
+- [ ] install EsLint and Prettier

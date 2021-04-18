@@ -1,7 +1,11 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getAssetsAsync, getAlbumAsync, removeAssetsFromAlbumAsync } from 'expo-media-library';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  getAssetsAsync,
+  getAlbumAsync,
+  removeAssetsFromAlbumAsync,
+} from "expo-media-library";
 import * as FileSystem from "expo-file-system";
-import * as Sharing from 'expo-sharing';
+import * as Sharing from "expo-sharing";
 import JSZip from "jszip";
 
 const ALBUM_NAME = "Batch Number";
