@@ -2,7 +2,8 @@
   "home": {
     "title": "notlelo",
     "camera": "Photo",
-    "library": "Bibliothèque"
+    "library": "Bibliothèque",
+    "noEvent": "< aucun évènement >"
   },
   "camera": {
     "validate": "Valider",

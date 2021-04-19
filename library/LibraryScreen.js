@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { StyleSheet, View, SafeAreaView } from "react-native";
 import ViewPager from "@react-native-community/viewpager";
 
-import { getProducts } from '../EventService';
+import { getProducts, removeProduct } from '../EventService';
 import EventView from './EventView';
 
 export default function LibraryScreen() {
@@ -68,7 +68,7 @@ export default function LibraryScreen() {
   };
 
   const deleteProduct = async (product) => {
-    await EventService.removeProduct(product);
+    await removeProduct(product);
     fetchProducts();
   };
 

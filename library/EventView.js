@@ -6,13 +6,12 @@ import ShareEventButton from './ShareEventButton';
 import ExpandProductPhotoModal from './ExpandProductPhotoModal';
 
 export default function EventView({ event, deleteProduct, setSelectedPhoto }) {
-    const displayDates = () => {
-        
+    
+  const displayDates = () => {      
       const dateList = [];
       for(const [dateName, mealMap] of event.dateMap) {
         dateList.push({name: dateName, mealMap: mealMap});
       }
-
       return dateList.map(date => (
           <DateView key={Math.random()} date={date} deleteProduct={deleteProduct} setSelectedPhoto={setSelectedPhoto}></DateView>
       ));

@@ -2,7 +2,8 @@
   "home": {
     "title": "Batch Number",
     "camera": "Start",
-    "library": "Library"
+    "library": "Library",
+    "noEvent": "Please select an event"
   },
   "camera": {
     "validate": "Validate",
@@ -15,7 +16,6 @@
     "eventNamePlaceHolder": "summer camp 2020"
   },
   "library": {
-    "library": "Library",
     "close": "Close",
     "delete": "Delete",
     "compress": "Compress as zip",

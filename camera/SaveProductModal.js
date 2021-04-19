@@ -13,7 +13,7 @@ import {
   getAlbumAsync,
   addAssetsToAlbumAsync,
 } from "expo-media-library";
-import EventService from "../EventService";
+import { addProduct } from "../EventService";
 import i18n from "../i18n";
 
 const ALBUM_NAME = "Batch Number";
@@ -66,7 +66,7 @@ export default function SaveProductModal({
       }
       // save the product to the database
       const product = { event: eventName, meal: mealName, name: productName };
-      EventService.addProduct(product, creationDate);
+      addProduct(product, creationDate);
 
       setPhotoList([]);
     }
