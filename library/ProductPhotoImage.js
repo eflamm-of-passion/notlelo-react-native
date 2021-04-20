@@ -3,10 +3,7 @@ import { StyleSheet, TouchableOpacity, Image } from "react-native";
 
 export default function ProductPhotoImage({ photo, setSelectedPhoto }) {
   return (
-    <TouchableOpacity
-      key={Math.random()}
-      onPress={() => setSelectedPhoto(photo)}
-    >
+    <TouchableOpacity onPress={() => setSelectedPhoto(photo)}>
       <Image style={styles.photo} source={{ uri: photo.uri }} />
     </TouchableOpacity>
   );

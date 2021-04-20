@@ -10,7 +10,7 @@ export default function ProductView({
   setSelectedPhoto,
 }) {
   return (
-    <View key={Math.random()}>
+    <View>
       <View style={styles.productTitle}>
         <Text style={styles.productTitleText}>{product.name}</Text>
         <DeleteProductButton
@@ -20,9 +20,9 @@ export default function ProductView({
       </View>
       <View style={styles.photoList}>
         {product.photos
-          ? product.photos.map((photo) => (
+          ? product.photos.map((photo, index) => (
               <ProductPhotoImage
-                key={Math.random()}
+                key={index}
                 photo={photo}
                 setSelectedPhoto={setSelectedPhoto}
               ></ProductPhotoImage>
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   productTitleText: {
-    fontSize: 20,
+    fontSize: 19,
     paddingLeft: 80,
     letterSpacing: 1,
     color: "#404040",

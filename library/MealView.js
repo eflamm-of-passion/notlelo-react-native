@@ -5,11 +5,11 @@ import ProductView from "./ProductView";
 
 export default function MealView({ meal, deleteProduct, setSelectedPhoto }) {
   return (
-    <View key={Math.random()}>
+    <View>
       <Text style={styles.mealTitle}>{meal.name}</Text>
-      {meal.products.map((product) => (
+      {meal.products.map((product, index) => (
         <ProductView
-          key={Math.random()}
+          key={index}
           product={product}
           deleteProduct={deleteProduct}
           setSelectedPhoto={setSelectedPhoto}
@@ -21,8 +21,8 @@ export default function MealView({ meal, deleteProduct, setSelectedPhoto }) {
 
 const styles = StyleSheet.create({
   mealTitle: {
-    fontSize: 25,
-    paddingLeft: 40,
+    fontSize: 23,
+    paddingLeft: 45,
     letterSpacing: 3,
     color: "#404040",
     textTransform: "uppercase",

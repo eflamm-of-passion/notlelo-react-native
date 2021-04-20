@@ -1,20 +1,29 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { StyleSheet, View, SafeAreaView } from "react-native";
+
+import ExpandProductPhotoModal from "./ExpandProductPhotoModal";
 import ViewPager from "@react-native-community/viewpager";
 
-import { getProducts, removeProduct } from '../EventService';
-import EventView from './EventView';
+import {
+  getProducts,
+  getProductsByEventName,
+  removeProduct,
+} from "../EventService";
+import EventView from "./EventView";
 
-export default function LibraryScreen() {
+export default function LibraryScreen({ route }) {
   const [productList, setProductList] = useState([]);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+
+  const { eventName } = route.params;
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const fetchProducts = useCallback(async () => {
-    const flatProductList = await getProducts();
+    const flatProductList = await getProductsByEventName(eventName);
+    // const flatProductList = await getProducts();
     const productList = deserializeFlatProductList(flatProductList);
     setProductList(productList);
   }, []);
@@ -22,14 +31,14 @@ export default function LibraryScreen() {
   const deserializeFlatProductList = (flatProductList) => {
     // yeah... I know
     const eventMap = new Map();
-    for(const flatProduct of flatProductList) {
+    for (const flatProduct of flatProductList) {
       const dateMap = eventMap.get(flatProduct.event);
-      if(dateMap){
+      if (dateMap) {
         const mealMap = dateMap.get(flatProduct.date);
-        if(mealMap) {
-          const product = deserializeProduct(flatProduct); 
+        if (mealMap) {
+          const product = deserializeProduct(flatProduct);
           const productList = mealMap.get(flatProduct.meal);
-          if(productList) {
+          if (productList) {
             productList.push(product);
             mealMap.set(flatProduct.meal, productList);
           } else {
@@ -50,10 +59,9 @@ export default function LibraryScreen() {
         const newDateMap = new Map();
         const newMealMap = new Map();
         newMealMap.set(flatProduct.meal, [product]);
-        newDateMap.set(flatProduct.date, newMealMap)
+        newDateMap.set(flatProduct.date, newMealMap);
         eventMap.set(flatProduct.event, newDateMap);
       }
-
     }
     return eventMap;
   };
@@ -74,35 +82,34 @@ export default function LibraryScreen() {
 
   const displayEvents = (eventMap) => {
     const eventList = [];
-    
-    for(const [eventName, dateMap] of eventMap) {
-      eventList.push({name: eventName, dateMap: dateMap});
+
+    for (const [eventName, dateMap] of eventMap) {
+      eventList.push({ name: eventName, dateMap: dateMap });
     }
 
-    return eventList.map((event) => (
-      <View key={Math.random()}>
+    return eventList.map((event, index) => (
+      <View style={styles.container} key={index}>
         <EventView
           event={event}
           deleteProduct={deleteProduct}
           setSelectedPhoto={setSelectedPhoto}
         ></EventView>
+        <ExpandProductPhotoModal
+          selectedPhoto={selectedPhoto}
+          setSelectedPhoto={setSelectedPhoto}
+        ></ExpandProductPhotoModal>
       </View>
     ));
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <ViewPager style={styles.viewPager} initialPage={0}>
-        {productList.size ? displayEvents(productList) : null}
-      </ViewPager>
+      {productList.size ? displayEvents(productList) : null}
     </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-  viewPager: {
     flex: 1,
   },
 });

@@ -24,10 +24,10 @@ export default function SaveProductModal({
   photoList,
   setPhotoList,
   creationDate,
+  eventName,
 }) {
   const [productName, setProductName] = useState("");
   const [mealName, setMealName] = useState("");
-  const [eventName, setEventName] = useState("");
 
   const onClickValidate = () => {
     setModalVisible(false);
@@ -92,16 +92,6 @@ export default function SaveProductModal({
           placeholder={i18n.t("camera.mealNamePlaceHolder")}
           onChangeText={(text) => setMealName(text)}
           value={mealName}
-        />
-        <Text style={styles.modalTitle}>
-          {i18n.t("camera.eventInputLabel")}
-        </Text>
-        <TextInput
-          style={styles.modalTextInput}
-          autoFocus={true}
-          placeholder={i18n.t("camera.eventNamePlaceHolder")}
-          onChangeText={(text) => setEventName(text)}
-          value={eventName}
         />
         <View style={styles.modalButtonContainer}>
           <TouchableOpacity

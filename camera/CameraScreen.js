@@ -9,13 +9,15 @@ import ValidateProductButton from "./ValidateProductButton";
 import PreviewPhotoList from "./PreviewPhotoList";
 import SaveProductModal from "./SaveProductModal";
 
-export default function CameraScreen({ navigation }) {
+export default function CameraScreen({ navigation, route }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [camera, setCamera] = useState(null);
   const [photoList, setPhotoList] = useState([]);
 
   const [creationDate, setCreationDate] = useState(new Date());
   const [isModalVisible, setModalVisible] = useState(false);
+
+  const { eventName } = route.params;
 
   useEffect(() => {
     (async () => {
@@ -80,6 +82,7 @@ export default function CameraScreen({ navigation }) {
         photoList={photoList}
         setPhotoList={setPhotoList}
         creationDate={creationDate}
+        eventName={eventName}
       ></SaveProductModal>
     </View>
   );

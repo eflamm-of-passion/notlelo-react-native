@@ -2,10 +2,17 @@
 until the next release
 
 - [x] make sure the event title is not too big, and the share button is visible
-- [ ] view pager by dates
+- [x] view pager by dates
 - [x] refactor the code in smaller components
-- [ ] delete meal if no product left, and delete event if no meal left
 - [x] install EsLint and Prettier
-- [ ] suggest meal and event, as a <select>
+- [x] suggest event, as a <select>
 - [x] refactor the EventService to be React compliant
-- [ ] install EsLint and Prettier
+- [x] install EsLint and Prettier
+- [x] display readable date
+- [x] remove all Math.random() in loops
+- [ ] choose an event to view in library
+- [ ] choose an event to take pictures
+- [ ] create new event
+- [ ] choose a default meal when taking a picture
+- [ ] enter a new meal if wanted when taking a picture
+- [ ] style the picker items
