@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
 import { requestPermissionsAsync } from "expo-media-library";
 import { Camera } from "expo-camera";
 
@@ -91,6 +91,7 @@ export default function CameraScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    minHeight: Math.round(Dimensions.get("window").height), // the keyboard does not push up
   },
 
   camera: {

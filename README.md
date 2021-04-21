@@ -10,9 +10,11 @@ until the next release
 - [x] install EsLint and Prettier
 - [x] display readable date
 - [x] remove all Math.random() in loops
-- [ ] choose an event to view in library
-- [ ] choose an event to take pictures
-- [ ] create new event
-- [ ] choose a default meal when taking a picture
-- [ ] enter a new meal if wanted when taking a picture
+- [x] choose an event to view in library
+- [x] choose an event to take pictures
+- [x] create new event
+- [x] choose a default meal when taking a picture
+- [x] enter a new meal if wanted when taking a picture
 - [ ] style the picker items
+
+www.svgrepo.com

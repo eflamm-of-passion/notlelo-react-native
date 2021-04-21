@@ -3,7 +3,8 @@
     "title": "notlelo",
     "camera": "Photo",
     "library": "Bibliothèque",
-    "noEvent": "< aucun évènement >"
+    "noEvent": "< aucun camp >",
+    "eventInputPlaceholder": "nom du camp"
   },
   "camera": {
     "validate": "Valider",
@@ -19,6 +20,16 @@
     "close": "Fermer",
     "delete": "Supprimer",
     "compress": "Télécharger au format zip",
-    "share": "Partager"
+    "share": "Partager",
+    "mealInputPlaceholder": "petite fringale"
+  },
+  "meal": {
+    "breakfast": "Petit-déjeuner",
+    "lunch": "Déjeuner",
+    "snack": "Goûter",
+    "dinner": "Dîner",
+    "fifth": "Cinquième",
+    "cookingContest": "Concours cuisine",
+    "picnic": "Pique-nique"
   }
 }

@@ -3,7 +3,8 @@
     "title": "Batch Number",
     "camera": "Start",
     "library": "Library",
-    "noEvent": "Please select an event"
+    "noEvent": "< no selected camp >",
+    "eventInputPlaceholder": "name of the camp"
   },
   "camera": {
     "validate": "Validate",
@@ -19,6 +20,16 @@
     "close": "Close",
     "delete": "Delete",
     "compress": "Compress as zip",
-    "share": "Share"
+    "share": "Share",
+    "mealInputPlaceholder": "name of your meal"
+  },
+  "meal": {
+    "breakfast": "Breakfast",
+    "lunch": "Lunch",
+    "snack": "Snack",
+    "dinner": "Dinner",
+    "fifth": "Fifth meal",
+    "cookingContest": "Cooking contest",
+    "picnic": "Picnic"
   }
 }
