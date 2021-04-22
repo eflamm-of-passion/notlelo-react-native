@@ -1,20 +1,51 @@
-**TODO**  
-until the next release
+# run the project
 
-- [x] make sure the event title is not too big, and the share button is visible
-- [x] view pager by dates
-- [x] refactor the code in smaller components
-- [x] install EsLint and Prettier
-- [x] suggest event, as a <select>
-- [x] refactor the EventService to be React compliant
-- [x] install EsLint and Prettier
-- [x] display readable date
-- [x] remove all Math.random() in loops
-- [x] choose an event to view in library
-- [x] choose an event to take pictures
-- [x] create new event
-- [x] choose a default meal when taking a picture
-- [x] enter a new meal if wanted when taking a picture
-- [ ] style the picker items
+Install **npm** via **nvm**:  
+https://github.com/nvm-sh/nvm
 
+Install **expo** : https://docs.expo.io/get-started/installation/
+
+# how to deploy on android
+
+Increment the android.versionCode in the app.json
+Run `expo build:android`, wait for the build to finish. Then download it on https://expo.io/.
+
+Go to https://play.google.com/console/ and create an new release.
+
+# realeases notes
+
+**_next release_**
+
+[ ] refactor the homescreen in smaller components  
+[ ] take multiple pictures at the same time  
+[ ] find better names for camera and library links  
+[ ] display the date in letters  
+[ ] check the permissions  
+[ ] disable take picture button when no photo is taken
+[ ] remove the loop of event in the library  
+[ ] create a default event, when no event is selected  
+[ ] add back button in library  
+[ ] add navigation button in library between dates  
+[ ] blur background when modal appears  
+[ ] blur background when preview picture  
+[ ] style the pickers
+
+**_v1.1_**
+
+- make sure the event title is not too big, and the hare button is visible
+- view pager by dates
+- refactor the code in smaller components
+- install EsLint and Prettier
+- suggest event, as a <select></select>
+- refactor the EventService to be React compliant
+- install EsLint and Prettier
+- display readable date
+- remove all Math.random() in loops
+- choose an event to view in library
+- choose an event to take pictures
+- create new event
+- choose a default meal when taking a picture
+- enter a new meal if wanted when taking a picture
+
+source of icons :  
 www.svgrepo.com
