@@ -4,7 +4,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import HomeScreen from './HomeScreen';
+import HomeScreen from './home/HomeScreen';
 import CameraScreen from './camera/CameraScreen';
 import LibraryScreen from './library/LibraryScreen';
 import { init } from './EventService';

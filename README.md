@@ -29,6 +29,7 @@ Go to https://play.google.com/console/ and create an new release.
 [ ] blur background when modal appears  
 [ ] blur background when preview picture  
 [ ] style the pickers
+[ ] start some tests
 
 **_v1.1_**
 
