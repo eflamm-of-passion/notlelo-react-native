@@ -10,9 +10,9 @@ import { StatusBar } from "expo-status-bar";
 import i18n from "../i18n";
 
 import { getProducts } from "../EventService";
-import EventInput from './EventInput';
-import EventPicker from './EventPicker';
-import LinkButton from './LinkButton';
+import EventInput from "./EventInput";
+import EventPicker from "./EventPicker";
+import LinkButton from "./LinkButton";
 
 export default function HomeScreen({ navigation }) {
   const [eventNameList, setEventNameList] = useState([]);
@@ -40,15 +40,38 @@ export default function HomeScreen({ navigation }) {
       >
         <Text style={styles.titleText}>{i18n.t("home.title")}</Text>
       </ImageBackground>
+
       <View style={styles.buttons}>
-        {
-        showEventInput 
-          ? <EventInput setSelectedEventName={setSelectedEventName} setShowEventInput={setShowEventInput} eventNameList={eventNameList} setEventNameList={setEventNameList} />  
-          : <EventPicker setShowEventInput={setShowEventInput} eventNameList={eventNameList} selectedEventName={selectedEventName} setSelectedEventName={setSelectedEventName}/>
-        }
-        <LinkButton navigation={navigation} label={i18n.t("home.camera")} component={"Camera"} selectedEventName={selectedEventName}/>
-        <LinkButton navigation={navigation} label={i18n.t("home.library")} component={"Library"} selectedEventName={selectedEventName}/>
+        {showEventInput ? (
+          <EventInput
+            setSelectedEventName={setSelectedEventName}
+            setShowEventInput={setShowEventInput}
+            eventNameList={eventNameList}
+            setEventNameList={setEventNameList}
+          />
+        ) : (
+          <EventPicker
+            setShowEventInput={setShowEventInput}
+            eventNameList={eventNameList}
+            selectedEventName={selectedEventName}
+            setSelectedEventName={setSelectedEventName}
+          />
+        )}
+
+        <LinkButton
+          navigation={navigation}
+          label={i18n.t("home.camera")}
+          component={"Camera"}
+          selectedEventName={selectedEventName}
+        />
+        <LinkButton
+          navigation={navigation}
+          label={i18n.t("home.library")}
+          component={"Library"}
+          selectedEventName={selectedEventName}
+        />
       </View>
+
       <StatusBar style="light" />
     </View>
   );
@@ -87,5 +110,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  
 });

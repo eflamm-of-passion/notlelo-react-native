@@ -7,7 +7,7 @@ import CancelTakingPictureButton from "./CancelTakingPictureButton";
 import TakePictureButton from "./TakePictureButton";
 import ValidateProductButton from "./ValidateProductButton";
 import PreviewPhotoList from "./PreviewPhotoList";
-import SaveProductModal from "./SaveProductModal";
+import SaveProductModal from "./validateModal/SaveProductModal";
 
 export default function CameraScreen({ navigation, route }) {
   const [hasPermission, setHasPermission] = useState(null);

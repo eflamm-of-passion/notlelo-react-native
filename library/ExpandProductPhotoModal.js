@@ -7,6 +7,7 @@ import {
   Text,
   Image,
 } from "react-native";
+import { BlurView } from "expo-blur";
 import i18n from "../i18n";
 
 export default function ExpandProductPhotoModal({
@@ -19,20 +20,28 @@ export default function ExpandProductPhotoModal({
       transparent={true}
       visible={selectedPhoto != null}
     >
-      <View style={styles.modalView}>
-        {selectedPhoto ? (
-          <Image
-            style={styles.modalPhoto}
-            source={{ uri: selectedPhoto.uri }}
-          />
-        ) : null}
-        <TouchableOpacity
-          style={[styles.modalButton, styles.modalCloseButton]}
-          onPress={() => setSelectedPhoto(null)}
-        >
-          <Text style={styles.modalButtonText}>{i18n.t("library.close")}</Text>
-        </TouchableOpacity>
-      </View>
+      <BlurView
+        tint="dark"
+        intensity={100}
+        style={[StyleSheet.absoluteFill, styles.nonBlurredContent]}
+      >
+        <View style={styles.modalView}>
+          {selectedPhoto ? (
+            <Image
+              style={styles.modalPhoto}
+              source={{ uri: selectedPhoto.uri }}
+            />
+          ) : null}
+          <TouchableOpacity
+            style={[styles.modalButton, styles.modalCloseButton]}
+            onPress={() => setSelectedPhoto(null)}
+          >
+            <Text style={styles.modalButtonText}>
+              {i18n.t("library.close")}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </BlurView>
     </Modal>
   );
 }
