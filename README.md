@@ -16,22 +16,22 @@ Go to https://play.google.com/console/ and create an new release.
 
 **_next release_**
 
-[x] refactor the homescreen in smaller components
+[x] refactor the homescreen in smaller components  
 [x] refactor the camera validate modal in smaller components  
 [ ] take multiple pictures at the same time  
 [ ] find better names for camera and library links  
 [ ] display the date in letters  
 [ ] check the permissions  
-[ ] investigate the "none" bug
-[ ] disable take picture button when no photo is taken
+[ ] investigate the "none" bug  
+[ ] disable take picture button when no photo is taken  
 [ ] remove the loop of event in the library  
 [ ] create a default event, when no event is selected  
-[ ] add back button in library  
+[x] add back button in library  
 [ ] add navigation button in library between dates  
-[ ] delete projects
-[ ] blur background when modal appears  
-[ ] blur background when preview picture  
-[ ] style the pickers
+[ ] delete projects  
+[x] blur background when modal appears  
+[x] blur background when preview picture  
+[ ] style the pickers  
 [ ] start some tests
 
 **_v1.1_**

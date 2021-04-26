@@ -11,7 +11,7 @@ import {
 } from "../EventService";
 import EventView from "./EventView";
 
-export default function LibraryScreen({ route }) {
+export default function LibraryScreen({ route, navigation }) {
   const [productList, setProductList] = useState([]);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
 
@@ -90,6 +90,7 @@ export default function LibraryScreen({ route }) {
     return eventList.map((event, index) => (
       <View style={styles.container} key={index}>
         <EventView
+          navigation={navigation}
           event={event}
           deleteProduct={deleteProduct}
           setSelectedPhoto={setSelectedPhoto}
