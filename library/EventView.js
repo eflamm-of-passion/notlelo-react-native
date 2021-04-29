@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Svg, Path } from "react-native-svg";
 import ViewPager from "@react-native-community/viewpager";
@@ -12,6 +12,9 @@ export default function EventView({
   deleteProduct,
   setSelectedPhoto,
 }) {
+  const pager = useRef(null);
+  const [pageIndex, setPageIndex] = useState(0);
+
   const displayDates = () => {
     const dateList = [];
     for (const [dateName, mealMap] of event.dateMap) {
@@ -48,10 +51,21 @@ export default function EventView({
         </Text>
         <ShareEventButton event={event}></ShareEventButton>
       </View>
-      <ViewPager style={styles.pager} initialPage={0}>
+      <ViewPager
+        ref={pager}
+        style={styles.pager}
+        initialPage={pageIndex}
+        onPageSelected={(e) => {
+          const { position } = e.nativeEvent;
+          setPageIndex(position);
+        }}
+      >
         {displayDates()}
       </ViewPager>
-      <TouchableOpacity style={[styles.swipeButton, styles.rightButton]}>
+      <TouchableOpacity
+        style={[styles.swipeButton, styles.rightButton]}
+        onPress={() => pager.current.setPage(pageIndex + 1)}
+      >
         <Svg
           style={styles.rightArrow}
           fill="#fff"
@@ -60,7 +74,10 @@ export default function EventView({
           <Path d="M233.252,155.997L120.752,6.001c-4.972-6.628-14.372-7.97-21-3c-6.628,4.971-7.971,14.373-3,21 l105.75,140.997L96.752,306.001c-4.971,6.627-3.627,16.03,3,21c2.698,2.024,5.856,3.001,8.988,3.001 c4.561,0,9.065-2.072,12.012-6.001l112.5-150.004C237.252,168.664,237.252,161.33,233.252,155.997z" />
         </Svg>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.swipeButton, styles.leftButton]}>
+      <TouchableOpacity
+        style={[styles.swipeButton, styles.leftButton]}
+        onPress={() => pager.current.setPage(pageIndex - 1)}
+      >
         <Svg style={styles.leftArrow} fill="#fff" viewBox="0 0 330.002 330.002">
           <Path d="M233.252,155.997L120.752,6.001c-4.972-6.628-14.372-7.97-21-3c-6.628,4.971-7.971,14.373-3,21 l105.75,140.997L96.752,306.001c-4.971,6.627-3.627,16.03,3,21c2.698,2.024,5.856,3.001,8.988,3.001 c4.561,0,9.065-2.072,12.012-6.001l112.5-150.004C237.252,168.664,237.252,161.33,233.252,155.997z" />
         </Svg>
@@ -103,6 +120,7 @@ const styles = StyleSheet.create({
   },
   swipeButton: {
     position: "absolute",
+    justifyContent: "center",
     bottom: 25,
     height: 55,
     width: 55,
@@ -114,12 +132,14 @@ const styles = StyleSheet.create({
     right: 30,
   },
   rightArrow: {
+    height: 35,
     marginLeft: 5,
   },
   leftButton: {
     left: 30,
   },
   leftArrow: {
+    height: 35,
     transform: [{ rotate: "180deg" }],
     marginLeft: -3,
   },
