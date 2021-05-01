@@ -13,6 +13,7 @@ export default function CameraScreen({ navigation, route }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [camera, setCamera] = useState(null);
   const [photoList, setPhotoList] = useState([]);
+  const [isTakingPicture, setTakingPicture] = useState(false);
 
   const [creationDate, setCreationDate] = useState(new Date());
   const [isModalVisible, setModalVisible] = useState(false);
@@ -30,21 +31,24 @@ export default function CameraScreen({ navigation, route }) {
     })();
   }, [isModalVisible, photoList]);
 
-  if (hasPermission === null || hasPermission === false) {
+  if (!hasPermission) {
     return <Text>No access to the camera </Text>;
   }
 
   const onClickTakePicture = async () => {
-    if (camera) {
+    if (camera && !isTakingPicture) {
       if (!photoList.length) {
         setCreationDate(new Date());
       }
       const photoFiller = { id: 0, filler: true };
       setPhotoList([photoFiller].concat(photoList));
+      setTakingPicture(true);
       const photo = await camera.takePictureAsync({ quality: 0.5 });
+      // remove the filler from the previw list
       setPhotoList(photoList.filter((photo) => photo.id !== photoFiller.id));
       photo.id = Math.random();
       setPhotoList([photo].concat(photoList));
+      setTakingPicture(false);
     }
   };
 
@@ -64,7 +68,10 @@ export default function CameraScreen({ navigation, route }) {
       >
         <View style={styles.buttonContainer}>
           <CancelTakingPictureButton navigation={navigation} />
-          <TakePictureButton onClickTakePicture={onClickTakePicture} />
+          <TakePictureButton
+            onClickTakePicture={onClickTakePicture}
+            isDisabled={isTakingPicture}
+          />
           <ValidateProductButton
             openModal={openModal}
             isDisabled={photoList.length === 0}

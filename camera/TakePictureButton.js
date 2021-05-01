@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Svg, Circle } from "react-native-svg";
 
-export default function TakePictureButton({ onClickTakePicture }) {
+export default function TakePictureButton({ onClickTakePicture, isDisabled }) {
   return (
     <TouchableOpacity
       style={styles.takePictureButton}
@@ -15,7 +15,7 @@ export default function TakePictureButton({ onClickTakePicture }) {
           r="45"
           stroke="silver"
           strokeWidth="5"
-          fill="snow"
+          fill={isDisabled ? "grey" : "snow"}
         />
       </Svg>
     </TouchableOpacity>
