@@ -30,8 +30,10 @@ export default function HomeScreen({ navigation }) {
       eventNameSet.add(product.event);
     }
     setEventNameList([...eventNameSet]);
-  }, []);
-
+    [...eventNameSet].length
+      ? setSelectedEventName([...eventNameSet][0])
+      : null;
+  }, [selectedEventName]);
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -63,12 +65,14 @@ export default function HomeScreen({ navigation }) {
           label={i18n.t("home.camera")}
           component={"Camera"}
           selectedEventName={selectedEventName}
+          isDisabled={!selectedEventName}
         />
         <LinkButton
           navigation={navigation}
           label={i18n.t("home.library")}
           component={"Library"}
           selectedEventName={selectedEventName}
+          isDisabled={!selectedEventName}
         />
       </View>
 

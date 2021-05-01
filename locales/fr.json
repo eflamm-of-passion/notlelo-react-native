@@ -1,8 +1,8 @@
 {
   "home": {
     "title": "notlelo",
-    "camera": "Photo",
-    "library": "Bibliothèque",
+    "camera": "Prendre en photo",
+    "library": "Mes numéros de lots",
     "noEvent": "< aucun camp >",
     "eventInputPlaceholder": "nom du camp"
   },

@@ -19,11 +19,13 @@ Go to https://play.google.com/console/ and create an new release.
 - [x] refactor the homescreen in smaller components
 - [x] refactor the camera validate modal in smaller components
 - [ ] take multiple pictures at the same time
-- [ ] find better names for camera and library links
+- [x] find better names for camera and library links
 - [ ] display the date in letters
 - [ ] check the permissions
 - [ ] investigate the "none" bug
-- [ ] disable take picture button when no photo is taken
+- [x] remove "no camp" in the picker when there is at least one existing camp
+- [x] disable go to camera or library screen when no event is selected
+- [x] disable take picture button when no photo is taken
 - [ ] remove the loop of event in the library
 - [ ] create a default event, when no event is selected
 - [x] add back button in library
@@ -32,7 +34,7 @@ Go to https://play.google.com/console/ and create an new release.
 - [x] blur background when modal appears
 - [x] blur background when preview picture
 - [ ] style the pickers
-- [ ] start some tests
+- [ ] start to do some tests
 
 **_v1.1_**
 

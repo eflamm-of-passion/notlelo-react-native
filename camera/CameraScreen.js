@@ -63,19 +63,15 @@ export default function CameraScreen({ navigation, route }) {
         }}
       >
         <View style={styles.buttonContainer}>
-          <CancelTakingPictureButton
-            navigation={navigation}
-          ></CancelTakingPictureButton>
-          <TakePictureButton
-            onClickTakePicture={onClickTakePicture}
-          ></TakePictureButton>
-          <ValidateProductButton openModal={openModal}></ValidateProductButton>
+          <CancelTakingPictureButton navigation={navigation} />
+          <TakePictureButton onClickTakePicture={onClickTakePicture} />
+          <ValidateProductButton
+            openModal={openModal}
+            isDisabled={photoList.length === 0}
+          />
         </View>
       </Camera>
-      <PreviewPhotoList
-        photoList={photoList}
-        setPhotoList={setPhotoList}
-      ></PreviewPhotoList>
+      <PreviewPhotoList photoList={photoList} setPhotoList={setPhotoList} />
       <SaveProductModal
         isModalVisible={isModalVisible}
         setModalVisible={setModalVisible}
@@ -83,7 +79,7 @@ export default function CameraScreen({ navigation, route }) {
         setPhotoList={setPhotoList}
         creationDate={creationDate}
         eventName={eventName}
-      ></SaveProductModal>
+      />
     </View>
   );
 }

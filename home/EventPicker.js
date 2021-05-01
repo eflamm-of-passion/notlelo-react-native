@@ -17,7 +17,13 @@ export default function EventPicker({
         selectedValue={selectedEventName}
         onValueChange={(itemValue) => setSelectedEventName(itemValue)}
       >
-        <Picker.Item label={i18n.t("home.noEvent")} value={null} color="grey" />
+        {!selectedEventName && (
+          <Picker.Item
+            label={i18n.t("home.noEvent")}
+            value={null}
+            color="grey"
+          />
+        )}
         {eventNameList.map((eventName, index) => (
           <Picker.Item
             key={index}

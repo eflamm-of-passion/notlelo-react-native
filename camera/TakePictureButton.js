@@ -13,9 +13,9 @@ export default function TakePictureButton({ onClickTakePicture }) {
           cx="50"
           cy="50"
           r="45"
-          stroke="darkgrey"
+          stroke="silver"
           strokeWidth="5"
-          fill="lightgray"
+          fill="snow"
         />
       </Svg>
     </TouchableOpacity>

@@ -11,13 +11,13 @@ export default function CancelTakingPictureButton({ navigation }) {
       <Svg width="50" height="50" viewBox="0 0 20 20" fill="white">
         <Path
           fill="none"
-          stroke="lightgray"
+          stroke="white"
           stroke-width="1.06"
           d="M16,16 L4,4"
         ></Path>
         <Path
           fill="none"
-          stroke="lightgray"
+          stroke="white"
           stroke-width="1.06"
           d="M16,4 L4,16"
         ></Path>

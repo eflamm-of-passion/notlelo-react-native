@@ -6,15 +6,21 @@ export default function LinkButton({
   label,
   component,
   selectedEventName,
+  isDisabled,
 }) {
   return (
     <TouchableOpacity
       style={styles.link}
       onPress={() =>
+        !isDisabled &&
         navigation.navigate(component, { eventName: selectedEventName })
       }
     >
-      <Text style={styles.buttonText}>{label}</Text>
+      <Text
+        style={[styles.buttonText, isDisabled && styles.disabledButtonText]}
+      >
+        {label}
+      </Text>
     </TouchableOpacity>
   );
 }
@@ -28,9 +34,12 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   buttonText: {
-    fontSize: 21,
-    letterSpacing: 6,
+    fontSize: 18,
+    letterSpacing: 3,
     textTransform: "uppercase",
     color: "#404040",
+  },
+  disabledButtonText: {
+    color: "lightgrey",
   },
 });

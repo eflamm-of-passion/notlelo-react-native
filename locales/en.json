@@ -1,8 +1,8 @@
 {
   "home": {
     "title": "Batch Number",
-    "camera": "Start",
-    "library": "Library",
+    "camera": "Take a picture",
+    "library": "My batch numbers",
     "noEvent": "< no selected camp >",
     "eventInputPlaceholder": "name of the camp"
   },
