@@ -18,16 +18,16 @@ Go to https://play.google.com/console/ and create an new release.
 
 - [x] refactor the homescreen in smaller components
 - [x] refactor the camera validate modal in smaller components
-- [ ] take multiple pictures at the same time
+- [x] disable snap button when taking a picture
 - [x] find better names for camera and library links
-- [ ] display the date in letters
+- [x] fix scoll in library
+- [x] display the date in letters
 - [ ] check the permissions
 - [ ] investigate the "none" bug
 - [x] remove "no camp" in the picker when there is at least one existing camp
 - [x] disable go to camera or library screen when no event is selected
 - [x] disable take picture button when no photo is taken
 - [ ] remove the loop of event in the library
-- [ ] create a default event, when no event is selected
 - [x] add back button in library
 - [x] add navigation button in library between dates
 - [ ] delete projects

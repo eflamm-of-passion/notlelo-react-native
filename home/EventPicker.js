@@ -15,23 +15,26 @@ export default function EventPicker({
       <Picker
         style={styles.picker}
         selectedValue={selectedEventName}
-        onValueChange={(itemValue) => setSelectedEventName(itemValue)}
+        onValueChange={(itemValue) => {
+          setSelectedEventName(itemValue);
+        }}
       >
-        {!selectedEventName && (
+        {selectedEventName === "" ? (
           <Picker.Item
             label={i18n.t("home.noEvent")}
             value={null}
             color="grey"
           />
+        ) : (
+          eventNameList.map((eventName, index) => (
+            <Picker.Item
+              key={index}
+              label={eventName}
+              value={eventName}
+              color="black"
+            />
+          ))
         )}
-        {eventNameList.map((eventName, index) => (
-          <Picker.Item
-            key={index}
-            label={eventName}
-            value={eventName}
-            color="black"
-          />
-        ))}
       </Picker>
 
       <TouchableOpacity

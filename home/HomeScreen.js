@@ -33,7 +33,8 @@ export default function HomeScreen({ navigation }) {
     [...eventNameSet].length
       ? setSelectedEventName([...eventNameSet][0])
       : null;
-  }, [selectedEventName]);
+  });
+
   return (
     <View style={styles.container}>
       <ImageBackground

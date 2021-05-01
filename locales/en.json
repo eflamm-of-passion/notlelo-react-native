@@ -31,5 +31,29 @@
     "fifth": "Fifth meal",
     "cookingContest": "Cooking contest",
     "picnic": "Picnic"
+  },
+  "day": {
+    "monday": "monday",
+    "tuesday": "tuedsay",
+    "wednesday": "wednesday",
+    "thursday": "thursday",
+    "friday": "friday",
+    "saturday": "saturday",
+    "sunday": "sunday",
+    "firstShort": "st"
+  },
+  "month": {
+    "january": "january",
+    "february": "february",
+    "march": "march",
+    "april": "april",
+    "may": "may",
+    "june": "june",
+    "july": "july",
+    "august": "august",
+    "september": "september",
+    "october": "october",
+    "november": "november",
+    "december": "december"
   }
 }

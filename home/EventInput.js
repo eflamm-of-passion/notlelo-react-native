@@ -9,7 +9,7 @@ export default function EventInput({
   eventNameList,
   setEventNameList,
 }) {
-  const [inputEventName, setInputEventName] = useState(null);
+  const [inputEventName, setInputEventName] = useState("");
 
   return (
     <View style={styles.eventInputTextContainer}>

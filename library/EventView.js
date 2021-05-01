@@ -1,5 +1,11 @@
 import React, { useRef, useState } from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import { Svg, Path } from "react-native-svg";
 import ViewPager from "@react-native-community/viewpager";
 
@@ -21,13 +27,13 @@ export default function EventView({
       dateList.push({ name: dateName, mealMap: mealMap });
     }
     return dateList.reverse().map((date, index) => (
-      <View key={index}>
+      <ScrollView key={index}>
         <DateView
           date={date}
           deleteProduct={deleteProduct}
           setSelectedPhoto={setSelectedPhoto}
-        ></DateView>
-      </View>
+        />
+      </ScrollView>
     ));
   };
 

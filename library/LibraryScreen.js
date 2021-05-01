@@ -2,13 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { StyleSheet, View, SafeAreaView } from "react-native";
 
 import ExpandProductPhotoModal from "./ExpandProductPhotoModal";
-import ViewPager from "@react-native-community/viewpager";
 
-import {
-  getProducts,
-  getProductsByEventName,
-  removeProduct,
-} from "../EventService";
+import { getProductsByEventName, removeProduct } from "../EventService";
 import EventView from "./EventView";
 
 export default function LibraryScreen({ route, navigation }) {
@@ -23,7 +18,6 @@ export default function LibraryScreen({ route, navigation }) {
 
   const fetchProducts = useCallback(async () => {
     const flatProductList = await getProductsByEventName(eventName);
-    // const flatProductList = await getProducts();
     const productList = deserializeFlatProductList(flatProductList);
     setProductList(productList);
   }, []);
