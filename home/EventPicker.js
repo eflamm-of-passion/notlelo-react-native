@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
   picker: {
     width: 240,
     height: 60,
+    marginRight: 10,
   },
   plusButton: {
     height: 30,

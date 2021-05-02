@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { Svg, Path } from "react-native-svg";
 import ViewPager from "@react-native-community/viewpager";
+import { useFonts } from "expo-font";
 
 import DateView from "./DateView";
 import ShareEventButton from "./ShareEventButton";
@@ -20,6 +21,9 @@ export default function EventView({
 }) {
   const pager = useRef(null);
   const [pageIndex, setPageIndex] = useState(0);
+  const [fontLoaded] = useFonts({
+    CaveatBrush: require("../assets/fonts/CaveatBrush-Regular.ttf"),
+  });
 
   const displayDates = () => {
     const dateList = [];
@@ -51,7 +55,10 @@ export default function EventView({
         <Text
           numberOfLines={1}
           adjustsFontSizeToFit
-          style={styles.eventTitleText}
+          style={[
+            styles.eventTitleText,
+            fontLoaded ? { fontFamily: "CaveatBrush" } : null,
+          ]}
         >
           {event.name}
         </Text>
@@ -146,9 +153,9 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingLeft: 10,
     color: "white",
-    textTransform: "uppercase",
-    fontSize: 40,
-    letterSpacing: 8,
+    // textTransform: "uppercase",
+    fontSize: 45,
+    letterSpacing: 1,
   },
   pager: {
     flex: 1,

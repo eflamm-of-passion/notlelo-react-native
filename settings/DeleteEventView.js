@@ -5,16 +5,14 @@ import i18n from "../i18n";
 import { deleteEvent } from "../event-service";
 import DeleteButton from "../components/DeleteButton";
 
-export default function DeleteEventView({ eventNameList, setEventNameList }) {
+export default function DeleteEventView({ eventNameList }) {
   // FIX the eventNameList is not updated after deletion, so localEventList is used as a workaround
   const [localEventList, setLocalEventList] = useState(eventNameList);
-  useEffect(() => {}, [setEventNameList]);
   const handleClick = (eventToDeleteName) => {
     deleteEvent(eventToDeleteName);
     const eventListUpdated = localEventList.filter(
       (eventName) => eventToDeleteName !== eventName
     );
-    setEventNameList(eventListUpdated);
     setLocalEventList(eventListUpdated);
   };
 

@@ -18,7 +18,6 @@ export default function LinkButton({
         navigation.navigate(component, {
           eventName: selectedEventName,
           eventNameList: eventNameList,
-          setEventNameList: setEventNameList,
         })
       }
     >

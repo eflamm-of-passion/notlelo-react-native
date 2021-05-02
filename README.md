@@ -12,7 +12,13 @@ Run `expo build:android`, wait for the build to finish. Then download it on http
 
 Go to https://play.google.com/console/ and create an new release.
 
-# realeases notes
+# troubleshoot
+
+`Error: ENOSPC: System limit for number of file watchers reached`
+
+Close VS Code, then run `npm start` and reopen VS Code.
+
+# changelog
 
 **_next release_**
 
@@ -33,7 +39,7 @@ Go to https://play.google.com/console/ and create an new release.
 - [x] delete projects
 - [x] blur background when modal appears
 - [x] blur background when preview picture
-- [ ] install sgdf fonts
+- [x] install sgdf fonts
 - [ ] style the pickers
 - [ ] start to do some tests
 - [ ] write some documentation

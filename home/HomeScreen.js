@@ -8,6 +8,7 @@ import {
   Dimensions,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
+import { useFonts } from "expo-font";
 import i18n from "../i18n";
 
 import { getProducts } from "../event-service";
@@ -21,6 +22,10 @@ export default function HomeScreen({ navigation }) {
   const [selectedEventName, setSelectedEventName] = useState(null);
   const [showEventInput, setShowEventInput] = useState(false);
 
+  const [fontLoaded] = useFonts({
+    CaveatBrush: require("../assets/fonts/CaveatBrush-Regular.ttf"),
+  });
+
   useEffect(() => {
     fetchProducts();
   }, [isFocused]);
@@ -32,7 +37,7 @@ export default function HomeScreen({ navigation }) {
       eventNameSet.add(product.event);
     }
     setEventNameList([...eventNameSet]);
-    [...eventNameSet].length
+    [...eventNameSet].length && ![...eventNameSet].includes(selectedEventName)
       ? setSelectedEventName([...eventNameSet][0])
       : null;
   });
@@ -43,7 +48,14 @@ export default function HomeScreen({ navigation }) {
         source={require("../assets/ripped-paper.png")}
         style={styles.title}
       >
-        <Text style={styles.titleText}>{i18n.t("home.title")}</Text>
+        <Text
+          style={[
+            styles.titleText,
+            fontLoaded ? { fontFamily: "CaveatBrush" } : null,
+          ]}
+        >
+          {i18n.t("home.title")}
+        </Text>
       </ImageBackground>
 
       <View style={styles.buttons}>
@@ -84,7 +96,6 @@ export default function HomeScreen({ navigation }) {
             label={i18n.t("home.settings")}
             component={"Settings"}
             eventNameList={eventNameList}
-            setEventNameList={setEventNameList}
             isDisabled={!eventNameList}
           />
         </View>
@@ -107,19 +118,17 @@ const styles = StyleSheet.create({
   title: {
     flex: 1,
     width: "100%",
-    marginTop: -30,
+    marginTop: -25,
     alignItems: "center",
     justifyContent: "center",
   },
   titleText: {
-    width: "80%",
     textAlign: "center",
-    fontSize: 70,
+    paddingTop: 20,
+    fontSize: 100,
     lineHeight: 100,
     color: "white",
     letterSpacing: 7,
-    textShadowColor: "white",
-    textShadowRadius: 4,
   },
   buttons: {
     flex: 1,
@@ -129,6 +138,7 @@ const styles = StyleSheet.create({
   },
   picker: {
     height: "20%",
+    paddingTop: 20,
   },
   links: {
     justifyContent: "space-evenly",
