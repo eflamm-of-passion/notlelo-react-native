@@ -22,27 +22,28 @@ Close VS Code, then run `npm start` and reopen VS Code.
 
 **_next release_**
 
+- [ ] remove the loop of event in the library
+- [ ] start to do some tests
+- [ ] write some documentation
+
+**_v1.2_**
+
 - [x] refactor the homescreen in smaller components
 - [x] refactor the camera validate modal in smaller components
 - [x] disable snap button when taking a picture
 - [x] find better names for camera and library links
 - [x] fix scoll in library
 - [x] display the date in letters
-- [ ] check the permissions
-- [ ] investigate the "none" bug
+- [x] upgrade to sdk 41
 - [x] remove "no camp" in the picker when there is at least one existing camp
 - [x] disable go to camera or library screen when no event is selected
 - [x] disable take picture button when no photo is taken
-- [ ] remove the loop of event in the library
 - [x] add back button in library
 - [x] add navigation button in library between dates
 - [x] delete projects
 - [x] blur background when modal appears
 - [x] blur background when preview picture
 - [x] install sgdf fonts
-- [ ] style the pickers
-- [ ] start to do some tests
-- [ ] write some documentation
 
 **_v1.1_**
 
