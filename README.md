@@ -30,11 +30,13 @@ Go to https://play.google.com/console/ and create an new release.
 - [ ] remove the loop of event in the library
 - [x] add back button in library
 - [x] add navigation button in library between dates
-- [ ] delete projects
+- [x] delete projects
 - [x] blur background when modal appears
 - [x] blur background when preview picture
+- [ ] install sgdf fonts
 - [ ] style the pickers
 - [ ] start to do some tests
+- [ ] write some documentation
 
 **_v1.1_**
 
@@ -43,7 +45,7 @@ Go to https://play.google.com/console/ and create an new release.
 - refactor the code in smaller components
 - install EsLint and Prettier
 - suggest event, as a <select></select>
-- refactor the EventService to be React compliant
+- refactor the event-service to be React compliant
 - install EsLint and Prettier
 - display readable date
 - remove all Math.random() in loops

@@ -6,6 +6,8 @@ export default function LinkButton({
   label,
   component,
   selectedEventName,
+  eventNameList,
+  setEventNameList,
   isDisabled,
 }) {
   return (
@@ -13,7 +15,11 @@ export default function LinkButton({
       style={styles.link}
       onPress={() =>
         !isDisabled &&
-        navigation.navigate(component, { eventName: selectedEventName })
+        navigation.navigate(component, {
+          eventName: selectedEventName,
+          eventNameList: eventNameList,
+          setEventNameList: setEventNameList,
+        })
       }
     >
       <Text
@@ -29,7 +35,6 @@ const styles = StyleSheet.create({
   link: {
     justifyContent: "center",
     alignItems: "center",
-    height: 60,
     color: "darkgray",
     marginBottom: 25,
   },

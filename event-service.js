@@ -118,11 +118,24 @@ export const addProduct = async (product, creationDate) => {
  * @param {object} product
  */
 export const removeProduct = async (product) => {
+  // remove the photo from the album
   const assets = await getProductPhotos(product);
   await removeAssetsFromAlbumAsync(assets.assets, assets.albumId);
+  // remove the product from the database
   let products = await getProducts();
   products = products.filter((p) => p.uuid !== product.uuid);
   return await setProducts(products);
+};
+
+/**
+ * Remove the products from an event, and delete the photos in the album
+ * @param {*} eventName, the name of the event
+ */
+export const deleteEvent = async (eventName) => {
+  const productsToRemove = await getProductsByEventName(eventName);
+  for (const productToRemove of productsToRemove) {
+    await removeProduct(productToRemove);
+  }
 };
 
 /**

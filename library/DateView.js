@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
+import i18n from "../i18n";
 
 import MealView from "./MealView";
-import i18n from "../i18n";
 
 export default function DateView({ date, deleteProduct, setSelectedPhoto }) {
   const displayMeals = () => {
@@ -67,14 +67,14 @@ export default function DateView({ date, deleteProduct, setSelectedPhoto }) {
 
   return (
     <View styles={styles.scroll}>
-      <Text style={styles.mealTitle}>{displayReadableDate(date.name)}</Text>
+      <Text style={styles.dateTitle}>{displayReadableDate(date.name)}</Text>
       {displayMeals()}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  mealTitle: {
+  dateTitle: {
     fontSize: 35,
     paddingLeft: 10,
     letterSpacing: 1,

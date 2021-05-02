@@ -3,7 +3,7 @@ import { StyleSheet, View, SafeAreaView } from "react-native";
 
 import ExpandProductPhotoModal from "./ExpandProductPhotoModal";
 
-import { getProductsByEventName, removeProduct } from "../EventService";
+import { getProductsByEventName, removeProduct } from "../event-service";
 import EventView from "./EventView";
 
 export default function LibraryScreen({ route, navigation }) {

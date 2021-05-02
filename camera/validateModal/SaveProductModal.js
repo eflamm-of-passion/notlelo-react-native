@@ -16,7 +16,7 @@ import {
 } from "expo-media-library";
 
 import i18n from "../../i18n";
-import { addProduct } from "../../EventService";
+import { addProduct } from "../../event-service";
 import MealPicker from "./MealPicker";
 import MealInput from "./MealInput";
 

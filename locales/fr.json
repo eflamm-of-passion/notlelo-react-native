@@ -3,6 +3,7 @@
     "title": "notlelo",
     "camera": "Prendre en photo",
     "library": "Mes numéros de lots",
+    "settings": "Paramètres",
     "noEvent": "< aucun camp >",
     "eventInputPlaceholder": "nom du camp"
   },
@@ -55,5 +56,8 @@
     "october": "octobre",
     "november": "novembre",
     "december": "décembre"
+  },
+  "settings": {
+    "deleteEvent": "Supprimer un camp"
   }
 }
