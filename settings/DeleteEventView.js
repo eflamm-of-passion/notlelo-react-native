@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import Checkbox from "expo-checkbox";
 import i18n from "../i18n";
 
 import { deleteEvent } from "../event-service";
@@ -8,12 +9,31 @@ import DeleteButton from "../components/DeleteButton";
 export default function DeleteEventView({ eventNameList }) {
   // FIX the eventNameList is not updated after deletion, so localEventList is used as a workaround
   const [localEventList, setLocalEventList] = useState(eventNameList);
-  const handleClick = (eventToDeleteName) => {
-    deleteEvent(eventToDeleteName);
-    const eventListUpdated = localEventList.filter(
-      (eventName) => eventToDeleteName !== eventName
-    );
-    setLocalEventList(eventListUpdated);
+  const [eventNameListToDelete, setEventNameListToDelete] = useState([]);
+
+  const handleDeleteButtonClick = (eventNameList) => {
+    for (const eventName of eventNameList) {
+      deleteEvent(eventName);
+      const eventListUpdated = localEventList.filter(
+        (anEventName) => eventName !== anEventName
+      );
+      setLocalEventList(eventListUpdated);
+    }
+    setEventNameListToDelete([]);
+  };
+
+  const switchEventNameToDelete = (eventName) => {
+    if (eventNameListToDelete.includes(eventName)) {
+      // remove the eventName
+      setEventNameListToDelete(
+        eventNameListToDelete.filter(
+          (eventNameToDelete) => eventNameToDelete !== eventName
+        )
+      );
+    } else {
+      // add the eventName
+      setEventNameListToDelete([eventName].concat(eventNameListToDelete));
+    }
   };
 
   return (
@@ -22,13 +42,34 @@ export default function DeleteEventView({ eventNameList }) {
       <View style={styles.events}>
         {localEventList.map((eventName, index) => (
           <View style={styles.eventLine} key={index}>
-            <Text style={styles.eventName}>{eventName}</Text>
-            <DeleteButton
-              itemToDelete={eventName}
-              onClick={() => handleClick(eventName)}
+            <Checkbox
+              style={styles.checkbox}
+              value={eventNameListToDelete.includes(eventName)}
+              onValueChange={() => switchEventNameToDelete(eventName)}
+              color={eventNameListToDelete.includes(eventName) ? "red" : "grey"}
             />
+            <Text
+              style={[
+                styles.eventName,
+                {
+                  color: eventNameListToDelete.includes(eventName)
+                    ? "red"
+                    : "grey",
+                },
+              ]}
+            >
+              {eventName}
+            </Text>
           </View>
         ))}
+        <View style={styles.deleteButton}>
+          <DeleteButton
+            label={"Supprimer"}
+            isDisabled={!eventNameListToDelete.length}
+            itemToDelete={eventNameListToDelete}
+            onClick={handleDeleteButtonClick}
+          />
+        </View>
       </View>
     </View>
   );
@@ -56,15 +97,23 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 70,
     width: "100%",
-    justifyContent: "space-between",
     borderBottomColor: "lightgrey",
     borderBottomWidth: 1,
     paddingRight: 30,
   },
   eventName: {
-    fontSize: 21,
-    marginLeft: 20,
+    width: "90%",
+    fontSize: 22,
     color: "red",
+    textAlign: "center",
     letterSpacing: 1,
+  },
+  checkbox: {
+    marginLeft: 20,
+  },
+  deleteButton: {
+    marginTop: 20,
+    alignSelf: "center",
+    width: "65%",
   },
 });

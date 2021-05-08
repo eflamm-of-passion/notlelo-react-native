@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Svg, Path } from "react-native-svg";
 import { useFonts } from "expo-font";
+import * as app from "../app.json";
 import i18n from "../i18n";
 
 import DeleteEventView from "./DeleteEventView";
@@ -40,6 +41,7 @@ export default function SettingsScreen({ navigation, route }) {
           setEventNameList={setEventNameList}
         />
       </View>
+      <Text style={styles.version}>v{app.expo.version}</Text>
     </View>
   );
 }
@@ -70,5 +72,11 @@ const styles = StyleSheet.create({
   },
   settings: {
     flex: 1,
+  },
+  version: {
+    textAlign: "center",
+    backgroundColor: "white",
+    color: "grey",
+    paddingBottom: 10,
   },
 });

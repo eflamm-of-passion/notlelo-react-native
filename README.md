@@ -22,28 +22,39 @@ Close VS Code, then run `npm start` and reopen VS Code.
 
 **_next release_**
 
+- [x] add the date in the zip file architecture
+- [x] make the deletion of an event safer
+- [ ] try another SGDF font
+- [ ] hide the event name while the font is not loaded
+- [ ] show a spinner while sharing the zip file
+- [ ] investigate if any optimization is possible
+- [ ] add a help section
+- [ ] add a mail button, to send mail to myself
+- [ ] verify if there are generic components
+- [x] display the app version on the home screen
 - [ ] remove the loop of event in the library
+- [ ] select the current event when comming back from the camera
 - [ ] start to do some tests
 - [ ] write some documentation
 
 **_v1.2_**
 
-- [x] refactor the homescreen in smaller components
-- [x] refactor the camera validate modal in smaller components
-- [x] disable snap button when taking a picture
-- [x] find better names for camera and library links
-- [x] fix scoll in library
-- [x] display the date in letters
-- [x] upgrade to sdk 41
-- [x] remove "no camp" in the picker when there is at least one existing camp
-- [x] disable go to camera or library screen when no event is selected
-- [x] disable take picture button when no photo is taken
-- [x] add back button in library
-- [x] add navigation button in library between dates
-- [x] delete projects
-- [x] blur background when modal appears
-- [x] blur background when preview picture
-- [x] install sgdf fonts
+- refactor the homescreen in smaller components
+- refactor the camera validate modal in smaller components
+- disable snap button when taking a picture
+- find better names for camera and library links
+- fix scoll in library
+- display the date in letters
+- upgrade to sdk 41
+- remove "no camp" in the picker when there is at least one existing camp
+- disable go to camera or library screen when no event is selected
+- disable take picture button when no photo is taken
+- add back button in library
+- add navigation button in library between dates
+- delete projects
+- blur background when modal appears
+- blur background when preview picture
+- install sgdf fonts
 
 **_v1.1_**
 

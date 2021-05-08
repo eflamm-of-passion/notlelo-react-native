@@ -156,6 +156,7 @@ export const shareEvent = async (eventName) => {
         });
         const photoToZip = zip
           .folder(p.event)
+          .folder(p.date)
           .folder(p.meal)
           .folder(p.name)
           .file(photoName, photoBlob, { binary: true, base64: true });

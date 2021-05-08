@@ -17,6 +17,7 @@
     "expo": "^41.0.0",
     "expo-blur": "~9.0.3",
     "expo-camera": "~11.0.2",
+    "expo-checkbox": "~1.0.3",
     "expo-file-system": "~11.0.2",
     "expo-font": "~9.1.0",
     "expo-media-library": "~12.0.2",

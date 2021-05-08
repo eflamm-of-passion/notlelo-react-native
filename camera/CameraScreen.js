@@ -43,7 +43,7 @@ export default function CameraScreen({ navigation, route }) {
       const photoFiller = { id: 0, filler: true };
       setPhotoList([photoFiller].concat(photoList));
       setTakingPicture(true);
-      const photo = await camera.takePictureAsync({ quality: 0.5 });
+      const photo = await camera.takePictureAsync({ quality: 0.2 });
       // remove the filler from the previw list
       setPhotoList(photoList.filter((photo) => photo.id !== photoFiller.id));
       photo.id = Math.random();
