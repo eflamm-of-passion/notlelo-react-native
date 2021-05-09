@@ -24,14 +24,16 @@ Close VS Code, then run `npm start` and reopen VS Code.
 
 - [x] add the date in the zip file architecture
 - [x] make the deletion of an event safer
-- [ ] try another SGDF font
-- [ ] hide the event name while the font is not loaded
-- [ ] show a spinner while sharing the zip file
-- [ ] investigate if any optimization is possible
-- [ ] add a help section
-- [ ] add a mail button, to send mail to myself
-- [ ] verify if there are generic components
+- [x] show a spinner while sharing the zip file
 - [x] display the app version on the home screen
+- [ ] show a toast when an operation is a success or a failure
+- [ ] implement generic components : top bar
+- [ ] add suggestion for product name input
+- [ ] investigate if any optimization is possible
+- [ ] try another SGDF font
+- [ ] create global style file
+- [ ] hide the event name while the font is not loaded
+- [ ] add a help section
 - [ ] remove the loop of event in the library
 - [ ] select the current event when comming back from the camera
 - [ ] start to do some tests

@@ -22,6 +22,13 @@ export default function LibraryScreen({ route, navigation }) {
     setProductList(productList);
   }, []);
 
+  /**
+   * There is only one table in the database and all the information for a product is stored in one line.
+   * The function parses all the lines to build a json object following this architecture
+   * events -> dates -> meal -> products
+   * @param {*} flatProductList - all the lines from the database
+   * @returns json object
+   */
   const deserializeFlatProductList = (flatProductList) => {
     // yeah... I know
     const eventMap = new Map();

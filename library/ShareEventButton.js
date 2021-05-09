@@ -4,9 +4,11 @@ import { Svg, Path } from "react-native-svg";
 
 import { shareEvent } from "../event-service";
 
-export default function ShareEventButton({ event }) {
+export default function ShareEventButton({ event, setSharingInProgress }) {
   const handleShareEventClick = async (event) => {
+    setSharingInProgress(true);
     await shareEvent(event);
+    setSharingInProgress(false);
   };
 
   return (

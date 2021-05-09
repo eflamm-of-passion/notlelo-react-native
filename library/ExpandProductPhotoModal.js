@@ -20,11 +20,7 @@ export default function ExpandProductPhotoModal({
       transparent={true}
       visible={selectedPhoto != null}
     >
-      <BlurView
-        tint="dark"
-        intensity={100}
-        style={[StyleSheet.absoluteFill, styles.nonBlurredContent]}
-      >
+      <BlurView tint="dark" intensity={100} style={StyleSheet.absoluteFill}>
         <View style={styles.modalView}>
           {selectedPhoto ? (
             <Image

@@ -12,6 +12,7 @@ import { useFonts } from "expo-font";
 
 import DateView from "./DateView";
 import ShareEventButton from "./ShareEventButton";
+import SpinnerModal from "./SpinnerModal";
 
 export default function EventView({
   navigation,
@@ -24,6 +25,7 @@ export default function EventView({
   const [fontLoaded] = useFonts({
     CaveatBrush: require("../assets/fonts/CaveatBrush-Regular.ttf"),
   });
+  const [isSharingInProgress, setSharingInProgress] = useState(false);
 
   const displayDates = () => {
     const dateList = [];
@@ -62,7 +64,10 @@ export default function EventView({
         >
           {event.name}
         </Text>
-        <ShareEventButton event={event}></ShareEventButton>
+        <ShareEventButton
+          setSharingInProgress={setSharingInProgress}
+          event={event}
+        ></ShareEventButton>
       </View>
       <ViewPager
         ref={pager}
@@ -87,6 +92,7 @@ export default function EventView({
         pageIndex={pageIndex}
         numberOfPages={event.dateMap.size}
       />
+      {isSharingInProgress && <SpinnerModal />}
     </View>
   );
 }
