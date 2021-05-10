@@ -26,16 +26,16 @@ Close VS Code, then run `npm start` and reopen VS Code.
 - [x] make the deletion of an event safer
 - [x] show a spinner while sharing the zip file
 - [x] display the app version on the home screen
+- [x] create global style file
+- [x] implement generic components : top bar
+- [x] remove the loop of event in the library
+- [x] select the current event when coming back from the camera
 - [ ] show a toast when an operation is a success or a failure
-- [ ] implement generic components : top bar
 - [ ] add suggestion for product name input
 - [ ] investigate if any optimization is possible
+- [ ] add link to my mail for user to send me issues
 - [ ] try another SGDF font
-- [ ] create global style file
-- [ ] hide the event name while the font is not loaded
-- [ ] add a help section
-- [ ] remove the loop of event in the library
-- [ ] select the current event when comming back from the camera
+- [ ] add a help section, to explain why the app is working like that
 - [ ] start to do some tests
 - [ ] write some documentation
 

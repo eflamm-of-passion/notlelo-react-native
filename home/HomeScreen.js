@@ -37,9 +37,13 @@ export default function HomeScreen({ navigation }) {
       eventNameSet.add(product.event);
     }
     setEventNameList([...eventNameSet]);
-    [...eventNameSet].length && ![...eventNameSet].includes(selectedEventName)
-      ? setSelectedEventName([...eventNameSet][0])
-      : null;
+    if (
+      [...eventNameSet].length &&
+      ![...eventNameSet].includes(selectedEventName) &&
+      !selectedEventName
+    ) {
+      setSelectedEventName([...eventNameSet][0]);
+    }
   });
 
   return (

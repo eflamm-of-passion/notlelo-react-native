@@ -62,6 +62,9 @@ export default function DeleteEventView({ eventNameList }) {
             </Text>
           </View>
         ))}
+        {!localEventList.length && (
+          <Text style={styles.noCampText}>{i18n.t("settings.noCamp")}</Text>
+        )}
         <View style={styles.deleteButton}>
           <DeleteButton
             label={"Supprimer"}
@@ -115,5 +118,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
     alignSelf: "center",
     width: "65%",
+  },
+  noCampText: {
+    color: "darkgrey",
+    fontSize: 16,
+    fontStyle: "italic",
+    alignSelf: "center",
   },
 });

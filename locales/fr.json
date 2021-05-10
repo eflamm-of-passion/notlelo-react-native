@@ -58,6 +58,7 @@
     "december": "décembre"
   },
   "settings": {
-    "deleteEvent": "Supprimer un camp"
+    "deleteEvent": "Supprimer un camp",
+    "noCamp": "Aucun camp créé"
   }
 }

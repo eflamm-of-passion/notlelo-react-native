@@ -83,13 +83,13 @@ export default function LibraryScreen({ route, navigation }) {
 
   const displayEvents = (eventMap) => {
     const eventList = [];
-
     for (const [eventName, dateMap] of eventMap) {
       eventList.push({ name: eventName, dateMap: dateMap });
     }
+    const event = eventList[0];
 
-    return eventList.map((event, index) => (
-      <View style={styles.container} key={index}>
+    return (
+      <View style={styles.container}>
         <EventView
           navigation={navigation}
           event={event}
@@ -101,7 +101,7 @@ export default function LibraryScreen({ route, navigation }) {
           setSelectedPhoto={setSelectedPhoto}
         ></ExpandProductPhotoModal>
       </View>
-    ));
+    );
   };
 
   return (
