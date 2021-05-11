@@ -15,7 +15,8 @@
     "eventInputLabel": "Nom de l'évènement",
     "productNamePlaceHolder": "boîte de Montblanc",
     "mealNamePlaceHolder": "déjeuner",
-    "eventNamePlaceHolder": "camp 2020"
+    "eventNamePlaceHolder": "camp 2020",
+    "productSaved": "Le produit a été enregistré"
   },
   "library": {
     "close": "Fermer",

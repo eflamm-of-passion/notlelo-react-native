@@ -15,7 +15,8 @@
     "eventInputLabel": "Name of the event",
     "productNamePlaceHolder": "can of Montblanc",
     "mealNamePlaceHolder": "breakfast",
-    "eventNamePlaceHolder": "summer camp 2020"
+    "eventNamePlaceHolder": "summer camp 2020",
+    "productSaved": "The article has been saved"
   },
   "library": {
     "close": "Close",

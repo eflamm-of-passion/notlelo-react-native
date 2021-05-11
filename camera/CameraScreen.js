@@ -8,6 +8,8 @@ import TakePictureButton from "./TakePictureButton";
 import ValidateProductButton from "./ValidateProductButton";
 import PreviewPhotoList from "./PreviewPhotoList";
 import SaveProductModal from "./validateModal/SaveProductModal";
+import Toast from "../components/Toast";
+import i18n from "../i18n";
 
 export default function CameraScreen({ navigation, route }) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -16,7 +18,12 @@ export default function CameraScreen({ navigation, route }) {
   const [isTakingPicture, setTakingPicture] = useState(false);
 
   const [creationDate, setCreationDate] = useState(new Date());
-  const [isModalVisible, setModalVisible] = useState(false);
+  const [
+    isValidateProductModalVisible,
+    setValidateProductModalVisible,
+  ] = useState(false);
+  const [isToastVisible, setToastVisible] = useState(false);
+  const [message, setMessage] = useState(null);
 
   const { eventName } = route.params;
 
@@ -29,7 +36,7 @@ export default function CameraScreen({ navigation, route }) {
           mediaLibraryAccess.status === "granted"
       );
     })();
-  }, [isModalVisible, photoList]);
+  }, [isValidateProductModalVisible, photoList]);
 
   if (!hasPermission) {
     return <Text>No access to the camera </Text>;
@@ -52,9 +59,17 @@ export default function CameraScreen({ navigation, route }) {
     }
   };
 
-  const openModal = () => {
-    setModalVisible(true);
+  const openValidateProductModal = () => {
+    setValidateProductModalVisible(true);
     // TODO open the keyboard
+  };
+
+  const onProductSaved = () => {
+    // empty the preview list
+    setPhotoList([]);
+    // feedback to user
+    setMessage(i18n.t("camera.productSaved"));
+    setToastVisible(true);
   };
 
   return (
@@ -73,19 +88,25 @@ export default function CameraScreen({ navigation, route }) {
             isDisabled={isTakingPicture}
           />
           <ValidateProductButton
-            openModal={openModal}
+            openModal={openValidateProductModal}
             isDisabled={photoList.length === 0}
           />
         </View>
       </Camera>
       <PreviewPhotoList photoList={photoList} setPhotoList={setPhotoList} />
       <SaveProductModal
-        isModalVisible={isModalVisible}
-        setModalVisible={setModalVisible}
+        isModalVisible={isValidateProductModalVisible}
+        setModalVisible={setValidateProductModalVisible}
         photoList={photoList}
-        setPhotoList={setPhotoList}
         creationDate={creationDate}
         eventName={eventName}
+        onProductSaved={onProductSaved}
+      />
+      <Toast
+        title={message}
+        type={"success"}
+        visible={isToastVisible}
+        setVisible={setToastVisible}
       />
     </View>
   );

@@ -26,9 +26,9 @@ export default function SaveProductModal({
   isModalVisible,
   setModalVisible,
   photoList,
-  setPhotoList,
   creationDate,
   eventName,
+  onProductSaved,
 }) {
   const [productName, setProductName] = useState("");
   const [showMealInput, setShowMealInput] = useState(false);
@@ -82,7 +82,8 @@ export default function SaveProductModal({
       const product = { event: eventName, meal: mealName, name: productName };
       addProduct(product, creationDate);
 
-      setPhotoList([]);
+      // successful callback
+      onProductSaved();
     }
   };
 

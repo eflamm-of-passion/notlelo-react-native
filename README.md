@@ -30,7 +30,7 @@ Close VS Code, then run `npm start` and reopen VS Code.
 - [x] implement generic components : top bar
 - [x] remove the loop of event in the library
 - [x] select the current event when coming back from the camera
-- [ ] show a toast when an operation is a success or a failure
+- [ ] show a toast to give feedback to the user
 - [ ] add suggestion for product name input
 - [ ] investigate if any optimization is possible
 - [ ] add link to my mail for user to send me issues
