@@ -7,7 +7,7 @@ Install **expo** : https://docs.expo.io/get-started/installation/
 
 # how to deploy on android
 
-Increment the android.versionCode in the app.json
+Increment the `android.versionCode` and `version` in the app.json
 Run `expo build:android`, wait for the build to finish. Then download it on https://expo.io/.
 
 Go to https://play.google.com/console/ and create an new release.
@@ -22,23 +22,29 @@ Close VS Code, then run `npm start` and reopen VS Code.
 
 **_next release_**
 
-- [x] add the date in the zip file architecture
-- [x] make the deletion of an event safer
-- [x] show a spinner while sharing the zip file
-- [x] display the app version on the home screen
-- [x] create global style file
-- [x] remove the loop of event in the library
-- [x] select the current event when coming back from the camera
-- [x] implement generic components : top bar, icon
-- [x] delete unnecessary buttons
-- [ ] show a toast to give feedback to the user
-- [ ] add suggestion for product name input
-- [ ] investigate if any optimization is possible
-- [ ] add link to my mail for user to send me issues
-- [ ] try another SGDF font
-- [ ] add a help section, to explain why the app is working like that
+- [ ] investigate if any optimization is possible, like reducing taken pictures size, minify
 - [ ] start to do some tests
+- [ ] FAQ section, to explain why the app is working like that
+- [ ] add link to my mail for user to send me issues
+- [ ] verify that the share is successful
 - [ ] write some documentation
+- [ ] pimp the picture filler
+- [ ] try another SGDF font
+- [ ] buy a logo
+- [ ] add suggestion for product name input
+
+**_v1.3_**
+
+- add the date in the zip file architecture
+- make the deletion of an event safer
+- show a spinner while sharing the zip file
+- display the app version on the home screen
+- create global style file
+- remove the loop of event in the library
+- select the current event when coming back from the camera
+- implement generic components : top bar, icon
+- delete unnecessary buttons
+- show a toast to give feedback to the user
 
 **_v1.2_**
 
