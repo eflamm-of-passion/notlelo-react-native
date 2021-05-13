@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View, Text, Modal } from "react-native";
 
+import Icon from "../icons/Icon";
+
 export default function Toast({ title, type, timeout, visible, setVisible }) {
   useEffect(() => {
     setTimeout(
@@ -13,22 +15,22 @@ export default function Toast({ title, type, timeout, visible, setVisible }) {
 
   let backgroundColor = "lightgrey";
   let outlineColor = "grey";
-  let textColor = "grey";
+  let icon = null;
   switch (type) {
     case "success":
-      backgroundColor = "#19bf27";
+      backgroundColor = "#63db83";
       outlineColor = "green";
-      textColor = "green";
+      icon = "success";
       break;
     case "error":
-      backgroundColor = "orange";
+      backgroundColor = "#ed3b50";
       outlineColor = "red";
-      textColor = "red";
+      icon = "error";
       break;
-    case "warning":
+    case "info":
       backgroundColor = "lightgrey";
       outlineColor = "grey";
-      textColor = "grey";
+      icon = "info";
       break;
   }
   return (
@@ -40,13 +42,7 @@ export default function Toast({ title, type, timeout, visible, setVisible }) {
         setVisible(false);
       }}
     >
-      <TouchableOpacity
-        style={styles.overlay}
-        activeOpacity={1}
-        onPressOut={() => {
-          setVisible(false);
-        }}
-      >
+      <Overlay setVisible={setVisible}>
         <View style={styles.container}>
           <View
             style={[
@@ -55,13 +51,28 @@ export default function Toast({ title, type, timeout, visible, setVisible }) {
               { borderColor: outlineColor },
             ]}
           >
+            <Icon type={icon} color="white" />
             <Text style={[styles.text]}>{title}</Text>
           </View>
         </View>
-      </TouchableOpacity>
+      </Overlay>
     </Modal>
   );
 }
+
+const Overlay = ({ children, setVisible }) => {
+  return (
+    <TouchableOpacity
+      style={styles.overlay}
+      activeOpacity={1}
+      onPressOut={() => {
+        setVisible(false);
+      }}
+    >
+      {children}
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   overlay: {
@@ -75,16 +86,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   popup: {
+    flexDirection: "row",
     minHeight: 80,
     marginBottom: 10,
-    width: "80%",
+    paddingLeft: 5,
+    width: "75%",
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
   },
   text: {
-    fontSize: 18,
+    width: "80%",
+    fontSize: 19,
     color: "white",
-    letterSpacing: 1,
+    letterSpacing: 0,
+    paddingLeft: 15,
   },
 });

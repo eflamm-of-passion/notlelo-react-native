@@ -18,10 +18,8 @@ export default function CameraScreen({ navigation, route }) {
   const [isTakingPicture, setTakingPicture] = useState(false);
 
   const [creationDate, setCreationDate] = useState(new Date());
-  const [
-    isValidateProductModalVisible,
-    setValidateProductModalVisible,
-  ] = useState(false);
+  const [isValidateProductModalVisible, setValidateProductModalVisible] =
+    useState(false);
   const [isToastVisible, setToastVisible] = useState(false);
   const [message, setMessage] = useState(null);
 
@@ -57,6 +55,7 @@ export default function CameraScreen({ navigation, route }) {
       setPhotoList([photo].concat(photoList));
       setTakingPicture(false);
     }
+    // onProductSaved();
   };
 
   const openValidateProductModal = () => {
@@ -66,7 +65,7 @@ export default function CameraScreen({ navigation, route }) {
 
   const onProductSaved = () => {
     // empty the preview list
-    setPhotoList([]);
+    // setPhotoList([]);
     // feedback to user
     setMessage(i18n.t("camera.productSaved"));
     setToastVisible(true);
@@ -107,6 +106,7 @@ export default function CameraScreen({ navigation, route }) {
         type={"success"}
         visible={isToastVisible}
         setVisible={setToastVisible}
+        timeout={5000}
       />
     </View>
   );
