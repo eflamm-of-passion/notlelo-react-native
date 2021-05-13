@@ -60,6 +60,7 @@
   },
   "settings": {
     "deleteEvent": "Supprimer un camp",
+    "delete": "Supprimer",
     "noCamp": "Aucun camp créé"
   }
 }

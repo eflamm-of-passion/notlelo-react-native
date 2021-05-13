@@ -1,8 +1,8 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
-import DeleteProductButton from "./DeleteProductButton";
 import ProductPhotoImage from "./ProductPhotoImage";
+import Icon from "../icons/Icon";
 
 export default function ProductView({
   product,
@@ -13,10 +13,12 @@ export default function ProductView({
     <View>
       <View style={styles.productTitle}>
         <Text style={styles.productTitleText}>{product.name}</Text>
-        <DeleteProductButton
-          product={product}
-          deleteProduct={deleteProduct}
-        ></DeleteProductButton>
+        <TouchableOpacity
+          style={styles.deleteProductButton}
+          onPress={() => deleteProduct(product)}
+        >
+          <Icon type="garbage" />
+        </TouchableOpacity>
       </View>
       <View style={styles.photoList}>
         {product.photos
@@ -47,5 +49,13 @@ const styles = StyleSheet.create({
   photoList: {
     flexWrap: "wrap",
     flexDirection: "row",
+  },
+  deleteProductButton: {
+    width: 30,
+    height: 30,
+    marginLeft: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
   },
 });

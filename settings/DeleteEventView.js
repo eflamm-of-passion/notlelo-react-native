@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Checkbox from "expo-checkbox";
 import i18n from "../i18n";
 
 import { deleteEvent } from "../event-service";
-import DeleteButton from "../components/DeleteButton";
+import Icon from "../icons/Icon";
 
 export default function DeleteEventView({ eventNameList }) {
-  // FIX the eventNameList is not updated after deletion, so localEventList is used as a workaround
+  // the eventNameList is not updated after deletion, so localEventList is used as a workaround
   const [localEventList, setLocalEventList] = useState(eventNameList);
   const [eventNameListToDelete, setEventNameListToDelete] = useState([]);
+  const isDisabled = eventNameListToDelete.length === 0;
 
   const handleDeleteButtonClick = (eventNameList) => {
     for (const eventName of eventNameList) {
@@ -65,18 +66,36 @@ export default function DeleteEventView({ eventNameList }) {
         {!localEventList.length && (
           <Text style={styles.noCampText}>{i18n.t("settings.noCamp")}</Text>
         )}
-        <View style={styles.deleteButton}>
-          <DeleteButton
-            label={"Supprimer"}
-            isDisabled={!eventNameListToDelete.length}
-            itemToDelete={eventNameListToDelete}
-            onClick={handleDeleteButtonClick}
-          />
-        </View>
+        <DeleteButton
+          isDisabled={eventNameListToDelete.length === 0}
+          onClick={handleDeleteButtonClick}
+          list={eventNameListToDelete}
+        />
       </View>
     </View>
   );
 }
+
+const DeleteButton = ({ isDisabled, onClick, list }) => {
+  return (
+    <View style={styles.deleteButton}>
+      <TouchableOpacity
+        style={[
+          styles.plainButton,
+          {
+            backgroundColor: isDisabled ? "darkgrey" : "red",
+          },
+        ]}
+        onPress={() => !isDisabled && onClick(list)}
+      >
+        <Text style={styles.label}>{i18n.t("settings.delete")}</Text>
+        <View style={styles.deleteButtonIcon}>
+          <Icon type="garbage" color="white" />
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -123,6 +142,26 @@ const styles = StyleSheet.create({
     color: "darkgrey",
     fontSize: 16,
     fontStyle: "italic",
+    alignSelf: "center",
+  },
+  plainButton: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 60,
+    borderRadius: 5,
+  },
+  label: {
+    color: "white",
+    fontSize: 22,
+    letterSpacing: 1,
+    paddingRight: 15,
+  },
+  deleteButtonIcon: {
+    width: 30,
+    height: 30,
+    justifyContent: "center",
+    alignItems: "center",
     alignSelf: "center",
   },
 });
