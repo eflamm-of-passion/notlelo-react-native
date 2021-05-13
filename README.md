@@ -27,10 +27,11 @@ Close VS Code, then run `npm start` and reopen VS Code.
 - [x] show a spinner while sharing the zip file
 - [x] display the app version on the home screen
 - [x] create global style file
-- [x] implement generic components : top bar
 - [x] remove the loop of event in the library
 - [x] select the current event when coming back from the camera
+- [x] implement generic components : top bar, icon
 - [ ] show a toast to give feedback to the user
+- [ ] delete unnecessary buttons
 - [ ] add suggestion for product name input
 - [ ] investigate if any optimization is possible
 - [ ] add link to my mail for user to send me issues

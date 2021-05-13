@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { Svg, Path } from "react-native-svg";
+
+import Icon from "../icons/Icon";
 
 export default function CancelTakingPictureButton({ navigation }) {
   return (
@@ -8,20 +9,7 @@ export default function CancelTakingPictureButton({ navigation }) {
       style={styles.cancelButton}
       onPress={() => navigation.goBack()}
     >
-      <Svg width="50" height="50" viewBox="0 0 20 20" fill="white">
-        <Path
-          fill="none"
-          stroke="white"
-          stroke-width="1.06"
-          d="M16,16 L4,4"
-        ></Path>
-        <Path
-          fill="none"
-          stroke="white"
-          stroke-width="1.06"
-          d="M16,4 L4,16"
-        ></Path>
-      </Svg>
+      <Icon type="right-arrow" color="white" />
     </TouchableOpacity>
   );
 }
@@ -29,8 +17,11 @@ export default function CancelTakingPictureButton({ navigation }) {
 const styles = StyleSheet.create({
   cancelButton: {
     flex: 1,
+    width: 50,
+    height: 50,
     alignSelf: "center",
     alignItems: "center",
     marginLeft: 40,
+    transform: [{ rotate: "180deg" }],
   },
 });

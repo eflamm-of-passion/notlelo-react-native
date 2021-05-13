@@ -1,12 +1,12 @@
 import React, { useRef, useState } from "react";
 import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native";
-import { Svg, Path } from "react-native-svg";
 import ViewPager from "@react-native-community/viewpager";
 
 import DateView from "./DateView";
 import ShareEventButton from "./ShareEventButton";
 import SpinnerModal from "./SpinnerModal";
 import TopBar from "../components/TopBar";
+import Icon from "../icons/Icon";
 import { primaryColor } from "../global";
 
 export default function EventView({
@@ -106,13 +106,7 @@ const SwithPageButton = ({ direction, pager, pageIndex, numberOfPages }) => {
       ]}
       onPress={switchPage}
     >
-      <Svg
-        style={direction === "left" ? styles.leftArrow : styles.rightArrow}
-        fill="#fff"
-        viewBox="0 0 330.002 330.002"
-      >
-        <Path d="M233.252,155.997L120.752,6.001c-4.972-6.628-14.372-7.97-21-3c-6.628,4.971-7.971,14.373-3,21 l105.75,140.997L96.752,306.001c-4.971,6.627-3.627,16.03,3,21c2.698,2.024,5.856,3.001,8.988,3.001 c4.561,0,9.065-2.072,12.012-6.001l112.5-150.004C237.252,168.664,237.252,161.33,233.252,155.997z" />
-      </Svg>
+      <Icon type="right-arrow" color="white" />
     </TouchableOpacity>
   );
 };
@@ -139,18 +133,12 @@ const styles = StyleSheet.create({
   },
   rightButton: {
     right: 30,
-  },
-  rightArrow: {
-    height: 35,
-    marginLeft: 5,
+    paddingLeft: 12,
   },
   leftButton: {
     left: 30,
-  },
-  leftArrow: {
-    height: 35,
     transform: [{ rotate: "180deg" }],
-    marginLeft: -3,
+    paddingLeft: 12,
   },
   enabledButton: {
     backgroundColor: primaryColor,
