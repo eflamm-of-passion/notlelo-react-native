@@ -1,23 +1,38 @@
-import React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 import { shareEvent } from "../event-service";
 import Icon from "../icons/Icon";
+import Toast from "../components/Toast";
+import i18n from "../i18n";
 
 export default function ShareEventButton({ event, setSharingInProgress }) {
+  const [isToastVisible, setToastVisible] = useState(false);
+
   const handleShareEventClick = async (event) => {
     setSharingInProgress(true);
     await shareEvent(event);
     setSharingInProgress(false);
+
+    setToastVisible(true);
   };
 
   return (
-    <TouchableOpacity
-      style={styles.shareEventButton}
-      onPress={() => handleShareEventClick(event.name)}
-    >
-      <Icon type="share" color="white" />
-    </TouchableOpacity>
+    <View>
+      <TouchableOpacity
+        style={styles.shareEventButton}
+        onPress={() => handleShareEventClick(event.name)}
+      >
+        <Icon type="share" color="white" />
+      </TouchableOpacity>
+      <Toast
+        title={i18n.t("library.shareSuccess")}
+        type={"success"}
+        visible={isToastVisible}
+        setVisible={setToastVisible}
+        timeout={8000}
+      />
+    </View>
   );
 }
 

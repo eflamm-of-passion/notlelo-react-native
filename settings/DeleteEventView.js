@@ -5,12 +5,13 @@ import i18n from "../i18n";
 
 import { deleteEvent } from "../event-service";
 import Icon from "../icons/Icon";
+import Toast from "../components/Toast";
 
 export default function DeleteEventView({ eventNameList }) {
   // the eventNameList is not updated after deletion, so localEventList is used as a workaround
   const [localEventList, setLocalEventList] = useState(eventNameList);
   const [eventNameListToDelete, setEventNameListToDelete] = useState([]);
-  const isDisabled = eventNameListToDelete.length === 0;
+  const [isToastVisible, setToastVisible] = useState(false);
 
   const handleDeleteButtonClick = (eventNameList) => {
     for (const eventName of eventNameList) {
@@ -21,6 +22,7 @@ export default function DeleteEventView({ eventNameList }) {
       setLocalEventList(eventListUpdated);
     }
     setEventNameListToDelete([]);
+    setToastVisible(true);
   };
 
   const switchEventNameToDelete = (eventName) => {
@@ -72,6 +74,13 @@ export default function DeleteEventView({ eventNameList }) {
           list={eventNameListToDelete}
         />
       </View>
+      <Toast
+        title={i18n.t("settings.deleteSuccess")}
+        type={"success"}
+        visible={isToastVisible}
+        setVisible={setToastVisible}
+        timeout={5000}
+      />
     </View>
   );
 }

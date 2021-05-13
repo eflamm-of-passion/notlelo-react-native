@@ -7,20 +7,19 @@ export default function LinkButton({
   component,
   selectedEventName,
   eventNameList,
-  setEventNameList,
   isDisabled,
+  onPress,
 }) {
+  const handleOnPress = () => {
+    onPress();
+    !isDisabled &&
+      navigation.navigate(component, {
+        eventName: selectedEventName,
+        eventNameList: eventNameList,
+      });
+  };
   return (
-    <TouchableOpacity
-      style={styles.link}
-      onPress={() =>
-        !isDisabled &&
-        navigation.navigate(component, {
-          eventName: selectedEventName,
-          eventNameList: eventNameList,
-        })
-      }
-    >
+    <TouchableOpacity style={styles.link} onPress={() => handleOnPress()}>
       <Text
         style={[styles.buttonText, isDisabled && styles.disabledButtonText]}
       >

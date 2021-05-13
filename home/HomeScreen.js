@@ -15,12 +15,15 @@ import { getProducts } from "../event-service";
 import EventInput from "./EventInput";
 import EventPicker from "./EventPicker";
 import LinkButton from "./LinkButton";
+import Toast from "../components/Toast";
 
 export default function HomeScreen({ navigation }) {
   const isFocused = useIsFocused();
   const [eventNameList, setEventNameList] = useState([]);
   const [selectedEventName, setSelectedEventName] = useState(null);
   const [showEventInput, setShowEventInput] = useState(false);
+  const [isToastVisible, setToastVisible] = useState(false);
+  const [toastMessage, setToastMessage] = useState(null);
 
   const [fontLoaded] = useFonts({
     CaveatBrush: require("../assets/fonts/CaveatBrush-Regular.ttf"),
@@ -37,14 +40,24 @@ export default function HomeScreen({ navigation }) {
       eventNameSet.add(product.event);
     }
     setEventNameList([...eventNameSet]);
-    if (
-      [...eventNameSet].length &&
-      ![...eventNameSet].includes(selectedEventName) &&
-      !selectedEventName
-    ) {
+    if ([...eventNameSet].length) {
+      if (
+        ![...eventNameSet].includes(selectedEventName) &&
+        !selectedEventName
+      ) {
+        setSelectedEventName([...eventNameSet][0]);
+      }
+    } else {
       setSelectedEventName([...eventNameSet][0]);
     }
   });
+
+  const onPressNavigation = () => {
+    if (!selectedEventName) {
+      setToastMessage(i18n.t("home.navigationDisabled"));
+      setToastVisible(true);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -87,6 +100,7 @@ export default function HomeScreen({ navigation }) {
             component={"Camera"}
             selectedEventName={selectedEventName}
             isDisabled={!selectedEventName}
+            onPress={onPressNavigation}
           />
           <LinkButton
             navigation={navigation}
@@ -94,6 +108,7 @@ export default function HomeScreen({ navigation }) {
             component={"Library"}
             selectedEventName={selectedEventName}
             isDisabled={!selectedEventName}
+            onPress={onPressNavigation}
           />
           <LinkButton
             navigation={navigation}
@@ -101,10 +116,17 @@ export default function HomeScreen({ navigation }) {
             component={"Settings"}
             eventNameList={eventNameList}
             isDisabled={!eventNameList}
+            onPress={onPressNavigation}
           />
         </View>
       </View>
-
+      <Toast
+        title={toastMessage}
+        type={"info"}
+        visible={isToastVisible}
+        setVisible={setToastVisible}
+        timeout={5000}
+      />
       <StatusBar style="light" />
     </View>
   );

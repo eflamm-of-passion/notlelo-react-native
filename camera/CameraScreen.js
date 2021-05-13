@@ -20,8 +20,11 @@ export default function CameraScreen({ navigation, route }) {
   const [creationDate, setCreationDate] = useState(new Date());
   const [isValidateProductModalVisible, setValidateProductModalVisible] =
     useState(false);
+
   const [isToastVisible, setToastVisible] = useState(false);
-  const [message, setMessage] = useState(null);
+  const [toastMessage, setToastMessage] = useState(null);
+  const [toastType, setToastType] = useState("info");
+  const [toastTimeout, setToastTimeout] = useState(5000);
 
   const { eventName } = route.params;
 
@@ -41,34 +44,49 @@ export default function CameraScreen({ navigation, route }) {
   }
 
   const onClickTakePicture = async () => {
-    if (camera && !isTakingPicture) {
-      if (!photoList.length) {
-        setCreationDate(new Date());
+    if (camera) {
+      if (!isTakingPicture) {
+        if (!photoList.length) {
+          setCreationDate(new Date());
+        }
+        const photoFiller = { id: 0, filler: true };
+        setPhotoList([photoFiller].concat(photoList));
+        setTakingPicture(true);
+        const photo = await camera.takePictureAsync({ quality: 0.1 });
+        // remove the filler from the previw list
+        setPhotoList(photoList.filter((photo) => photo.id !== photoFiller.id));
+        photo.id = Math.random();
+        setPhotoList([photo].concat(photoList));
+        setTakingPicture(false);
+      } else {
+        setToastMessage(i18n.t("camera.waitToTakePicture"));
+        setToastType("info");
+        setToastVisible(true);
+        setToastTimeout(1500);
       }
-      const photoFiller = { id: 0, filler: true };
-      setPhotoList([photoFiller].concat(photoList));
-      setTakingPicture(true);
-      const photo = await camera.takePictureAsync({ quality: 0.1 });
-      // remove the filler from the previw list
-      setPhotoList(photoList.filter((photo) => photo.id !== photoFiller.id));
-      photo.id = Math.random();
-      setPhotoList([photo].concat(photoList));
-      setTakingPicture(false);
     }
-    // onProductSaved();
   };
 
   const openValidateProductModal = () => {
-    setValidateProductModalVisible(true);
-    // TODO open the keyboard
+    if (photoList.length) {
+      setValidateProductModalVisible(true);
+      // TODO open the keyboard
+    } else {
+      setToastMessage(i18n.t("camera.validateDisabled"));
+      setToastType("info");
+      setToastVisible(true);
+      setToastTimeout(5000);
+    }
   };
 
   const onProductSaved = () => {
     // empty the preview list
-    // setPhotoList([]);
+    setPhotoList([]);
     // feedback to user
-    setMessage(i18n.t("camera.productSaved"));
+    setToastMessage(i18n.t("camera.productSaved"));
+    setToastType("success");
     setToastVisible(true);
+    setToastTimeout(5000);
   };
 
   return (
@@ -87,7 +105,7 @@ export default function CameraScreen({ navigation, route }) {
             isDisabled={isTakingPicture}
           />
           <ValidateProductButton
-            openModal={openValidateProductModal}
+            onPress={openValidateProductModal}
             isDisabled={photoList.length === 0}
           />
         </View>
@@ -102,11 +120,11 @@ export default function CameraScreen({ navigation, route }) {
         onProductSaved={onProductSaved}
       />
       <Toast
-        title={message}
-        type={"success"}
+        title={toastMessage}
+        type={toastType}
         visible={isToastVisible}
         setVisible={setToastVisible}
-        timeout={5000}
+        timeout={toastTimeout}
       />
     </View>
   );

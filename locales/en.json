@@ -5,25 +5,29 @@
     "library": "My batch numbers",
     "settings": "Settings",
     "noEvent": "< no selected camp >",
-    "eventInputPlaceholder": "name of the camp"
+    "eventInputPlaceholder": "name of the camp",
+    "navigationDisabled": "Please create a camp"
   },
   "camera": {
     "validate": "Validate",
     "cancel": "Cancel",
-    "productInputLabel": "Name of the product",
+    "productInputLabel": "Name of the article",
     "mealInputLabel": "Name of the meal",
     "eventInputLabel": "Name of the event",
     "productNamePlaceHolder": "can of Montblanc",
     "mealNamePlaceHolder": "breakfast",
     "eventNamePlaceHolder": "summer camp 2020",
-    "productSaved": "The article has been saved"
+    "productSaved": "The article has been saved",
+    "validateDisabled": "Please take pictures before saving the article",
+    "waitToTakePicture": "Please wait before taking another picture"
   },
   "library": {
     "close": "Close",
     "delete": "Delete",
     "compress": "Compress as zip",
     "share": "Share",
-    "mealInputPlaceholder": "name of your meal"
+    "mealInputPlaceholder": "name of your meal",
+    "shareSuccess": "The archive has been successfully shared"
   },
   "meal": {
     "breakfast": "Breakfast",
@@ -61,6 +65,7 @@
   "settings": {
     "deleteEvent": "Delete a camp",
     "delete": "Delete",
-    "noCamp": "No camp created"
+    "noCamp": "No camp created",
+    "deleteSuccess": "The camps have been successfully deleted"
   }
 }

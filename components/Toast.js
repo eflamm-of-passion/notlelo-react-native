@@ -28,7 +28,7 @@ export default function Toast({ title, type, timeout, visible, setVisible }) {
       icon = "error";
       break;
     case "info":
-      backgroundColor = "lightgrey";
+      backgroundColor = "#8f8fcf";
       outlineColor = "grey";
       icon = "info";
       break;
@@ -52,7 +52,9 @@ export default function Toast({ title, type, timeout, visible, setVisible }) {
             ]}
           >
             <Icon type={icon} color="white" />
-            <Text style={[styles.text]}>{title}</Text>
+            <Text numberOfLines={2} adjustsFontSizeToFit style={[styles.text]}>
+              {title}
+            </Text>
           </View>
         </View>
       </Overlay>

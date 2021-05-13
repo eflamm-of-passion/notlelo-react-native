@@ -5,7 +5,8 @@
     "library": "Mes numéros de lots",
     "settings": "Paramètres",
     "noEvent": "< aucun camp >",
-    "eventInputPlaceholder": "nom du camp"
+    "eventInputPlaceholder": "nom du camp",
+    "navigationDisabled": "Veuillez créer un camp"
   },
   "camera": {
     "validate": "Valider",
@@ -16,14 +17,17 @@
     "productNamePlaceHolder": "boîte de Montblanc",
     "mealNamePlaceHolder": "déjeuner",
     "eventNamePlaceHolder": "camp 2020",
-    "productSaved": "Le produit a été enregistré"
+    "productSaved": "Le produit a été enregistré",
+    "validateDisabled": "Veuillez prendre une photo avant d'enregistrer le produit",
+    "waitToTakePicture": "Veuillez attendre avant de prendre une nouvelle photo"
   },
   "library": {
     "close": "Fermer",
     "delete": "Supprimer",
     "compress": "Télécharger au format zip",
     "share": "Partager",
-    "mealInputPlaceholder": "petite fringale"
+    "mealInputPlaceholder": "petite fringale",
+    "shareSuccess": "L'archive a bien été partagée"
   },
   "meal": {
     "breakfast": "Petit-déjeuner",
@@ -61,6 +65,7 @@
   "settings": {
     "deleteEvent": "Supprimer un camp",
     "delete": "Supprimer",
-    "noCamp": "Aucun camp créé"
+    "noCamp": "Aucun camp créé",
+    "deleteSuccess": "Les camps ont bien été supprimés"
   }
 }

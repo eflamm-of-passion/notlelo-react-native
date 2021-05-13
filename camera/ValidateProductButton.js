@@ -3,12 +3,9 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 
 import Icon from "../icons/Icon";
 
-export default function ValidateProductButton({ openModal, isDisabled }) {
+export default function ValidateProductButton({ onPress, isDisabled }) {
   return (
-    <TouchableOpacity
-      style={styles.validateButton}
-      onPress={() => !isDisabled && openModal()}
-    >
+    <TouchableOpacity style={styles.validateButton} onPress={onPress}>
       <Icon type="plain-validate" color={isDisabled ? "darkgrey" : "white"} />
     </TouchableOpacity>
   );
