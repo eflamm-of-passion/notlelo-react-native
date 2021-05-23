@@ -116,7 +116,6 @@ export default function HomeScreen({ navigation }) {
             component={"Settings"}
             eventNameList={eventNameList}
             isDisabled={!eventNameList}
-            onPress={onPressNavigation}
           />
         </View>
       </View>

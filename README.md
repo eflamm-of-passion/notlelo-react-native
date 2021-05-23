@@ -1,37 +1,57 @@
-# run the project
+# notlelo
+
+During the summer camps and other events of the Scouts et Guides de France the scout leaders are asked to record every preprared food by keeping their batch number. It is often a tedious task that does not bring any value to the camp itself, only in case of food intoxication, but usually it is mostly a waste of time. The motivation behind the development of this application is to reduce the time spent on the record of the batch numbers.
+
+Notlelo is meant to take pictures of these batch numbers during the preparation of every meal. Then at the end of the camp the user will export all the pictures in an archive, where they are sorted by date, then by meal, then by product. And this archive will be stored on a device for the legal term specified in the Guide Réglementaire.
+
+## Run the project
 
 Install **npm** via **nvm**:  
 https://github.com/nvm-sh/nvm
 
 Install **expo** : https://docs.expo.io/get-started/installation/
 
-# how to deploy on android
+## Data structure
+
+The library AynscStorage from React Native is used to store the data. For convenience during the insertion of data, it is an array of products, with a flat object structure for each product, for example :
+```
+insert the flat data structure here
+```
+but when the data is fetched in the database to be read, then the array of product is deserialized to build the following tree and  sorted by `events -> dates -> meals -> products -> picture` . For example :
+
+```
+insert the deserialized data structure here
+```
+
+## How to deploy on android
 
 Increment the `android.versionCode` and `version` in the app.json
 Run `expo build:android`, wait for the build to finish. Then download it on https://expo.io/.
 
 Go to https://play.google.com/console/ and create an new release.
 
-# troubleshoot
+## Troubleshoot
 
 `Error: ENOSPC: System limit for number of file watchers reached`
 
 Close VS Code, then run `npm start` and reopen VS Code.
 
-# changelog
+## Changelog
 
 **_next release_**
 
-- [ ] investigate if any optimization is possible, like reducing taken pictures size, minify
+- [x] investigate if any optimization is possible, like reducing taken pictures size, minify
 - [ ] start to do some tests
 - [ ] FAQ section, to explain why the app is working like that
-- [ ] add link to my mail for user to send me issues
+- [ ] add link to my mail for user to send me issues, and my signature
 - [ ] verify that the share is successful
-- [ ] write some documentation
+- [ ] write some documentation, about the data model
 - [ ] pimp the picture filler
 - [ ] try another SGDF font
-- [ ] buy a logo
+- [ ] create a logo, and update the splah screen accordingly
 - [ ] add suggestion for product name input
+- [ ] change the project name in notlelo
+- [ ] build the app through EAS build when it will be in the free plan
 
 **_v1.3_**
 
@@ -82,5 +102,5 @@ Close VS Code, then run `npm start` and reopen VS Code.
 - choose a default meal when taking a picture
 - enter a new meal if wanted when taking a picture
 
-source of icons :  
-www.svgrepo.com
+source of icons : www.svgrepo.com  
+tool to create the logo : www.youidraw.com

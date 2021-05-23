@@ -5,6 +5,7 @@ import i18n from "../i18n";
 import { primaryColor } from "../global";
 
 import DeleteEventView from "./DeleteEventView";
+import FrequentlyAskedQuestionView from './FrequentlyAskedQuestionView';
 import TopBar from "../components/TopBar";
 
 export default function SettingsScreen({ navigation, route }) {
@@ -19,6 +20,7 @@ export default function SettingsScreen({ navigation, route }) {
           setEventNameList={setEventNameList}
         />
       </View>
+      <FrequentlyAskedQuestionView />
       <Text style={styles.version}>v{app.expo.version}</Text>
     </View>
   );

@@ -11,7 +11,7 @@ export default function LinkButton({
   onPress,
 }) {
   const handleOnPress = () => {
-    onPress();
+    onPress && onPress();
     !isDisabled &&
       navigation.navigate(component, {
         eventName: selectedEventName,
