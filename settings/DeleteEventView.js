@@ -6,6 +6,7 @@ import i18n from "../i18n";
 import { deleteEvent } from "../event-service";
 import Icon from "../icons/Icon";
 import Toast from "../components/Toast";
+import { secondaryColor } from "../global";
 
 export default function DeleteEventView({ eventNameList }) {
   // the eventNameList is not updated after deletion, so localEventList is used as a workaround
@@ -108,7 +109,7 @@ const DeleteButton = ({ isDisabled, onClick, list }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0,
     backgroundColor: "white",
   },
   title: {
@@ -117,10 +118,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 10,
     letterSpacing: 1,
-    color: "#404040",
+    color: secondaryColor,
   },
   events: {
-    flex: 1,
+    flex: 0,
     margin: 5,
   },
   eventLine: {

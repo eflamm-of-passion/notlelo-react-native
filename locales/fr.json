@@ -67,5 +67,12 @@
     "delete": "Supprimer",
     "noCamp": "Aucun camp créé",
     "deleteSuccess": "Les camps ont bien été supprimés"
+  },
+  "faq": {
+    "title": "Foire aux questions",
+    "slowTakingPicture": {
+      "question": "Pourquoi faut-il attendre pour prendre une seconde photo ?",
+      "answer": "La technologie choisie pour développer cette application ne permet pas encore de prendre plusieurs photos d'affilée."
+    }
   }
 }

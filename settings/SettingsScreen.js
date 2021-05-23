@@ -5,7 +5,7 @@ import i18n from "../i18n";
 import { primaryColor } from "../global";
 
 import DeleteEventView from "./DeleteEventView";
-import FrequentlyAskedQuestionView from './FrequentlyAskedQuestionView';
+import FrequentlyAskedQuestionView from "./FrequentlyAskedQuestionView";
 import TopBar from "../components/TopBar";
 
 export default function SettingsScreen({ navigation, route }) {
@@ -14,12 +14,10 @@ export default function SettingsScreen({ navigation, route }) {
   return (
     <View style={styles.container}>
       <TopBar navigation={navigation} title={i18n.t("home.settings")} />
-      <View style={styles.settings}>
-        <DeleteEventView
-          eventNameList={eventNameList}
-          setEventNameList={setEventNameList}
-        />
-      </View>
+      <DeleteEventView
+        eventNameList={eventNameList}
+        setEventNameList={setEventNameList}
+      />
       <FrequentlyAskedQuestionView />
       <Text style={styles.version}>v{app.expo.version}</Text>
     </View>
@@ -29,31 +27,13 @@ export default function SettingsScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  title: {
-    flexDirection: "row",
-    alignItems: "center",
-    minHeight: 90,
-    backgroundColor: primaryColor,
-  },
-  titleText: {
-    width: "80%",
-    paddingTop: 20,
-    paddingLeft: 10,
-    color: "white",
-    fontSize: 40,
-    letterSpacing: 4,
-  },
-  goBackButton: {
-    height: 40,
-    width: 40,
-    marginBottom: -15,
-    transform: [{ rotate: "180deg" }],
-  },
-  settings: {
-    flex: 1,
+    backgroundColor: "white",
   },
   version: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
     textAlign: "center",
     backgroundColor: "white",
     color: "grey",
