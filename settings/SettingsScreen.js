@@ -1,42 +1,128 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Text,
+  StyleSheet,
+} from "react-native";
+import * as Linking from "expo-linking";
 import * as app from "../app.json";
 import i18n from "../i18n";
-import { primaryColor } from "../global";
 
 import DeleteEventView from "./DeleteEventView";
 import FrequentlyAskedQuestionView from "./FrequentlyAskedQuestionView";
 import TopBar from "../components/TopBar";
+import { primaryColor, secondaryColor } from "../global";
+
+function HorizontalRule() {
+  return (
+    <View
+      style={{
+        alignSelf: "center",
+        width: "90%",
+        borderBottomColor: "lightgrey",
+        borderBottomWidth: 1,
+        marginTop: 20,
+        marginBottom: 20,
+      }}
+    />
+  );
+}
+
+function ContactMe() {
+  const email = "mailto:eflamm.ollivier@gmail.com";
+  const handlePress = () => {
+    Linking.openURL(email);
+  };
+
+  return (
+    <View>
+      <Text style={styles.aboutTitle}>{i18n.t("settings.about")}</Text>
+      <Text style={styles.aboutDescription}>
+        {i18n.t("settings.aboutDescription")}
+      </Text>
+      <TouchableOpacity style={styles.contactMeButton} onPress={handlePress}>
+        <Text style={styles.contactMeButtonText}>
+          {i18n.t("settings.clickHere")}
+        </Text>
+      </TouchableOpacity>
+      <Text style={styles.signature}>{i18n.t("settings.signature")}</Text>
+    </View>
+  );
+}
+
+function VersionNumber() {
+  return <Text style={styles.version}>v{app.expo.version}</Text>;
+}
 
 export default function SettingsScreen({ navigation, route }) {
   const { eventNameList, setEventNameList } = route.params;
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <TopBar navigation={navigation} title={i18n.t("home.settings")} />
       <DeleteEventView
         eventNameList={eventNameList}
         setEventNameList={setEventNameList}
       />
+      <HorizontalRule />
       <FrequentlyAskedQuestionView />
-      <Text style={styles.version}>v{app.expo.version}</Text>
-    </View>
+      <ContactMe />
+      <VersionNumber />
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    minHeight: "100%",
     backgroundColor: "white",
   },
+  aboutTitle: {
+    fontSize: 28,
+    paddingLeft: 10,
+    marginTop: 15,
+    letterSpacing: 1,
+    color: secondaryColor,
+  },
+  aboutDescription: {
+    fontSize: 16,
+    letterSpacing: 1,
+    color: secondaryColor,
+    marginLeft: 15,
+    marginRight: 15,
+    marginBottom: 8,
+    textAlign: "center",
+  },
+  signature: {
+    fontSize: 14,
+    letterSpacing: 1,
+    color: "darkgrey",
+    marginTop: 10,
+    marginLeft: 15,
+    marginRight: 15,
+    textAlign: "center",
+  },
+  contactMeButton: {
+    width: "50%",
+    alignSelf: "center",
+    alignItems: "center",
+    marginLeft: 10,
+    padding: 8,
+    borderRadius: 5,
+    backgroundColor: primaryColor,
+  },
+  contactMeButtonText: {
+    fontSize: 20,
+    color: "white",
+    letterSpacing: 1,
+  },
   version: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
     textAlign: "center",
     backgroundColor: "white",
     color: "grey",
-    paddingBottom: 10,
+    paddingTop: 10,
   },
 });

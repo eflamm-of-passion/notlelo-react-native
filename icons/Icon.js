@@ -14,7 +14,7 @@ import Share from "./icons/Share";
 import Success from "./icons/Success";
 import TakePicture from "./icons/TakePicture";
 
-export default function Icon({ type, color, width, height }) {
+export default function Icon({ type, color, width, height, rotation }) {
   switch (type) {
     case "clear":
       return <Clear color={color} />;
@@ -35,9 +35,16 @@ export default function Icon({ type, color, width, height }) {
     case "round-cancel":
       return <RoundCancel color={color} />;
     case "right-arrow":
-      return <RightArrow color={color} />;
+      return (
+        <RightArrow
+          color={color}
+          width={width}
+          height={height}
+          rotation={rotation}
+        />
+      );
     case "share":
-      return <Share color={color} />;
+      return <Share color={color} width={width} height={height} />;
     case "success":
       return <Success color={color} width={width} height={height} />;
     case "take-picture":

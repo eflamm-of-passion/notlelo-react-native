@@ -17,10 +17,9 @@ import {
 
 import i18n from "../../i18n";
 import { addProduct } from "../../event-service";
+import { albumName } from "../../global";
 import MealPicker from "./MealPicker";
 import MealInput from "./MealInput";
-
-const ALBUM_NAME = "Batch Number";
 
 export default function SaveProductModal({
   isModalVisible,
@@ -63,10 +62,10 @@ export default function SaveProductModal({
       }
 
       // add the assets to the album
-      const album = await getAlbumAsync(ALBUM_NAME);
+      const album = await getAlbumAsync(albumName);
       if (!album) {
         const createdAlbum = await createAlbumAsync(
-          ALBUM_NAME,
+          albumName,
           photoAssetList[0],
           false
         );

@@ -66,13 +66,26 @@
     "deleteEvent": "Supprimer un camp",
     "delete": "Supprimer",
     "noCamp": "Aucun camp créé",
-    "deleteSuccess": "Les camps ont bien été supprimés"
+    "deleteSuccess": "Les camps ont bien été supprimés",
+    "about": "Contacter le développeur",
+    "aboutDescription": "Si vous souhaitez signaler un problème, donner des suggestions d'améliorations ou pour autre chose :",
+    "signature": "Notlelo a été développée avec 🤍 par Eflamm Ollivier",
+    "clickHere": "Cliquez ici !"
   },
   "faq": {
     "title": "Foire aux questions",
     "slowTakingPicture": {
       "question": "Pourquoi faut-il attendre pour prendre une seconde photo ?",
       "answer": "La technologie choisie pour développer cette application ne permet pas encore de prendre plusieurs photos d'affilée."
+    },
+    "saveThePictures": {
+      "question": "Comment archiver toutes les photos d'un camp ?",
+      "answer1": "Il suffit d'appuyer sur le bouton ",
+      "answer2": "qui se trouve dans la rubrique \"Mes numéros de lot\". Une archive va être céée, et vous aurez la possibilité de le partager via un service tiers (e.g. mail, Google Drive, etc...)."
+    },
+    "availableOnIOS": {
+      "question": "L'application est-elle disponible sur iOS ?",
+      "answer": "Pour le moment Notlelo n'est pas disponible sur l'App Store d'Apple. Notamment parce que les frais pour déployer une application dessus sont élevés."
     }
   }
 }

@@ -14,13 +14,81 @@ Install **expo** : https://docs.expo.io/get-started/installation/
 ## Data structure
 
 The library AynscStorage from React Native is used to store the data. For convenience during the insertion of data, it is an array of products, with a flat object structure for each product, for example :
-```
-insert the flat data structure here
-```
-but when the data is fetched in the database to be read, then the array of product is deserialized to build the following tree and  sorted by `events -> dates -> meals -> products -> picture` . For example :
 
+```json
+[
+  {
+    "uuid": "101b1b75-5861-4464-9d70-f6f3a193fe32",
+    "event": "Camp bleu ",
+    "date": "06-06-2021",
+    "meal": "Petit-déjeuner",
+    "name": "Brioche",
+    "photos": [
+      {
+        "uri": "file:///storage/emulated/0/Pictures/Notlelo/0b9fb25e-c80a-4d5e-8e33-057a25f3769d.jpg",
+        "creationDate": 1623007351000
+      },
+      {
+        "uri": "file:///storage/emulated/0/Pictures/Notlelo/799190a0-e03d-4952-85cd-6a6c6d0c24ab.jpg",
+        "creationDate": 1623007351000
+      }
+    ]
+  },
+  {
+    "uuid": "f5475005-f53c-4407-b708-e5c33c16c420",
+    "event": "Camp bleu ",
+    "date": "06-06-2021",
+    "meal": "Déjeuner",
+    "name": "Pâtes",
+    "photos": [
+      {
+        "uri": "file:///storage/emulated/0/Pictures/Notlelo/b6603d08-5149-4b0e-80d9-f89af1da66a8.jpg",
+        "creationDate": 1623007566000
+      }
+    ]
+  }
+]
 ```
-insert the deserialized data structure here
+
+but when the data is fetched in the database to be read, then the array of product is deserialized to build the following tree and sorted by `events -> dates -> meals -> products -> picture` . For example :
+
+```javascript
+Map {
+  "Camp bleu " => Map {
+    "06-06-2021" => Map {
+      "Petit-déjeuner" => Array [
+        Object {
+          "date": "06-06-2021",
+          "name": "Brioche",
+          "photos": Array [
+            Object {
+              "creationDate": 1623007351000,
+              "uri": "file:///storage/emulated/0/Pictures/Notlelo/0b9fb25e-c80a-4d5e-8e33-057a25f3769d.jpg",
+            },
+            Object {
+              "creationDate": 1623007351000,
+              "uri": "file:///storage/emulated/0/Pictures/Notlelo/799190a0-e03d-4952-85cd-6a6c6d0c24ab.jpg",
+            },
+          ],
+          "uuid": "101b1b75-5861-4464-9d70-f6f3a193fe32",
+        },
+      ],
+      "Déjeuner" => Array [
+        Object {
+          "date": "06-06-2021",
+          "name": "Pâtes ",
+          "photos": Array [
+            Object {
+              "creationDate": 1623007566000,
+              "uri": "file:///storage/emulated/0/Pictures/Notlelo/b6603d08-5149-4b0e-80d9-f89af1da66a8.jpg",
+            },
+          ],
+          "uuid": "f5475005-f53c-4407-b708-e5c33c16c420",
+        },
+      ],
+    },
+  },
+}
 ```
 
 ## How to deploy on android
@@ -41,17 +109,18 @@ Close VS Code, then run `npm start` and reopen VS Code.
 **_next release_**
 
 - [x] investigate if any optimization is possible, like reducing taken pictures size, minify
-- [ ] start to do some tests
-- [ ] FAQ section, to explain why the app is working like that
-- [ ] add link to my mail for user to send me issues, and my signature
+- [x] FAQ section, to explain why the app is working like that: time take photo, share, iOS
+- [x] add link to my mail for user to send me issues, and my signature
+- [x] create a logo, and update the splah screen accordingly
+- [x] write some documentation, about the data model
+- [x] change the project name in notlelo
+- [ ] add suggestion for product name input
 - [ ] verify that the share is successful
-- [ ] write some documentation, about the data model
+- [ ] start to do some tests
 - [ ] pimp the picture filler
 - [ ] try another SGDF font
-- [ ] create a logo, and update the splah screen accordingly
-- [ ] add suggestion for product name input
-- [ ] change the project name in notlelo
 - [ ] build the app through EAS build when it will be in the free plan
+- [ ] fix : reduce take picture button padding
 
 **_v1.3_**
 
@@ -103,4 +172,5 @@ Close VS Code, then run `npm start` and reopen VS Code.
 - enter a new meal if wanted when taking a picture
 
 source of icons : www.svgrepo.com  
-tool to create the logo : www.youidraw.com
+draw the logo : www.youidraw.com  
+generate the app icon : https://easyappicon.com/

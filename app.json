@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "notlelo",
-    "slug": "notlelo",
-    "version": "1.4.2",
+    "name": "Notlelo",
+    "slug": "Notlelo",
+    "version": "1.4.5",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/icon.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#003a5d"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -19,7 +19,7 @@
     },
     "android": {
       "package": "io.eflamm.notlelo",
-      "versionCode": 8
+      "versionCode": 11
     },
     "web": {
       "favicon": "./assets/favicon.png"

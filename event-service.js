@@ -8,7 +8,7 @@ import * as FileSystem from "expo-file-system";
 import * as Sharing from "expo-sharing";
 import JSZip from "jszip";
 
-const ALBUM_NAME = "Batch Number";
+import { albumName } from "./global";
 
 /**
  * Creates the product array, if it does not exist
@@ -59,6 +59,61 @@ export const setProducts = (products) => {
 };
 
 /**
+ * There is only one table in the database and all the information for a product is stored in one line.
+ * The function parses all the lines to build a json object following this architecture
+ * events -> dates -> meal -> products
+ * @param {*} flatProductList - all the lines from the database
+ * @returns json object
+ */
+export const deserializeFlatProductList = (flatProductList) => {
+  // yeah... I know
+  const eventMap = new Map();
+  for (const flatProduct of flatProductList) {
+    const dateMap = eventMap.get(flatProduct.event);
+    if (dateMap) {
+      const mealMap = dateMap.get(flatProduct.date);
+      if (mealMap) {
+        const product = deserializeProduct(flatProduct);
+        const productList = mealMap.get(flatProduct.meal);
+        if (productList) {
+          productList.push(product);
+          mealMap.set(flatProduct.meal, productList);
+        } else {
+          // the meal does not exist
+          mealMap.set(flatProduct.meal, [product]);
+        }
+        dateMap.set(flatProduct.date, mealMap);
+      } else {
+        // the date does not exist
+        const product = deserializeProduct(flatProduct);
+        const newMealMap = new Map();
+        newMealMap.set(flatProduct.meal, [product]);
+        dateMap.set(flatProduct.date, newMealMap);
+      }
+    } else {
+      // the event does not exist
+      const product = deserializeProduct(flatProduct);
+      const newDateMap = new Map();
+      const newMealMap = new Map();
+      newMealMap.set(flatProduct.meal, [product]);
+      newDateMap.set(flatProduct.date, newMealMap);
+      eventMap.set(flatProduct.event, newDateMap);
+    }
+  }
+  console.log(eventMap);
+  return eventMap;
+};
+
+const deserializeProduct = (flatProduct) => {
+  return {
+    uuid: flatProduct.uuid,
+    name: flatProduct.name,
+    photos: flatProduct.photos,
+    date: flatProduct.date,
+  };
+};
+
+/**
  * Returns the MediaLibrary assets, and the album id
  * @param {object} product
  * @returns
@@ -68,7 +123,7 @@ export const getProductPhotos = async (product) => {
   const dates = product.photos.map((photo) => photo.creationDate);
   const firstDate = Math.min(...dates);
   const lastDate = Math.max(...dates);
-  const album = await getAlbumAsync(ALBUM_NAME);
+  const album = await getAlbumAsync(albumName);
   // search between those dates, and the app album
   const getOption = {
     createdBefore: lastDate + 100, // a bit after

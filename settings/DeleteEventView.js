@@ -115,8 +115,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     paddingLeft: 10,
-    marginTop: 20,
-    marginBottom: 10,
+    marginTop: 15,
     letterSpacing: 1,
     color: secondaryColor,
   },
@@ -129,8 +128,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 70,
     width: "100%",
-    borderBottomColor: "lightgrey",
-    borderBottomWidth: 1,
     paddingRight: 30,
   },
   eventName: {
@@ -144,7 +141,8 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   deleteButton: {
-    marginTop: 20,
+    marginTop: 10,
+    marginBottom: 10,
     alignSelf: "center",
     width: "65%",
   },

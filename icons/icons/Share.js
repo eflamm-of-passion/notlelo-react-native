@@ -1,9 +1,11 @@
 import React from "react";
 import { Svg, Path } from "react-native-svg";
 
-export default function Share({ color }) {
+export default function Share({ color, width, height }) {
   return (
     <Svg
+      width={width ?? 40}
+      height={height ?? 40}
       viewBox="0 0 384.973 384.973"
       style="enable-background:new 0 0 384.973 384.973;"
       fill={color ?? "white"}

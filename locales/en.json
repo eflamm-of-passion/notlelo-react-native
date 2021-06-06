@@ -66,6 +66,7 @@
     "deleteEvent": "Delete a camp",
     "delete": "Delete",
     "noCamp": "No camp created",
-    "deleteSuccess": "The camps have been successfully deleted"
+    "deleteSuccess": "The camps have been successfully deleted",
+    "contactMe": "Contact the developper"
   }
 }
