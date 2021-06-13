@@ -27,7 +27,8 @@
     "compress": "Compress as zip",
     "share": "Share",
     "mealInputPlaceholder": "name of your meal",
-    "shareSuccess": "The archive has been successfully shared"
+    "shareSuccess": "The archive has been successfully shared",
+    "shareNotAvailable": "Sharing is not available on your device"
   },
   "meal": {
     "breakfast": "Breakfast",
@@ -67,6 +68,6 @@
     "delete": "Delete",
     "noCamp": "No camp created",
     "deleteSuccess": "The camps have been successfully deleted",
-    "contactMe": "Contact the developper"
+    "contactMe": "Contact"
   }
 }

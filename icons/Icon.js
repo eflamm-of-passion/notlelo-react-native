@@ -6,7 +6,7 @@ import Garbage from "./icons/Garbage";
 import Info from "./icons/Info";
 import PlainCross from "./icons/PlainCross";
 import PlainValidate from "./icons/PlainValidate";
-import RightArrow from "./icons/RightArrow";
+import Arrow from "./icons/RightArrow";
 import RoundCancel from "./icons/RoundCancel";
 import RoundPlus from "./icons/RoundPlus";
 import RoundValidate from "./icons/RoundValidate";
@@ -36,7 +36,7 @@ export default function Icon({ type, color, width, height, rotation }) {
       return <RoundCancel color={color} />;
     case "right-arrow":
       return (
-        <RightArrow
+        <Arrow
           color={color}
           width={width}
           height={height}
@@ -48,7 +48,7 @@ export default function Icon({ type, color, width, height, rotation }) {
     case "success":
       return <Success color={color} width={width} height={height} />;
     case "take-picture":
-      return <TakePicture color={color} />;
+      return <TakePicture color={color} width={width} height={height} />;
     default:
       return null;
   }

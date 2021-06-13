@@ -20,6 +20,7 @@
     "expo-checkbox": "~1.0.3",
     "expo-file-system": "~11.0.2",
     "expo-font": "~9.1.0",
+    "expo-linear-gradient": "~9.1.0",
     "expo-linking": "~2.2.3",
     "expo-media-library": "~12.0.2",
     "expo-sharing": "~9.1.2",

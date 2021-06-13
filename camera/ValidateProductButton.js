@@ -13,9 +13,9 @@ export default function ValidateProductButton({ onPress, isDisabled }) {
 
 const styles = StyleSheet.create({
   validateButton: {
-    flex: 1,
-    alignSelf: "center",
+    width: 100,
+    height: 100,
+    paddingTop: 25,
     alignItems: "center",
-    marginRight: 45,
   },
 });

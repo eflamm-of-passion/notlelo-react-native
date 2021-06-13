@@ -1,7 +1,7 @@
 import React from "react";
 import { Svg, Path } from "react-native-svg";
 
-export default function RightArrow({ color, width, height, rotation }) {
+export default function Arrow({ color, width, height, rotation }) {
   const rotationAttribute = rotation ? rotation + "deg" : "0deg";
   return (
     <Svg

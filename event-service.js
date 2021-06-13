@@ -100,7 +100,6 @@ export const deserializeFlatProductList = (flatProductList) => {
       eventMap.set(flatProduct.event, newDateMap);
     }
   }
-  console.log(eventMap);
   return eventMap;
 };
 

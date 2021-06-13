@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, View, Image } from "react-native";
 
 import Icon from "../icons/Icon";
+import Shimmer from "../components/Shimmer";
 
 export default function PreviewPhotoList({ photoList, setPhotoList }) {
   const onClickFlushPictures = async () => {
@@ -21,7 +22,9 @@ export default function PreviewPhotoList({ photoList, setPhotoList }) {
           key={photo.id}
         >
           {photo.filler ? (
-            <View style={styles.photoPreviewFiller}></View>
+            <View style={styles.photoPreviewFiller}>
+              <Shimmer width={80} height={80} />
+            </View>
           ) : (
             <Image style={styles.photoPreview} source={{ uri: photo.uri }} />
           )}
@@ -57,6 +60,7 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 50,
     marginTop: 10,
+    overflow: "hidden",
   },
   photoPreview: {
     width: 80,

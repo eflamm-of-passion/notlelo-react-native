@@ -97,6 +97,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   signature: {
+    width: "75%",
+    alignSelf: "center",
     fontSize: 14,
     letterSpacing: 1,
     color: "darkgrey",

@@ -141,7 +141,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   buttonContainer: {
-    backgroundColor: "transparent",
+    height: 200,
     flexDirection: "row",
+    justifyContent: "center",
   },
 });

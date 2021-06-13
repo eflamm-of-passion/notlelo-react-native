@@ -114,13 +114,12 @@ Close VS Code, then run `npm start` and reopen VS Code.
 - [x] create a logo, and update the splah screen accordingly
 - [x] write some documentation, about the data model
 - [x] change the project name in notlelo
+- [x] fix : reduce take picture button padding
+- [x] pimp the picture filler
 - [ ] add suggestion for product name input
-- [ ] verify that the share is successful
 - [ ] start to do some tests
-- [ ] pimp the picture filler
 - [ ] try another SGDF font
 - [ ] build the app through EAS build when it will be in the free plan
-- [ ] fix : reduce take picture button padding
 
 **_v1.3_**
 

@@ -9,19 +9,22 @@ export default function CancelTakingPictureButton({ navigation }) {
       style={styles.cancelButton}
       onPress={() => navigation.goBack()}
     >
-      <Icon type="right-arrow" color="white" />
+      <Icon
+        type="right-arrow"
+        color="white"
+        width={50}
+        height={50}
+        rotation={180}
+      />
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   cancelButton: {
-    flex: 1,
-    width: 50,
-    height: 50,
-    alignSelf: "center",
+    paddingTop: 25,
+    width: 100,
+    height: 100,
     alignItems: "center",
-    marginLeft: 40,
-    transform: [{ rotate: "180deg" }],
   },
 });

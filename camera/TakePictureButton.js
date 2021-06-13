@@ -9,15 +9,20 @@ export default function TakePictureButton({ onClickTakePicture, isDisabled }) {
       style={styles.takePictureButton}
       onPress={() => onClickTakePicture()}
     >
-      <Icon type="take-picture" color={isDisabled ? "grey" : "snow"} />
+      <Icon
+        width={100}
+        height={100}
+        type="take-picture"
+        color={isDisabled ? "grey" : "snow"}
+      />
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   takePictureButton: {
-    flex: 5,
-    alignSelf: "center",
+    width: 150,
+    height: 125,
     alignItems: "center",
   },
 });
