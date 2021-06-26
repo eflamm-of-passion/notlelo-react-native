@@ -108,18 +108,21 @@ Close VS Code, then run `npm start` and reopen VS Code.
 
 **_next release_**
 
-- [x] investigate if any optimization is possible, like reducing taken pictures size, minify
-- [x] FAQ section, to explain why the app is working like that: time take photo, share, iOS
-- [x] add link to my mail for user to send me issues, and my signature
-- [x] create a logo, and update the splah screen accordingly
-- [x] write some documentation, about the data model
-- [x] change the project name in notlelo
-- [x] fix : reduce take picture button padding
-- [x] pimp the picture filler
 - [ ] add suggestion for product name input
 - [ ] start to do some tests
 - [ ] try another SGDF font
 - [ ] build the app through EAS build when it will be in the free plan
+
+**1.4.6**
+
+- investigate if any optimization is possible, like reducing taken pictures size, minify
+- FAQ section, to explain why the app is working like that: time take photo, share, iOS
+- add link to my mail for user to send me issues, and my signature
+- create a logo, and update the splah screen accordingly
+- write some documentation, about the data model
+- change the project name in notlelo
+- fix : reduce take picture button padding
+- pimp the picture filler
 
 **_v1.3_**
 
