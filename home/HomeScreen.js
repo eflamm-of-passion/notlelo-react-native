@@ -77,7 +77,7 @@ export default function HomeScreen({ navigation }) {
 
       <View style={styles.buttons}>
         <View style={styles.picker}>
-          {showEventInput ? (
+          {showEventInput || !eventNameList.length ? (
             <EventInput
               setSelectedEventName={setSelectedEventName}
               setShowEventInput={setShowEventInput}

@@ -112,9 +112,12 @@ Close VS Code, then run `npm start` and reopen VS Code.
 - [ ] start to do some tests
 - [ ] try another SGDF font
 - [ ] build the app through EAS build when it will be in the free plan
+- [ ] resolve the memory leaks
 
-**1.4.6**
+**_v1.4.7_**
 
+- when no camp existing, open the text field to add
+- getting the latest created assets by the id and not the date, because creationTime is zero
 - investigate if any optimization is possible, like reducing taken pictures size, minify
 - FAQ section, to explain why the app is working like that: time take photo, share, iOS
 - add link to my mail for user to send me issues, and my signature

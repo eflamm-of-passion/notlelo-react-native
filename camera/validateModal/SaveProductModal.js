@@ -25,7 +25,6 @@ export default function SaveProductModal({
   isModalVisible,
   setModalVisible,
   photoList,
-  creationDate,
   eventName,
   onProductSaved,
 }) {
@@ -43,7 +42,6 @@ export default function SaveProductModal({
   const [mealName, setMealName] = useState(mealList[0]);
 
   const onClickValidate = () => {
-    setModalVisible(false);
     savePictures();
   };
 
@@ -56,8 +54,10 @@ export default function SaveProductModal({
     if (photoList.length) {
       // create the assets from the taken pictures
       let photoAssetList = [];
+      const takenPhotoFilenames = [];
       for (const photo of photoList) {
         const createdAsset = await createAssetAsync(photo.uri);
+        takenPhotoFilenames.push(createdAsset.filename);
         photoAssetList.push(createdAsset);
       }
 
@@ -69,17 +69,16 @@ export default function SaveProductModal({
           photoAssetList[0],
           false
         );
-        await addAssetsToAlbumAsync(
-          photoAssetList.slice(1),
-          createdAlbum,
-          false
-        );
+        photoAssetList = photoAssetList.slice(1);
+        if (photoAssetList.length) {
+          await addAssetsToAlbumAsync(photoAssetList, createdAlbum, false);
+        }
       } else {
         await addAssetsToAlbumAsync(photoAssetList, album, false);
       }
       // save the product to the database
       const product = { event: eventName, meal: mealName, name: productName };
-      addProduct(product, creationDate);
+      await addProduct(product, takenPhotoFilenames);
 
       // successful callback
       onProductSaved();

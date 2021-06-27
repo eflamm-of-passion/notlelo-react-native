@@ -17,7 +17,6 @@ export default function CameraScreen({ navigation, route }) {
   const [photoList, setPhotoList] = useState([]);
   const [isTakingPicture, setTakingPicture] = useState(false);
 
-  const [creationDate, setCreationDate] = useState(new Date());
   const [isValidateProductModalVisible, setValidateProductModalVisible] =
     useState(false);
 
@@ -46,9 +45,6 @@ export default function CameraScreen({ navigation, route }) {
   const onClickTakePicture = async () => {
     if (camera) {
       if (!isTakingPicture) {
-        if (!photoList.length) {
-          setCreationDate(new Date());
-        }
         const photoFiller = { id: 0, filler: true };
         setPhotoList([photoFiller].concat(photoList));
         setTakingPicture(true);
@@ -68,7 +64,7 @@ export default function CameraScreen({ navigation, route }) {
   };
 
   const openValidateProductModal = () => {
-    if (photoList.length) {
+    if (photoList.length && !isTakingPicture) {
       setValidateProductModalVisible(true);
       // TODO open the keyboard
     } else {
@@ -82,6 +78,7 @@ export default function CameraScreen({ navigation, route }) {
   const onProductSaved = () => {
     // empty the preview list
     setPhotoList([]);
+    setValidateProductModalVisible(false);
     // feedback to user
     setToastMessage(i18n.t("camera.productSaved"));
     setToastType("success");
@@ -106,7 +103,7 @@ export default function CameraScreen({ navigation, route }) {
           />
           <ValidateProductButton
             onPress={openValidateProductModal}
-            isDisabled={photoList.length === 0}
+            isDisabled={!photoList.length || isTakingPicture}
           />
         </View>
       </Camera>
@@ -115,7 +112,6 @@ export default function CameraScreen({ navigation, route }) {
         isModalVisible={isValidateProductModalVisible}
         setModalVisible={setValidateProductModalVisible}
         photoList={photoList}
-        creationDate={creationDate}
         eventName={eventName}
         onProductSaved={onProductSaved}
       />

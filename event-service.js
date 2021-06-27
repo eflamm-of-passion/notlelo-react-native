@@ -123,35 +123,38 @@ export const getProductPhotos = async (product) => {
   const firstDate = Math.min(...dates);
   const lastDate = Math.max(...dates);
   const album = await getAlbumAsync(albumName);
-  // search between those dates, and the app album
-  const getOption = {
-    createdBefore: lastDate + 100, // a bit after
-    createdAfter: firstDate - 100, // a bit before
-    albumId: album.id,
-  };
-  const results = await getAssetsAsync(getOption);
-  const assets = {
-    assets: results.assets,
+  const photoFilenames = product.photos.map((photo) =>
+    photo.uri.split("/").pop()
+  );
+  const assetsObject = await getAssetsAsync({ first: 9999 }); // FIXME find a better way to find the taken photos
+  const assets = assetsObject.assets.filter((asset) =>
+    photoFilenames.includes(asset.filename)
+  );
+  const results = {
+    assets: assets,
     albumId: album.id,
   };
 
-  return assets;
+  return results;
 };
 
 /**
  * Adds a product and the reference to its photos in the database
  * @param {object} product, the product to add
- * @param {date} creationDate, the date of creation of the product, to fetch its the assets
+ * @param {string[]} takenPhotoFilenames, the filenames of the taken photos, to fetch from all the assets
  */
-export const addProduct = async (product, creationDate) => {
+export const addProduct = async (product, takenPhotoFilenames) => {
   const now = new Date();
   const today = `${now.getDate() > 9 ? now.getDate() : "0" + now.getDate()}-${
     now.getMonth() > 8 ? now.getMonth() + 1 : "0" + (now.getMonth() + 1)
   }-${now.getFullYear()}`;
-  const assets = await getAssetsAsync({ createdAfter: creationDate });
-  const photos = assets.assets.map((a) => ({
+  const assetsObject = await getAssetsAsync({ first: 9999 }); // FIXME find a better way to find the taken photos
+  const assets = assetsObject.assets.filter((asset) =>
+    takenPhotoFilenames.includes(asset.filename)
+  );
+  const photos = assets.map((a) => ({
     uri: a.uri,
-    creationDate: a.creationTime,
+    creationDate: a.creationTime ? a.creationTime : a.modificationTime,
   }));
   const productToCreate = {
     uuid: UUID(),
