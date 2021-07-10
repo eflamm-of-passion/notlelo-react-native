@@ -82,7 +82,7 @@
     "saveThePictures": {
       "question": "Comment archiver toutes les photos d'un camp ?",
       "answer1": "Il suffit d'appuyer sur le bouton ",
-      "answer2": "qui se trouve dans la rubrique \"Mes numéros de lot\". Une archive va être céée, et vous aurez la possibilité de le partager via un service tiers (e.g. mail, Google Drive, etc...)."
+      "answer2": "qui se trouve dans la rubrique \"Mes numéros de lot\". Une archive va être céée, et vous aurez la possibilité de la partager via un service tiers (e.g. mail, Google Drive, etc...)."
     },
     "availableOnIOS": {
       "question": "L'application est-elle disponible sur iOS ?",

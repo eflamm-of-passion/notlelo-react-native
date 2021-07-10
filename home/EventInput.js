@@ -17,6 +17,7 @@ export default function EventInput({
         placeholder={i18n.t("home.eventInputPlaceholder")}
         style={styles.eventInputText}
         onChangeText={(text) => setInputEventName(text)}
+        value={inputEventName}
       />
 
       <TouchableOpacity

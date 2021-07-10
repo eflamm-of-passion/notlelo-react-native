@@ -5,8 +5,6 @@ import Icon from "../icons/Icon";
 import { secondaryColor } from "../global";
 import i18n from "../i18n";
 
-// source : https://blog.theodo.com/2020/06/build-accordion-list-react-native/
-
 export default function FrequentlyAskedQuestionView() {
   return (
     <View style={styles.container}>
@@ -38,15 +36,17 @@ function Dropdown({ title, children }) {
     <View style={styles.questionContainer}>
       <View style={styles.questionLine}>
         <TouchableWithoutFeedback onPress={() => setOpened(!isOpened)}>
-          <Text style={styles.questionText}>{title}</Text>
+          <View style={styles.questionLine}>
+            <Text style={styles.questionText}>{title}</Text>
+            <Icon
+              type="right-arrow"
+              color="black"
+              width={20}
+              height={20}
+              rotation={isOpened ? 90 : 0}
+            />
+          </View>
         </TouchableWithoutFeedback>
-        <Icon
-          type="right-arrow"
-          color="black"
-          width={20}
-          height={20}
-          rotation={isOpened ? 90 : 0}
-        />
       </View>
       {isOpened && children}
     </View>

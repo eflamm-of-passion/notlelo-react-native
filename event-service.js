@@ -11,14 +11,42 @@ import JSZip from "jszip";
 import { albumName } from "./global";
 
 /**
- * Creates the product array, if it does not exist
+ * Creates the product array, if it does not exist. And clean the list of products.
  */
-export const init = () => {
-  getProducts().then((products) => {
-    if (!products) {
-      setProducts([]);
-    }
-  });
+export const init = async () => {
+  const products = await getProducts();
+  if (!products) {
+    // initialize the list of products
+    setProducts([]);
+  } else {
+    cleanProductsWithDeletedPhotos(products);
+  }
+};
+
+/**
+ * If the photos do not exist anymore, then the product is deleted. So it is not showing in the library.
+ * @param {*} products
+ */
+const cleanProductsWithDeletedPhotos = async (products) => {
+  const albumId = await getAlbumAsync(albumName);
+  if (albumId) {
+    let productsToDelete = [];
+    const assets = await getAssetsAsync({
+      album: albumId,
+    });
+    const existingPhotos = assets.assets.map((asset) => asset.uri);
+    products.forEach((product) => {
+      const photosExist = product.photos.filter((photo) =>
+        existingPhotos.includes(photo.uri)
+      );
+      if (photosExist.length === 0) {
+        productsToDelete.push(product);
+      }
+    });
+    productsToDelete.forEach((product) => removeProduct(product));
+  } else {
+    setProducts([]);
+  }
 };
 
 /**
@@ -233,6 +261,57 @@ export const shareEvent = async (eventName) => {
   await Sharing.shareAsync(zipFilePath, { UTI });
   // clear the zip from the internal storage
   await FileSystem.deleteAsync(zipFilePath);
+};
+
+/**
+ * Returns a list of the product names from and event and their occurrence
+ * @param {*} eventName
+ * @returns [{name: string, occurrence: integer}]
+ */
+export const getProductNamesAndOccurrences = async (eventName) => {
+  const products = await getProductsByEventName(eventName);
+  const productNames = products.map((product) => product.name);
+  const productNamesAndOccurrencesMap = new Map();
+  productNames.forEach((productName) => {
+    if (productNamesAndOccurrencesMap.get(productName)) {
+      productNamesAndOccurrencesMap.set(
+        productName,
+        productNamesAndOccurrencesMap.get(productName) + 1
+      );
+    } else {
+      productNamesAndOccurrencesMap.set(productName, 1);
+    }
+  });
+  let productNamesAndOccurrencesList = [];
+  productNamesAndOccurrencesMap.forEach((value, key) =>
+    productNamesAndOccurrencesList.push({ name: key, occurrence: value })
+  );
+  productNamesAndOccurrencesList = productNamesAndOccurrencesList.sort(
+    (a, b) => b.occurrence - a.occurrence
+  );
+  return productNamesAndOccurrencesList;
+};
+
+/**
+ * Gives a list of product names based on the most frequent names and a string that can be contained in the name.
+ * @param {*} productNamesAndOccurrences - the list of the product names and their occurrences
+ * @param {*} filterName - string contained in the name
+ * @param {*} maxSuggestions - the number of suggestions in the list
+ * @returns a list of strings
+ */
+export const getProductNameSuggestions = (
+  productNamesAndOccurrences,
+  filterName,
+  maxSuggestions
+) => {
+  return productNamesAndOccurrences
+    .map((productNameAndOccurrence) => productNameAndOccurrence.name)
+    .filter((productName) =>
+      filterName
+        ? productName.includes(filterName) && productName !== filterName
+        : true
+    )
+    .slice(0, maxSuggestions);
 };
 
 function UUID() {

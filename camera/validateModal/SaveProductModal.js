@@ -17,9 +17,10 @@ import {
 
 import i18n from "../../i18n";
 import { addProduct } from "../../event-service";
-import { albumName } from "../../global";
+import { secondaryColor, albumName } from "../../global";
 import MealPicker from "./MealPicker";
 import MealInput from "./MealInput";
+import ProductInput from "./ProductInput";
 
 export default function SaveProductModal({
   isModalVisible,
@@ -96,13 +97,13 @@ export default function SaveProductModal({
           <Text style={styles.modalTitle}>
             {i18n.t("camera.productInputLabel")}
           </Text>
-          <TextInput
-            style={styles.modalTextInput}
-            autoFocus={true}
-            placeholder={i18n.t("camera.productNamePlaceHolder")}
-            onChangeText={(text) => setProductName(text)}
-            value={productName}
+
+          <ProductInput
+            productName={productName}
+            setProductName={setProductName}
+            eventName={eventName}
           />
+
           <Text style={styles.modalTitle}>
             {i18n.t("camera.mealInputLabel")}
           </Text>
@@ -167,14 +168,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#3b3b3b",
     textAlign: "left",
-  },
-  modalTextInput: {
-    marginTop: 10,
-    marginBottom: 10,
-    height: 40,
-    width: "90%",
-    borderBottomWidth: 1,
-    borderBottomColor: "grey",
   },
   modalButtonContainer: {
     flexDirection: "row",

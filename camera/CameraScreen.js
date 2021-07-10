@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 import { requestPermissionsAsync } from "expo-media-library";
 import { Camera } from "expo-camera";
 
-import CancelTakingPictureButton from "./CancelTakingPictureButton";
 import TakePictureButton from "./TakePictureButton";
 import ValidateProductButton from "./ValidateProductButton";
 import PreviewPhotoList from "./PreviewPhotoList";
 import SaveProductModal from "./validateModal/SaveProductModal";
 import Toast from "../components/Toast";
+import Icon from "../icons/Icon";
 import i18n from "../i18n";
 
 export default function CameraScreen({ navigation, route }) {
@@ -48,7 +54,10 @@ export default function CameraScreen({ navigation, route }) {
         const photoFiller = { id: 0, filler: true };
         setPhotoList([photoFiller].concat(photoList));
         setTakingPicture(true);
-        const photo = await camera.takePictureAsync({ quality: 0.1 });
+        const photo = await camera.takePictureAsync({
+          quality: 0.1, // this parameter is overriden by skipProcessing
+          skipProcessing: true, // to take picture faster, but need to be tested further
+        });
         // remove the filler from the previw list
         setPhotoList(photoList.filter((photo) => photo.id !== photoFiller.id));
         photo.id = Math.random();
@@ -86,6 +95,25 @@ export default function CameraScreen({ navigation, route }) {
     setToastTimeout(5000);
   };
 
+  function CancelTakingPictureButton({ navigation }) {
+    return (
+      <TouchableOpacity
+        style={styles.cancelButton}
+        onPress={() => {
+          navigation.goBack();
+        }}
+      >
+        <Icon
+          type="right-arrow"
+          color="white"
+          width={50}
+          height={50}
+          rotation={180}
+        />
+      </TouchableOpacity>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <Camera
@@ -94,19 +122,18 @@ export default function CameraScreen({ navigation, route }) {
         ref={(r) => {
           setCamera(r);
         }}
-      >
-        <View style={styles.buttonContainer}>
-          <CancelTakingPictureButton navigation={navigation} />
-          <TakePictureButton
-            onClickTakePicture={onClickTakePicture}
-            isDisabled={isTakingPicture}
-          />
-          <ValidateProductButton
-            onPress={openValidateProductModal}
-            isDisabled={!photoList.length || isTakingPicture}
-          />
-        </View>
-      </Camera>
+      />
+      <View style={styles.buttonContainer}>
+        <CancelTakingPictureButton navigation={navigation} />
+        <TakePictureButton
+          onClickTakePicture={onClickTakePicture}
+          isDisabled={isTakingPicture}
+        />
+        <ValidateProductButton
+          onPress={openValidateProductModal}
+          isDisabled={!photoList.length || isTakingPicture}
+        />
+      </View>
       <PreviewPhotoList photoList={photoList} setPhotoList={setPhotoList} />
       <SaveProductModal
         isModalVisible={isValidateProductModalVisible}
@@ -131,14 +158,22 @@ const styles = StyleSheet.create({
     flex: 1,
     minHeight: Math.round(Dimensions.get("window").height), // the keyboard does not push up
   },
-
   camera: {
     flex: 1,
     justifyContent: "flex-end",
   },
   buttonContainer: {
+    position: "absolute",
+    bottom: 0,
     height: 200,
+    width: "100%",
     flexDirection: "row",
     justifyContent: "center",
+  },
+  cancelButton: {
+    paddingTop: 25,
+    width: 100,
+    height: 100,
+    alignItems: "center",
   },
 });

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
-import { Svg, Path } from "react-native-svg";
 import i18n from "../../i18n";
 
 import Icon from "../../icons/Icon";
@@ -9,30 +8,33 @@ export default function MealInput({ onValidate, onCancel }) {
   const [inputMealName, setInputMealName] = useState("");
 
   return (
-    <View style={styles.mealInputTextContainer}>
-      <TextInput
-        placeholder={i18n.t("library.mealInputPlaceholder")}
-        style={styles.mealInputText}
-        onChangeText={(text) => setInputMealName(text)}
-      />
-      <TouchableOpacity
-        style={styles.mealInputButton}
-        onPress={() => onValidate(inputMealName)}
-      >
-        <Icon type="round-validate" color="green" />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.mealInputButton}
-        onPress={() => onCancel()}
-      >
-        <Icon type="round-cancel" color="red" />
-      </TouchableOpacity>
+    <View>
+      <View style={styles.container}>
+        <TextInput
+          placeholder={i18n.t("library.mealInputPlaceholder")}
+          style={styles.mealInputText}
+          onChangeText={(text) => setInputMealName(text)}
+          value={inputMealName}
+        />
+        <TouchableOpacity
+          style={styles.mealInputButton}
+          onPress={() => onValidate(inputMealName)}
+        >
+          <Icon type="round-validate" color="green" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.mealInputButton}
+          onPress={() => onCancel()}
+        >
+          <Icon type="round-cancel" color="red" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  mealInputTextContainer: {
+  container: {
     flexDirection: "row",
     alignItems: "center",
   },
