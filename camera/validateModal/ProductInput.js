@@ -53,6 +53,7 @@ export default function ProductInput({
       <View style={styles.suggestionContainer}>
         {productNameSuggestions.map((productNameSuggestion) => (
           <TouchableOpacity
+            key={productNameSuggestion}
             onPress={() => {
               setProductName(productNameSuggestion);
               processSuggestions(productNames, productNameSuggestion);

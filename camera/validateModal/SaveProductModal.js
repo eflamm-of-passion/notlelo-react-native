@@ -17,7 +17,7 @@ import {
 
 import i18n from "../../i18n";
 import { addProduct } from "../../event-service";
-import { secondaryColor, albumName } from "../../global";
+import { albumName } from "../../global";
 import MealPicker from "./MealPicker";
 import MealInput from "./MealInput";
 import ProductInput from "./ProductInput";

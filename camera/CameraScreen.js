@@ -18,6 +18,7 @@ import Icon from "../icons/Icon";
 import i18n from "../i18n";
 
 export default function CameraScreen({ navigation, route }) {
+  const [focusedScreen, setFocusedScreen] = useState(false);
   const [hasPermission, setHasPermission] = useState(null);
   const [camera, setCamera] = useState(null);
   const [photoList, setPhotoList] = useState([]);
@@ -34,6 +35,9 @@ export default function CameraScreen({ navigation, route }) {
   const { eventName } = route.params;
 
   useEffect(() => {
+    // source : https://github.com/react-native-camera/react-native-camera/issues/1051
+    navigation.addListener("willFocus", () => this.setFocusedScreen(true));
+    navigation.addListener("willBlur", () => this.setFocusedScreen(false));
     (async () => {
       const cameraAccess = await Camera.requestPermissionsAsync();
       const mediaLibraryAccess = await requestPermissionsAsync();
@@ -43,10 +47,6 @@ export default function CameraScreen({ navigation, route }) {
       );
     })();
   }, [isValidateProductModalVisible, photoList]);
-
-  if (!hasPermission) {
-    return <Text>No access to the camera </Text>;
-  }
 
   const onClickTakePicture = async () => {
     if (camera) {
@@ -112,6 +112,12 @@ export default function CameraScreen({ navigation, route }) {
         />
       </TouchableOpacity>
     );
+  }
+
+  if (!hasPermission) {
+    return <Text>No access to the camera </Text>;
+  } else if (focusedScreen) {
+    return <View />;
   }
 
   return (

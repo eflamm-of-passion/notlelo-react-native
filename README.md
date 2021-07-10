@@ -111,7 +111,8 @@ Close VS Code, then run `npm start` and reopen VS Code.
 - [x] delete a product with a deleted pictures
 - [x] find a way to take the picture quicker
 - [x] add suggestion for product name input
-- [ ] resolve the memory leaks, unmount the camera before leaving the view
+- [x] resolve unmount the camera before leaving the view
+- [ ] resolve unmount the library
 - [ ] start to do some tests
 - [ ] try another SGDF font
 - [ ] build the app through EAS build when it will be in the free plan
