@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { useFonts } from "expo-font";
 
 import ProductPhotoImage from "./ProductPhotoImage";
 import Icon from "../icons/Icon";
@@ -9,10 +10,21 @@ export default function ProductView({
   deleteProduct,
   setSelectedPhoto,
 }) {
+  const [fontLoaded] = useFonts({
+    Raleway: require("../assets/fonts/Raleway.ttf"),
+  });
+
   return (
     <View>
       <View style={styles.productTitle}>
-        <Text style={styles.productTitleText}>{product.name}</Text>
+        <Text
+          style={[
+            styles.productTitleText,
+            fontLoaded && { fontFamily: "Raleway" },
+          ]}
+        >
+          {product.name}
+        </Text>
         <TouchableOpacity
           style={styles.deleteProductButton}
           onPress={() => deleteProduct(product)}
@@ -41,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   productTitleText: {
-    fontSize: 19,
+    fontSize: 20,
     paddingLeft: 80,
     letterSpacing: 1,
     color: "#404040",

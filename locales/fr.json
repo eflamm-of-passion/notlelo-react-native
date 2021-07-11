@@ -87,6 +87,10 @@
     "availableOnIOS": {
       "question": "L'application est-elle disponible sur iOS ?",
       "answer": "Pour le moment Notlelo n'est pas disponible sur l'App Store d'Apple. Notamment parce que les frais pour déployer une application dessus sont élevés."
+    },
+    "foundABug": {
+      "question": "J'ai trouvé un bug dans l'application, que dois-je faire ?",
+      "answer": "L'application est encore en cours de développement et n'a été testée que sur très peu d'appareil. Si vous avez trouvé un bug, veuillez m'en faire part en cliquant sur le bouton dans Contact."
     }
   }
 }

@@ -149,9 +149,9 @@ const styles = StyleSheet.create({
   },
   titleText: {
     textAlign: "center",
-    paddingTop: 20,
-    fontSize: 100,
-    lineHeight: 100,
+    paddingTop: 50,
+    fontSize: 120,
+    lineHeight: 120,
     color: "white",
     letterSpacing: 7,
   },

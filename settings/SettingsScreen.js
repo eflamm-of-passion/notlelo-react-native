@@ -7,6 +7,8 @@ import {
   StyleSheet,
 } from "react-native";
 import * as Linking from "expo-linking";
+import { useFonts } from "expo-font";
+
 import * as app from "../app.json";
 import i18n from "../i18n";
 
@@ -31,6 +33,11 @@ function HorizontalRule() {
 }
 
 function ContactMe() {
+  const [fontLoaded] = useFonts({
+    Raleway: require("../assets/fonts/Raleway.ttf"),
+    Sarabun: require("../assets/fonts/Sarabun.ttf"),
+  });
+
   const email = "mailto:eflamm.ollivier@gmail.com";
   const handlePress = () => {
     Linking.openURL(email);
@@ -38,8 +45,17 @@ function ContactMe() {
 
   return (
     <View>
-      <Text style={styles.aboutTitle}>{i18n.t("settings.about")}</Text>
-      <Text style={styles.aboutDescription}>
+      <Text
+        style={[styles.aboutTitle, fontLoaded && { fontFamily: "Raleway" }]}
+      >
+        {i18n.t("settings.about")}
+      </Text>
+      <Text
+        style={[
+          styles.aboutDescription,
+          fontLoaded && { fontFamily: "Sarabun" },
+        ]}
+      >
         {i18n.t("settings.aboutDescription")}
       </Text>
       <TouchableOpacity style={styles.contactMeButton} onPress={handlePress}>
@@ -47,7 +63,9 @@ function ContactMe() {
           {i18n.t("settings.clickHere")}
         </Text>
       </TouchableOpacity>
-      <Text style={styles.signature}>{i18n.t("settings.signature")}</Text>
+      <Text style={[styles.signature, fontLoaded && { fontFamily: "Sarabun" }]}>
+        {i18n.t("settings.signature")}
+      </Text>
     </View>
   );
 }

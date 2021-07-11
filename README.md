@@ -112,9 +112,12 @@ Close VS Code, then run `npm start` and reopen VS Code.
 - [x] find a way to take the picture quicker
 - [x] add suggestion for product name input
 - [x] resolve unmount the camera before leaving the view
+- [x] FAQ : found a bug
+- [x] remove the deleted photos from a product
+- [ ] do not ask a permission whenever handling the photos
+- [ ] try another SGDF font
 - [ ] resolve unmount the library
 - [ ] start to do some tests
-- [ ] try another SGDF font
 - [ ] build the app through EAS build when it will be in the free plan
 
 **_v1.4.7_**

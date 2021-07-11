@@ -1,12 +1,19 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
+import { useFonts } from "expo-font";
 
 import ProductView from "./ProductView";
 
 export default function MealView({ meal, deleteProduct, setSelectedPhoto }) {
+  const [fontLoaded] = useFonts({
+    Raleway: require("../assets/fonts/Raleway.ttf"),
+  });
+
   return (
     <View>
-      <Text style={styles.mealTitle}>{meal.name}</Text>
+      <Text style={[styles.mealTitle, fontLoaded && { fontFamily: "Raleway" }]}>
+        {meal.name}
+      </Text>
       {meal.products.map((product, index) => (
         <ProductView
           key={index}

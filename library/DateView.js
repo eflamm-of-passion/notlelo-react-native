@@ -1,10 +1,15 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import i18n from "../i18n";
+import { useFonts } from "expo-font";
 
 import MealView from "./MealView";
 
 export default function DateView({ date, deleteProduct, setSelectedPhoto }) {
+  const [fontLoaded] = useFonts({
+    Raleway: require("../assets/fonts/Raleway.ttf"),
+  });
+
   const displayMeals = () => {
     const mealList = [];
     for (const [mealName, products] of date.mealMap) {
@@ -67,7 +72,9 @@ export default function DateView({ date, deleteProduct, setSelectedPhoto }) {
 
   return (
     <View styles={styles.scroll}>
-      <Text style={styles.dateTitle}>{displayReadableDate(date.name)}</Text>
+      <Text style={[styles.dateTitle, fontLoaded && { fontFamily: "Raleway" }]}>
+        {displayReadableDate(date.name)}
+      </Text>
       {displayMeals()}
     </View>
   );

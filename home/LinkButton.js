@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
+import { useFonts } from "expo-font";
 
 export default function LinkButton({
   navigation,
@@ -10,6 +11,10 @@ export default function LinkButton({
   isDisabled,
   onPress,
 }) {
+  const [fontLoaded] = useFonts({
+    Raleway: require("../assets/fonts/Raleway.ttf"),
+  });
+
   const handleOnPress = () => {
     onPress && onPress();
     !isDisabled &&
@@ -18,10 +23,15 @@ export default function LinkButton({
         eventNameList: eventNameList,
       });
   };
+
   return (
     <TouchableOpacity style={styles.link} onPress={() => handleOnPress()}>
       <Text
-        style={[styles.buttonText, isDisabled && styles.disabledButtonText]}
+        style={[
+          styles.buttonText,
+          isDisabled && styles.disabledButtonText,
+          fontLoaded && { fontFamily: "Raleway" },
+        ]}
       >
         {label}
       </Text>
@@ -37,10 +47,12 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 23,
     letterSpacing: 3,
-    textTransform: "uppercase",
     color: "#404040",
+    paddingBottom: 3,
+    borderBottomWidth: 1,
+    borderBottomColor: "#eee",
   },
   disabledButtonText: {
     color: "lightgrey",

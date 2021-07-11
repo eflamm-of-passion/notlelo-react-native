@@ -56,7 +56,7 @@ export default function CameraScreen({ navigation, route }) {
         setTakingPicture(true);
         const photo = await camera.takePictureAsync({
           quality: 0.1, // this parameter is overriden by skipProcessing
-          skipProcessing: true, // to take picture faster, but need to be tested further
+          // skipProcessing: true, // to take picture faster, but need to be tested further
         });
         // remove the filler from the previw list
         setPhotoList(photoList.filter((photo) => photo.id !== photoFiller.id));

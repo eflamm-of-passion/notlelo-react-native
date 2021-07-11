@@ -34,13 +34,19 @@ const cleanProductsWithDeletedPhotos = async (products) => {
     const assets = await getAssetsAsync({
       album: albumId,
     });
-    const existingPhotos = assets.assets.map((asset) => asset.uri);
+    const allExistingPhotos = assets.assets.map((asset) => asset.uri);
     products.forEach((product) => {
-      const photosExist = product.photos.filter((photo) =>
-        existingPhotos.includes(photo.uri)
+      const existingProductPhotos = product.photos.filter((photo) =>
+        allExistingPhotos.includes(photo.uri)
       );
-      if (photosExist.length === 0) {
+      if (existingProductPhotos.length === 0) {
+        // the product has no existing photos anymore, so it needs to be deleted
         productsToDelete.push(product);
+      }
+      if (existingProductPhotos.length !== product.photos.length) {
+        // the product has some photos that do not exist anymore, so it needs to be updated
+        const productToUpdate = { ...product, photos: existingProductPhotos };
+        updateProduct(productToUpdate);
       }
     });
     productsToDelete.forEach((product) => removeProduct(product));
@@ -199,6 +205,22 @@ export const addProduct = async (product, takenPhotoFilenames) => {
 };
 
 /**
+ * Updates a product in the database
+ * @param {*} product
+ */
+export const updateProduct = async (productToUpdate) => {
+  let products = await getProducts();
+  products = products.map((product) => {
+    if (product.uuid === productToUpdate.uuid) {
+      return productToUpdate;
+    } else {
+      return product;
+    }
+  });
+  return await setProducts(products);
+};
+
+/**
  * Removes a product from the database, and its photos in the album
  * @param {object} product
  */
@@ -234,7 +256,7 @@ export const shareEvent = async (eventName) => {
   const photosToZip = [];
   for (const p of products) {
     if (p.event === eventName) {
-      for (photo of p.photos) {
+      for (const photo of p.photos) {
         const photoName = photo.uri.split("/").pop();
         const photoBlob = await FileSystem.readAsStringAsync(photo.uri, {
           encoding: FileSystem.EncodingType.Base64,

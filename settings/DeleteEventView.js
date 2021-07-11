@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Checkbox from "expo-checkbox";
-import i18n from "../i18n";
+import { useFonts } from "expo-font";
 
+import i18n from "../i18n";
 import { deleteEvent } from "../event-service";
 import Icon from "../icons/Icon";
 import Toast from "../components/Toast";
@@ -13,6 +14,9 @@ export default function DeleteEventView({ eventNameList }) {
   const [localEventList, setLocalEventList] = useState(eventNameList);
   const [eventNameListToDelete, setEventNameListToDelete] = useState([]);
   const [isToastVisible, setToastVisible] = useState(false);
+  const [fontLoaded] = useFonts({
+    Raleway: require("../assets/fonts/Raleway.ttf"),
+  });
 
   const handleDeleteButtonClick = (eventNameList) => {
     for (const eventName of eventNameList) {
@@ -42,7 +46,9 @@ export default function DeleteEventView({ eventNameList }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{i18n.t("settings.deleteEvent")}</Text>
+      <Text style={[styles.title, fontLoaded && { fontFamily: "Raleway" }]}>
+        {i18n.t("settings.deleteEvent")}
+      </Text>
       <View style={styles.events}>
         {localEventList.map((eventName, index) => (
           <View style={styles.eventLine} key={index}>
@@ -162,7 +168,7 @@ const styles = StyleSheet.create({
   label: {
     color: "white",
     fontSize: 22,
-    letterSpacing: 1,
+    letterSpacing: 2,
     paddingRight: 15,
   },
   deleteButtonIcon: {
