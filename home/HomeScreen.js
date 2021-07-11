@@ -11,7 +11,7 @@ import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
 import i18n from "../i18n";
 
-import { getProducts } from "../event-service";
+import { getProducts, getEventNames } from "../event-service";
 import EventInput from "./EventInput";
 import EventPicker from "./EventPicker";
 import LinkButton from "./LinkButton";
@@ -34,21 +34,12 @@ export default function HomeScreen({ navigation }) {
   }, [isFocused]);
 
   const fetchProducts = useCallback(async () => {
-    const productList = await getProducts();
-    const eventNameSet = new Set();
-    for (const product of productList) {
-      eventNameSet.add(product.event);
-    }
-    setEventNameList([...eventNameSet]);
-    if ([...eventNameSet].length) {
-      if (
-        ![...eventNameSet].includes(selectedEventName) &&
-        !selectedEventName
-      ) {
-        setSelectedEventName([...eventNameSet][0]);
+    const eventNames = await getEventNames();
+    setEventNameList(eventNames);
+    if (eventNames.length) {
+      if (!eventNames.includes(selectedEventName) && !selectedEventName) {
+        setSelectedEventName(eventNames[0]);
       }
-    } else {
-      setSelectedEventName([...eventNameSet][0]);
     }
   });
 

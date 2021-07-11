@@ -27,6 +27,7 @@
     "compress": "Télécharger au format zip",
     "share": "Partager",
     "mealInputPlaceholder": "petite fringale",
+    "shareLoading": "L'archivage des photos est en cours, veuillez patienter",
     "shareSuccess": "L'archive a bien été partagée",
     "shareNotAvailable": "Le partage de fichier n'est pas disponible sur votre appareil"
   },

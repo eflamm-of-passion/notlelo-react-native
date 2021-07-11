@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Text,
-  TextInput,
-  Modal,
-} from "react-native";
+import { StyleSheet, TouchableOpacity, View, Text, Modal } from "react-native";
 import { BlurView } from "expo-blur";
 import {
   createAssetAsync,
@@ -14,6 +7,7 @@ import {
   getAlbumAsync,
   addAssetsToAlbumAsync,
 } from "expo-media-library";
+import { useFonts } from "expo-font";
 
 import i18n from "../../i18n";
 import { addProduct } from "../../event-service";
@@ -29,6 +23,9 @@ export default function SaveProductModal({
   eventName,
   onProductSaved,
 }) {
+  const [fontLoaded] = useFonts({
+    Raleway: require("../../assets/fonts/Raleway.ttf"),
+  });
   const [productName, setProductName] = useState("");
   const [showMealInput, setShowMealInput] = useState(false);
   const [inputMealName, setInputMealName] = useState(null);
@@ -94,7 +91,9 @@ export default function SaveProductModal({
         style={[StyleSheet.absoluteFill, styles.nonBlurredContent]}
       >
         <View style={styles.modalView}>
-          <Text style={styles.modalTitle}>
+          <Text
+            style={[styles.modalTitle, fontLoaded && { fontFamily: "Raleway" }]}
+          >
             {i18n.t("camera.productInputLabel")}
           </Text>
 
@@ -104,7 +103,9 @@ export default function SaveProductModal({
             eventName={eventName}
           />
 
-          <Text style={styles.modalTitle}>
+          <Text
+            style={[styles.modalTitle, fontLoaded && { fontFamily: "Raleway" }]}
+          >
             {i18n.t("camera.mealInputLabel")}
           </Text>
 
@@ -134,7 +135,12 @@ export default function SaveProductModal({
               style={[styles.modalButton, styles.modalCancelButton]}
               onPress={() => onClickCancelSavingProduct()}
             >
-              <Text style={styles.modalButtonText}>
+              <Text
+                style={[
+                  styles.modalButtonText,
+                  fontLoaded && { fontFamily: "Raleway" },
+                ]}
+              >
                 {i18n.t("camera.cancel")}
               </Text>
             </TouchableOpacity>
@@ -142,7 +148,12 @@ export default function SaveProductModal({
               style={[styles.modalButton, styles.modalValidateButton]}
               onPress={() => onClickValidate()}
             >
-              <Text style={styles.modalButtonText}>
+              <Text
+                style={[
+                  styles.modalButtonText,
+                  fontLoaded && { fontFamily: "Raleway" },
+                ]}
+              >
                 {i18n.t("camera.validate")}
               </Text>
             </TouchableOpacity>
@@ -164,10 +175,10 @@ const styles = StyleSheet.create({
   },
   modalTitle: {
     width: "90%",
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 22,
     color: "#3b3b3b",
     textAlign: "left",
+    marginTop: 10,
   },
   modalButtonContainer: {
     flexDirection: "row",
@@ -183,6 +194,7 @@ const styles = StyleSheet.create({
   modalButtonText: {
     color: "white",
     textTransform: "uppercase",
+    letterSpacing: 1,
   },
   modalCancelButton: {
     backgroundColor: "red",

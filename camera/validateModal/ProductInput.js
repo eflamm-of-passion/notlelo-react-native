@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import i18n from "../../i18n";
+import { useFonts } from "expo-font";
 
 import {
   getProductNamesAndOccurrences,
@@ -18,6 +19,9 @@ export default function ProductInput({
   setProductName,
   eventName,
 }) {
+  const [fontLoaded] = useFonts({
+    Sarabun: require("../../assets/fonts/Sarabun.ttf"),
+  });
   const [productNames, setProductNames] = useState([]);
   const [productNameSuggestions, setProductNameSuggestions] = useState([]);
   const MAX_SUGGESTIONS = 3;
@@ -60,7 +64,14 @@ export default function ProductInput({
             }}
             style={styles.suggestionButton}
           >
-            <Text style={styles.suggestionText}>{productNameSuggestion}</Text>
+            <Text
+              style={[
+                styles.suggestionText,
+                fontLoaded && { fontFamily: "Sarabun" },
+              ]}
+            >
+              {productNameSuggestion}
+            </Text>
           </TouchableOpacity>
         ))}
       </View>

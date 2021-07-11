@@ -109,14 +109,20 @@ Close VS Code, then run `npm start` and reopen VS Code.
 **_next release_**
 
 - [x] delete a product with a deleted pictures
-- [x] find a way to take the picture quicker
+- [x] find a way to take the picture quicker, but the file size is too buig
 - [x] add suggestion for product name input
 - [x] resolve unmount the camera before leaving the view
 - [x] FAQ : found a bug
 - [x] remove the deleted photos from a product
-- [ ] do not ask a permission whenever handling the photos
-- [ ] try another SGDF font
-- [ ] resolve unmount the library
+- [x] add Raleway en Sarabun fonts
+- [x] add toast to indicate the archive is building
+- [x] on home page, the first event in the list must be the last updated
+- [ ] delete multiple events from the settings view
+- [ ] do not ask a permission whenever handling the photos on Android 11
+- [ ] style the input text
+- [ ] cleanup useEffect async tasks
+- [ ] open the keyboard when the focus is on a text input
+- [ ] open successful toast only if the archive is built
 - [ ] start to do some tests
 - [ ] build the app through EAS build when it will be in the free plan
 

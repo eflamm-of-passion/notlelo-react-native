@@ -1,9 +1,14 @@
 import React, { useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View, Text, Modal } from "react-native";
+import { useFonts } from "expo-font";
 
 import Icon from "../icons/Icon";
 
 export default function Toast({ title, type, timeout, visible, setVisible }) {
+  const [fontLoaded] = useFonts({
+    Sarabun: require("../assets/fonts/Sarabun.ttf"),
+  });
+
   useEffect(() => {
     setTimeout(
       () => {
@@ -28,7 +33,7 @@ export default function Toast({ title, type, timeout, visible, setVisible }) {
       icon = "error";
       break;
     case "info":
-      backgroundColor = "#8f8fcf";
+      backgroundColor = "#4ac6ff";
       outlineColor = "grey";
       icon = "info";
       break;
@@ -52,7 +57,11 @@ export default function Toast({ title, type, timeout, visible, setVisible }) {
             ]}
           >
             <Icon type={icon} color="white" />
-            <Text numberOfLines={2} adjustsFontSizeToFit style={[styles.text]}>
+            <Text
+              numberOfLines={2}
+              adjustsFontSizeToFit
+              style={[styles.text, fontLoaded && { fontFamily: "Sarabun" }]}
+            >
               {title}
             </Text>
           </View>

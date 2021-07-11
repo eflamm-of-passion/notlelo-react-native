@@ -7,14 +7,18 @@ import Toast from "../components/Toast";
 import i18n from "../i18n";
 
 export default function ShareEventButton({ event, setSharingInProgress }) {
-  const [isToastVisible, setToastVisible] = useState(false);
+  const [isSuccessToastVisible, setSuccessToastVisible] = useState(false);
+  const [isLoadingToastVisible, setLoadingToastVisible] = useState(false);
 
   const handleShareEventClick = async (event) => {
+    setLoadingToastVisible(true);
+
     setSharingInProgress(true);
     await shareEvent(event);
     setSharingInProgress(false);
 
-    setToastVisible(true);
+    setLoadingToastVisible(false);
+    setSuccessToastVisible(true);
   };
 
   return (
@@ -28,8 +32,15 @@ export default function ShareEventButton({ event, setSharingInProgress }) {
       <Toast
         title={i18n.t("library.shareSuccess")}
         type={"success"}
-        visible={isToastVisible}
-        setVisible={setToastVisible}
+        visible={isSuccessToastVisible}
+        setVisible={setSuccessToastVisible}
+        timeout={8000}
+      />
+      <Toast
+        title={i18n.t("library.shareLoading")}
+        type={"info"}
+        visible={isLoadingToastVisible}
+        setVisible={setLoadingToastVisible}
         timeout={8000}
       />
     </View>

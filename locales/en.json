@@ -27,6 +27,7 @@
     "compress": "Compress as zip",
     "share": "Share",
     "mealInputPlaceholder": "name of your meal",
+    "shareLoading": "The archiving is ongoing, please wait",
     "shareSuccess": "The archive has been successfully shared",
     "shareNotAvailable": "Sharing is not available on your device"
   },

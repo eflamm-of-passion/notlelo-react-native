@@ -179,7 +179,9 @@ export const getProductPhotos = async (product) => {
  */
 export const addProduct = async (product, takenPhotoFilenames) => {
   const now = new Date();
-  const today = `${now.getDate() > 9 ? now.getDate() : "0" + now.getDate()}-${
+  const today = `${
+    now.getDate() > 9 ? now.getDate() + 1 : "0" + now.getDate()
+  }-${
     now.getMonth() > 8 ? now.getMonth() + 1 : "0" + (now.getMonth() + 1)
   }-${now.getFullYear()}`;
   const assetsObject = await getAssetsAsync({ first: 9999 }); // FIXME find a better way to find the taken photos
@@ -335,6 +337,35 @@ export const getProductNameSuggestions = (
     )
     .slice(0, maxSuggestions);
 };
+
+/**
+ * Returns the list of all the events, starting by most recently updated
+ */
+export const getEventNames = async () => {
+  const productList = await getProducts();
+  const eventNameMap = new Map();
+  // find the last date of each event
+  for (const product of productList) {
+    const lastDate = eventNameMap.get(product.event)
+      ? getDate(eventNameMap.get(product.event))
+      : null;
+    const productDate = getDate(product.date);
+    if (lastDate < productDate) {
+      eventNameMap.set(product.event, product.date);
+    }
+  }
+  // sort the events by date, and keep only the name
+  let eventList = [];
+  eventNameMap.forEach((value, key) =>
+    eventList.push({ name: key, date: getDate(value) })
+  );
+  return eventList.sort((a, b) => b.date - a.date).map((event) => event.name);
+};
+
+function getDate(date) {
+  const arr = date.split("-");
+  return new Date(arr[2], arr[1], arr[0]);
+}
 
 function UUID() {
   var dt = new Date().getTime();

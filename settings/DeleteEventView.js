@@ -66,6 +66,7 @@ export default function DeleteEventView({ eventNameList }) {
                     ? "red"
                     : "grey",
                 },
+                fontLoaded && { fontFamily: "Raleway" },
               ]}
             >
               {eventName}
@@ -140,8 +141,8 @@ const styles = StyleSheet.create({
     width: "90%",
     fontSize: 22,
     color: "red",
-    textAlign: "center",
-    letterSpacing: 1,
+    paddingLeft: 25,
+    letterSpacing: 2,
   },
   checkbox: {
     marginLeft: 20,

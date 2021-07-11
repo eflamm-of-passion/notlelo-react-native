@@ -28,7 +28,7 @@ export default function MealView({ meal, deleteProduct, setSelectedPhoto }) {
 
 const styles = StyleSheet.create({
   mealTitle: {
-    fontSize: 23,
+    fontSize: 22,
     paddingLeft: 45,
     letterSpacing: 3,
     color: "#404040",
